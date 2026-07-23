@@ -6,6 +6,9 @@ import { SiteFooter } from "@/app/components/SiteFooter";
 import { SiteHeader } from "@/app/components/SiteHeader";
 import { categories, getArticlesByCategory } from "@/lib/content";
 
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
 export function generateStaticParams() { return categories.map((category) => ({ category: category.slug })); }
 
 export async function generateMetadata({ params }: { params: Promise<{ category: string }> }): Promise<Metadata> {

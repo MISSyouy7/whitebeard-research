@@ -6,6 +6,9 @@ import { SiteFooter } from "@/app/components/SiteFooter";
 import { SiteHeader } from "@/app/components/SiteHeader";
 import { formatDate, getAllArticles, getArticle, markdownToHtml } from "@/lib/content";
 
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
 export function generateStaticParams() { return getAllArticles().map((article) => ({ slug: article.slug })); }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {

@@ -96,19 +96,24 @@ a { color: inherit; text-decoration: none; }
 .read-link { font-size: 11px; letter-spacing: .08em; white-space: nowrap; }
 .read-link span { color: var(--red); font-size: 17px; }
 .center-action { padding: 38px 0 80px; text-align: center; }
+.empty-state { margin: 0 0 80px; padding: 72px 30px; border-block: 1px solid var(--ink); text-align: center; }
+.empty-state span { color: var(--red); font-size: 9px; letter-spacing: .2em; }
+.empty-state h2 { margin: 25px 0 18px; font: 500 clamp(30px, 4vw, 48px) var(--serif); }
+.empty-state p { max-width: 620px; margin: 0 auto; color: var(--muted); font: 14px/1.9 var(--serif); }
+.archive-empty { margin-bottom: 0; }
 .outline-button { display: inline-flex; align-items: center; gap: 50px; min-height: 48px; padding: 0 20px; border: 1px solid var(--ink); font-size: 12px; letter-spacing: .08em; transition: .2s; }
 .outline-button:hover { background: var(--ink); color: #fff; }
 
 .category-section { padding: 90px 0 110px; background: var(--forest); color: #f5f0e5; }
 .light-heading { border-bottom-color: rgba(255,255,255,.5); }
 .light-heading .heading-note, .light-heading small { color: rgba(255,255,255,.55); }
-.category-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+.category-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
 .category-card { position: relative; min-height: 390px; padding: 27px 25px; border-left: 1px solid rgba(255,255,255,.19); transition: background .25s, transform .25s; }
 .category-card:last-child { border-right: 1px solid rgba(255,255,255,.19); }
 .category-card:hover { background: rgba(255,255,255,.08); transform: translateY(-5px); }
 .category-card > span { font-size: 10px; color: rgba(255,255,255,.5); }
 .category-glyph { width: 112px; height: 112px; margin: 47px auto 38px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.4); border-radius: 50%; font: 500 53px var(--serif); color: #d8bfa2; box-shadow: inset 0 0 0 8px var(--forest), inset 0 0 0 9px rgba(255,255,255,.16); }
-.category-card h3 { margin: 0 0 13px; font: 500 25px var(--serif); }
+.category-card h3 { margin: 0 0 13px; font: 500 clamp(19px, 1.8vw, 25px) var(--serif); }
 .category-card p { min-height: 64px; margin: 0 0 26px; color: rgba(255,255,255,.58); font-size: 12px; line-height: 1.8; }
 .category-card small { display: flex; justify-content: space-between; padding-top: 15px; border-top: 1px solid rgba(255,255,255,.18); color: rgba(255,255,255,.6); font-size: 9px; letter-spacing: .1em; }
 .category-card small b { color: #fff; font-size: 16px; }

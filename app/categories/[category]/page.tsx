@@ -25,7 +25,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
       <header className="page-masthead category-masthead"><p>FIELD / {category.index}</p><h1>{category.name}</h1><span>{category.description}</span></header>
       <nav className="category-tabs" aria-label="研究分类"><Link href="/articles">全部</Link>{categories.map((item) => <Link className={item.slug === category.slug ? "active" : ""} href={`/categories/${item.slug}`} key={item.slug}>{item.name}</Link>)}</nav>
       <div className="archive-summary"><span>{category.name} · {articles.length} 篇</span><span>持续更新中</span></div>
-      <div className="article-list archive-list">{articles.map((article, index) => <ArticleCard article={article} index={index + 1} key={article.slug} />)}</div>
+      {articles.length > 0 ? <div className="article-list archive-list">{articles.map((article, index) => <ArticleCard article={article} index={index + 1} key={article.slug} />)}</div> : <div className="empty-state archive-empty"><span>FIELD / {category.index}</span><h2>这一研究方向正在建档</h2><p>完成来源核验、反方观点和证伪条件检查后，正式研究将在这里出现。</p></div>}
     </main><SiteFooter /></>
   );
 }

@@ -8,6 +8,8 @@ tags: ["库存周期", "制造业", "宏观观察"]
 readingTime: 9
 featured: false
 issue: "013"
+status: "draft"
+sample: true
 ---
 库存周期常被压缩成“去库结束、补库开始”这样的二元判断。但在真实世界里，企业很少在同一时间做出同一种选择。
 

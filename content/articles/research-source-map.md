@@ -8,6 +8,8 @@ tags: ["信息源", "研究方法", "事实核验"]
 readingTime: 8
 featured: false
 issue: "011"
+status: "draft"
+sample: true
 ---
 很多研究问题不是缺少信息，而是缺少对信息质量的判断。来源不同，能回答的问题也不同。
 

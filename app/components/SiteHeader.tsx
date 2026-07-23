@@ -2,8 +2,8 @@ import Link from "next/link";
 
 const links = [
   { href: "/articles", label: "全部研究" },
-  { href: "/categories/industry-observation", label: "产业观察" },
-  { href: "/categories/company-research", label: "公司研究" },
+  { href: "/categories/ai-compute-hardware", label: "AI算力" },
+  { href: "/categories/embodied-intelligence", label: "具身智能" },
   { href: "/about", label: "关于研究院" },
 ];
 

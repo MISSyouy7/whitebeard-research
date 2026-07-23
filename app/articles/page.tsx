@@ -17,7 +17,7 @@ export default function ArticlesPage() {
         {categories.map((category) => <Link href={`/categories/${category.slug}`} key={category.slug}>{category.name}</Link>)}
       </nav>
       <div className="archive-summary"><span>共收录 {articles.length} 篇</span><span>按发布日期排序 ↓</span></div>
-      <div className="article-list archive-list">{articles.map((article, index) => <ArticleCard article={article} index={index + 1} key={article.slug} />)}</div>
+      {articles.length > 0 ? <div className="article-list archive-list">{articles.map((article, index) => <ArticleCard article={article} index={index + 1} key={article.slug} />)}</div> : <div className="empty-state archive-empty"><span>RESEARCH IN PROGRESS</span><h2>公开研究即将开始</h2><p>示例内容已与正式档案隔离。首批文章通过事实核验与证伪检查后将在这里发布。</p></div>}
     </main><SiteFooter /></>
   );
 }

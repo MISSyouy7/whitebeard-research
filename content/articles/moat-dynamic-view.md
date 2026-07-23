@@ -8,6 +8,8 @@ tags: ["竞争优势", "商业模式", "护城河"]
 readingTime: 9
 featured: false
 issue: "009"
+status: "draft"
+sample: true
 ---
 研究公司时，“护城河”是一个高频词，也因此容易失去含义。品牌、规模、渠道和网络效应只是可能的来源，不是自动成立的结论。
 

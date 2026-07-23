@@ -14,7 +14,7 @@ export default function Home() {
       <SiteHeader />
       <main>
         <section className="hero section-shell">
-          <div className="hero-kicker"><span>独立研究 / 长期主义</span><span>EST. 2024</span></div>
+          <div className="hero-kicker"><span>AI INDUSTRY RESEARCH / LONG-TERM RECORD</span><span>白胡子盐话</span></div>
           <div className="hero-grid">
             <div className="hero-title-wrap">
               <p className="hero-eyebrow">WHITEBEARD<br />RESEARCH INSTITUTE</p>
@@ -22,13 +22,13 @@ export default function Home() {
               <div className="hero-stamp" aria-hidden="true">研究<br />求真</div>
             </div>
             <div className="hero-intro">
-              <p className="hero-lead">把复杂的问题，<br />研究得更清楚一点。</p>
-              <p>这里不追逐每一个热点。我们关注那些真正影响长期价值的变量，并把思考过程完整地写下来。</p>
+              <p className="hero-lead">看懂 AI 产业链，<br />跟踪真实变化。</p>
+              <p>面向个人投资者，聚焦 AI 算力与硬件、具身智能与物理 AI。从技术、产业到公司，建立可以持续验证的研究框架。</p>
               <Link className="primary-button" href="/articles">进入研究档案 <span>→</span></Link>
             </div>
           </div>
           <div className="hero-ticker" aria-label="研究原则">
-            <span>NO. 001</span><strong>不预测浪潮，理解潮汐。</strong><span>FACTS · FRAMEWORK · PATIENCE</span>
+            <span>NO. 001</span><strong>不追逐概念，验证产业。</strong><span>FACTS · EVIDENCE · FALSIFICATION</span>
           </div>
         </section>
 
@@ -64,17 +64,27 @@ export default function Home() {
             <div><span className="section-index">02</span><p>最新研究<br /><small>LATEST NOTES</small></p></div>
             <span className="heading-note">每一篇都源于一个真实的问题</span>
           </div>
-          <div className="article-list">
-            {latest.map((article, index) => <ArticleCard article={article} index={index + 1} key={article.slug} />)}
-          </div>
-          <div className="center-action"><Link className="outline-button" href="/articles">浏览全部研究 <span>→</span></Link></div>
+          {latest.length > 0 ? (
+            <>
+              <div className="article-list">
+                {latest.map((article, index) => <ArticleCard article={article} index={index + 1} key={article.slug} />)}
+              </div>
+              <div className="center-action"><Link className="outline-button" href="/articles">浏览全部研究 <span>→</span></Link></div>
+            </>
+          ) : (
+            <div className="empty-state">
+              <span>RESEARCH IN PROGRESS</span>
+              <h2>首批正式研究正在准备中</h2>
+              <p>只有完成来源核验、反方观点和证伪条件检查的文章，才会进入公开档案。</p>
+            </div>
+          )}
         </section>
 
         <section className="category-section">
           <div className="section-shell">
             <div className="section-heading light-heading">
               <div><span className="section-index">03</span><p>研究领域<br /><small>OUR FIELDS</small></p></div>
-              <span className="heading-note">四个视角，一套求真的方法</span>
+              <span className="heading-note">五个入口，一套可验证的方法</span>
             </div>
             <div className="category-grid">
               {categories.map((category) => {
@@ -98,8 +108,8 @@ export default function Home() {
           <blockquote>“研究不是寻找一个漂亮的答案，<br />而是不断逼近<span>真实</span>。”</blockquote>
           <div className="principles">
             <div><b>01</b><h3>事实优先</h3><p>先确认我们知道什么，再讨论它意味着什么。</p></div>
-            <div><b>02</b><h3>框架思考</h3><p>建立变量之间的联系，而非堆砌孤立的信息。</p></div>
-            <div><b>03</b><h3>保持耐心</h3><p>允许结论晚一点出现，也允许自己修正判断。</p></div>
+            <div><b>02</b><h3>跟踪验证</h3><p>把叙事还原为订单、产能、财务和可持续更新的数据。</p></div>
+            <div><b>03</b><h3>主动证伪</h3><p>写下反方观点和失效条件，也允许自己修正判断。</p></div>
           </div>
         </section>
       </main>

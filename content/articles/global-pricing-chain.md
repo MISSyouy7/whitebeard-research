@@ -8,6 +8,8 @@ tags: ["全球需求", "价格传导", "领先指标"]
 readingTime: 7
 featured: false
 issue: "010"
+status: "draft"
+sample: true
 ---
 价格是信息的压缩结果，却不是同步结果。终端需求、渠道订单、中游开工与原材料价格之间存在时滞，不同行业的时滞长度也不同。
 

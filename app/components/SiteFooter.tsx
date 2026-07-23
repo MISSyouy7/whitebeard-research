@@ -6,12 +6,12 @@ export function SiteFooter() {
       <div className="footer-grid">
         <div>
           <div className="footer-mark">白胡子<span>研究院</span></div>
-          <p>保持好奇，尊重事实，延迟判断。</p>
+          <p>看懂 AI 产业链，跟踪真实变化。</p>
         </div>
         <div className="footer-links">
           <Link href="/articles">研究档案</Link>
           <Link href="/about">研究原则</Link>
-          <Link href="/about">内容说明</Link>
+          <Link href="/categories/research-methods">研究方法</Link>
         </div>
         <div className="footer-note">
           <p>本站内容仅供研究与交流，不构成任何投资建议。</p>

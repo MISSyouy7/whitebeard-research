@@ -12,37 +12,45 @@ export type Article = {
   readingTime: number;
   featured: boolean;
   issue: string;
+  status: "draft" | "published";
   content: string;
 };
 
 export const categories = [
   {
-    slug: "macro-strategy",
-    name: "宏观与策略",
-    short: "宏观",
+    slug: "ai-compute-hardware",
+    name: "AI算力与硬件",
+    short: "算力",
     index: "01",
-    description: "在周期、政策与资产价格之间建立可验证的联系。",
+    description: "跟踪芯片、服务器、光通信、PCB、液冷与电源等关键环节。",
   },
   {
-    slug: "industry-observation",
-    name: "产业观察",
-    short: "产业",
+    slug: "embodied-intelligence",
+    name: "具身智能",
+    short: "具身",
     index: "02",
-    description: "沿产业链拆解变化，把叙事还原为供需与竞争格局。",
+    description: "拆解机器人本体、执行器、传感器、控制系统与核心零部件。",
   },
   {
-    slug: "company-research",
-    name: "公司研究",
-    short: "公司",
+    slug: "physical-ai-applications",
+    name: "物理AI与应用",
+    short: "物理",
     index: "03",
-    description: "从商业模式、财务质量与治理结构认识一家公司。",
+    description: "研究自动驾驶、工业机器人、无人机与智能制造的真实落地。",
   },
   {
-    slug: "methods-tools",
-    name: "方法与工具",
-    short: "方法",
+    slug: "company-industry-tracking",
+    name: "公司与产业跟踪",
+    short: "跟踪",
     index: "04",
-    description: "公开我们的研究框架、信息源与思考工具。",
+    description: "用公告、财报、订单、产能与经营数据持续验证产业逻辑。",
+  },
+  {
+    slug: "research-methods",
+    name: "研究方法",
+    short: "方法",
+    index: "05",
+    description: "公开信息源、研究框架、反方证据与判断修正过程。",
   },
 ] as const;
 
@@ -90,6 +98,7 @@ function parseArticle(fileName: string): Article {
     readingTime: Number(data.readingTime ?? 5),
     featured: Boolean(data.featured ?? false),
     issue: String(data.issue ?? "000"),
+    status: data.status === "published" ? "published" : "draft",
     content: match[2].trim(),
   };
 }
@@ -100,6 +109,7 @@ export function getAllArticles(): Article[] {
     .readdirSync(contentDirectory)
     .filter((fileName) => fileName.endsWith(".md"))
     .map(parseArticle)
+    .filter((article) => article.status === "published")
     .sort((a, b) => b.date.localeCompare(a.date));
 }
 

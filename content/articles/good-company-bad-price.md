@@ -8,6 +8,8 @@ tags: ["公司质量", "估值框架", "预期管理"]
 readingTime: 10
 featured: false
 issue: "012"
+status: "draft"
+sample: true
 ---
 “好公司”通常指向护城河、管理层和成长空间；“好价格”通常指向估值倍数。问题在于，这两组词如果分开使用，很容易产生错觉。
 

@@ -8,6 +8,8 @@ tags: ["AI硬件", "端侧智能", "产业链"]
 readingTime: 12
 featured: true
 issue: "014"
+status: "draft"
+sample: true
 ---
 过去两年，市场谈论 AI 硬件时，核心词几乎只有两个：**算力**与**资本开支**。这种观察没有错，但它很可能已经不足以解释下一阶段的产业变化。
 

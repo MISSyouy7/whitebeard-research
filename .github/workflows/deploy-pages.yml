@@ -40,11 +40,18 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Validate published research
+        run: pnpm validate:content
+
       - name: Build static site
         shell: bash
         run: |
           REPO_NAME="${GITHUB_REPOSITORY#*/}"
-          if [[ "$REPO_NAME" == "${GITHUB_REPOSITORY_OWNER}.github.io" ]]; then
+          if [[ -s public/CNAME ]]; then
+            CUSTOM_DOMAIN="$(tr -d '\r\n' < public/CNAME)"
+            BASE_PATH=""
+            SITE_URL="https://${CUSTOM_DOMAIN}"
+          elif [[ "$REPO_NAME" == "${GITHUB_REPOSITORY_OWNER}.github.io" ]]; then
             BASE_PATH=""
             SITE_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io"
           else

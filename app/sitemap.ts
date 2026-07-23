@@ -3,6 +3,8 @@ import { categories, getAllArticles } from "@/lib/content";
 
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://baihuzigl.com").replace(/\/$/, "");
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = ["", "/articles", "/about"].map((route) => ({
     url: `${siteUrl}${route}`,

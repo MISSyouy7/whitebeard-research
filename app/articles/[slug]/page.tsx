@@ -9,7 +9,10 @@ import { formatDate, getAllArticles, getArticle, markdownToHtml } from "@/lib/co
 export const dynamic = "force-static";
 export const dynamicParams = false;
 
-export function generateStaticParams() { return getAllArticles().map((article) => ({ slug: article.slug })); }
+export function generateStaticParams() {
+  const params = getAllArticles().map((article) => ({ slug: article.slug }));
+  return params.length > 0 ? params : [{ slug: "__no-published-articles__" }];
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;

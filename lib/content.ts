@@ -87,13 +87,16 @@ function parseArticle(fileName: string): Article {
     data[line.slice(0, separator).trim()] = parseValue(line.slice(separator + 1));
   }
 
+  const categorySlug = String(data.categorySlug ?? "uncategorized");
+  const category = categories.find((item) => item.slug === categorySlug)?.name ?? String(data.category ?? "未分类");
+
   return {
     slug,
     title: String(data.title ?? slug),
     description: String(data.description ?? ""),
     date: String(data.date ?? ""),
-    category: String(data.category ?? "未分类"),
-    categorySlug: String(data.categorySlug ?? "uncategorized"),
+    category,
+    categorySlug,
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     readingTime: Number(data.readingTime ?? 5),
     featured: Boolean(data.featured ?? false),

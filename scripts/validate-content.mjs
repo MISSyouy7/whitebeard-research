@@ -9,7 +9,7 @@ const categorySlugs = new Set([
   "company-industry-tracking",
   "research-methods",
 ]);
-const requiredFields = ["title", "description", "date", "category", "categorySlug", "tags", "readingTime", "featured", "issue", "status"];
+const requiredFields = ["title", "description", "date", "categorySlug", "tags", "readingTime", "featured", "issue", "status"];
 const requiredSections = [
   "## 已确认事实",
   "## 当前判断及依据",

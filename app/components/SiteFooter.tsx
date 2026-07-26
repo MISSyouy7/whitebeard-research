@@ -14,6 +14,7 @@ export function SiteFooter() {
           <Link href="/articles">研究档案</Link>
           <Link href="/join">加入研究院</Link>
           <Link href="/about">关于与边界</Link>
+          <Link href="/admin">内容后台</Link>
         </div>
         <div className="footer-note">
           <p>事实、判断与推测分开记录。本站内容仅作研究交流，不构成投资建议。</p>

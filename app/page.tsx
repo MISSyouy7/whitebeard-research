@@ -27,7 +27,7 @@ export default function Home() {
               <h1>把 AI 产业变化，<br />研究成<span>可跟踪的股票线索。</span></h1>
             </div>
             <div className="home-hero-copy">
-              <p>从小红书、公众号或爱股票社区来到这里，都可以在同一个地方找到完整研究、判断变化和下一步跟踪。</p>
+              <p>无论在哪里认识白胡子，都可以在这里找到完整研究、判断变化和下一步跟踪。</p>
               <p>聚焦 AI 算力与硬件、具身智能、物理 AI，持续连接产业环节、上市公司与财务验证。</p>
               <div className="home-actions">
                 <Link className="primary-button" href="/weekly">查看本周跟踪 <span>→</span></Link>
@@ -105,7 +105,7 @@ export default function Home() {
 
         <section className="join-band section-shell">
           <span className="join-band-label">STAY CONNECTED</span>
-          <div><h2>平台会变，<br />这张名片一直在。</h2><p>收藏永久域名，跟着每周研究节奏阅读；想加入候补名单，可以从你来的平台私信关键词。</p></div>
+          <div><h2>平台会变，<br />这张名片一直在。</h2><p>收藏永久域名，跟着每周研究节奏阅读。研究服务开放时，官网会同步说明加入方式。</p></div>
           <Link className="primary-button button-dark" href="/join">加入研究院 <span>→</span></Link>
         </section>
       </main>

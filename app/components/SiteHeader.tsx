@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 const links = [
-  { href: "/articles", label: "全部研究" },
-  { href: "/categories/ai-compute-hardware", label: "AI算力" },
-  { href: "/categories/embodied-intelligence", label: "具身智能" },
-  { href: "/about", label: "关于研究院" },
+  { href: "/weekly", label: "本周" },
+  { href: "/articles", label: "研究" },
+  { href: "/join", label: "加入" },
+  { href: "/about", label: "关于" },
 ];
 
 export function SiteHeader() {

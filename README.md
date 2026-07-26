@@ -2,18 +2,19 @@
 
 白胡子盐话官方网站，也是白胡子长期积累 AI 产业链研究与个人信用的数字名片。
 
-网站使用 Markdown 管理文章，支持分类浏览、手机端阅读、内容发布检查和 GitHub Pages 自动部署。季度运营工作台位于 `operations/quarter-2026-07-27/`。
+网站使用 Markdown 管理研究文章与每周跟踪，支持分类浏览、候补承接、手机端阅读、内容发布检查和 GitHub Pages 自动部署。季度运营工作台位于 `operations/quarter-2026-07-27/`。
 
 ## 内容后台（推荐）
 
 访问 `https://baihuzigl.com/admin/`，点击“打开文章后台”，再使用网站仓库所属的 GitHub 账号登录。
 
-后台会读取根目录的 `.pages.yml`，把表单内容直接保存为 `content/articles/*.md`：
+后台会读取根目录的 `.pages.yml`，把表单内容直接保存为 `content/articles/*.md` 或 `content/weekly/*.md`：
 
 - 新文章默认保存为 `draft`，官网不可见。
 - 选择分类后，网站会自动显示正确的中文分类名称。
 - 改为 `published` 后会触发内容检查；检查通过才会更新官网。
 - 后台只用于公开研究文章，禁止保存交易账户、个人持仓、客户名单或付费记录。
+- “研究文章”用于完整深度内容，“每周研究跟踪”用于更新本周问题、进度、判断变化和下一步安排。
 
 首次登录需要确认 Pages CMS 对 `MISSyouy7/whitebeard-research` 仓库的读写权限。
 

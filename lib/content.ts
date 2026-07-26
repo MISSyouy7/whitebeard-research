@@ -16,6 +16,19 @@ export type Article = {
   content: string;
 };
 
+export type WeeklyBrief = {
+  slug: string;
+  title: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  issue: string;
+  state: string;
+  focus: string[];
+  status: "draft" | "published";
+  content: string;
+};
+
 export const categories = [
   {
     slug: "ai-compute-hardware",
@@ -55,6 +68,7 @@ export const categories = [
 ] as const;
 
 const contentDirectory = path.join(process.cwd(), "content", "articles");
+const weeklyDirectory = path.join(process.cwd(), "content", "weekly");
 
 function parseValue(value: string): string | boolean | number | string[] {
   const clean = value.trim();
@@ -122,6 +136,50 @@ export function getArticle(slug: string): Article | undefined {
 
 export function getArticlesByCategory(categorySlug: string): Article[] {
   return getAllArticles().filter((article) => article.categorySlug === categorySlug);
+}
+
+function parseWeeklyBrief(fileName: string): WeeklyBrief {
+  const slug = fileName.replace(/\.md$/, "");
+  const raw = fs.readFileSync(path.join(weeklyDirectory, fileName), "utf8");
+  const match = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+
+  if (!match) {
+    throw new Error(`Weekly brief ${fileName} is missing front matter.`);
+  }
+
+  const data: Record<string, string | boolean | number | string[]> = {};
+  for (const line of match[1].split("\n")) {
+    const separator = line.indexOf(":");
+    if (separator < 0) continue;
+    data[line.slice(0, separator).trim()] = parseValue(line.slice(separator + 1));
+  }
+
+  return {
+    slug,
+    title: String(data.title ?? slug),
+    description: String(data.description ?? ""),
+    startDate: String(data.startDate ?? ""),
+    endDate: String(data.endDate ?? ""),
+    issue: String(data.issue ?? "000"),
+    state: String(data.state ?? "跟踪中"),
+    focus: Array.isArray(data.focus) ? data.focus.map(String) : [],
+    status: data.status === "published" ? "published" : "draft",
+    content: match[2].trim(),
+  };
+}
+
+export function getWeeklyBriefs(): WeeklyBrief[] {
+  if (!fs.existsSync(weeklyDirectory)) return [];
+  return fs
+    .readdirSync(weeklyDirectory)
+    .filter((fileName) => fileName.endsWith(".md"))
+    .map(parseWeeklyBrief)
+    .filter((brief) => brief.status === "published")
+    .sort((a, b) => b.startDate.localeCompare(a.startDate));
+}
+
+export function getLatestWeeklyBrief(): WeeklyBrief | undefined {
+  return getWeeklyBriefs()[0];
 }
 
 export function formatDate(date: string): string {

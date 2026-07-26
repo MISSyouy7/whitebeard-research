@@ -6,15 +6,17 @@ export function SiteFooter() {
       <div className="footer-grid">
         <div>
           <div className="footer-mark">白胡子<span>研究院</span></div>
-          <p>看懂 AI 产业链，跟踪真实变化。</p>
+          <p>把 AI 产业变化，研究成可跟踪的股票线索。</p>
+          <p>baihuzigl.com</p>
         </div>
         <div className="footer-links">
+          <Link href="/weekly">本周跟踪</Link>
           <Link href="/articles">研究档案</Link>
-          <Link href="/about">研究原则</Link>
-          <Link href="/categories/research-methods">研究方法</Link>
+          <Link href="/join">加入研究院</Link>
+          <Link href="/about">关于与边界</Link>
         </div>
         <div className="footer-note">
-          <p>本站内容仅供研究与交流，不构成任何投资建议。</p>
+          <p>事实、判断与推测分开记录。本站内容仅作研究交流，不构成投资建议。</p>
           <p>© {new Date().getFullYear()} WHITEBEARD INSTITUTE</p>
         </div>
       </div>

@@ -118,3 +118,105 @@ content:
           - 机构或公司，《材料标题》，发布日期，[原文](https://example.com)。
 
           仅作研究交流，不构成投资建议。
+  - name: weekly
+    label: 每周研究跟踪
+    type: collection
+    path: content/weekly
+    filename: "{fields.slug}.md"
+    view:
+      fields: [title, status, state, startDate, endDate]
+      primary: title
+      sort: [startDate, title]
+      default:
+        sort: startDate
+        order: desc
+    fields:
+      - name: slug
+        label: 周报网址代号
+        type: string
+        description: 例如 weekly-002。
+        required: true
+        pattern:
+          regex: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          message: 只能填写英文小写、数字和短横线。
+      - name: title
+        label: 本周核心问题
+        type: string
+        required: true
+      - name: description
+        label: 本周研究说明
+        type: text
+        required: true
+      - name: startDate
+        label: 开始日期
+        type: date
+        required: true
+      - name: endDate
+        label: 结束日期
+        type: date
+        required: true
+      - name: issue
+        label: 周次编号
+        type: string
+        default: "001"
+        description: 使用三位数字，例如 002。
+        required: true
+      - name: state
+        label: 当前状态
+        type: select
+        default: 准备中
+        required: true
+        options:
+          values:
+            - value: 准备中
+              label: 准备中
+            - value: 跟踪中
+              label: 跟踪中
+            - value: 已复盘
+              label: 已复盘
+      - name: focus
+        label: 覆盖方向
+        type: string
+        list: true
+        required: true
+      - name: status
+        label: 发布状态
+        type: select
+        default: draft
+        required: true
+        options:
+          values:
+            - value: draft
+              label: 草稿（官网不可见）
+            - value: published
+              label: 正式发布
+      - name: body
+        label: 本周跟踪正文
+        type: rich-text
+        required: true
+        default: |
+          简要说明本周为什么研究这个问题。
+
+          ## 本周核心问题
+
+          待填写。
+
+          ## 本周先做什么
+
+          - 待填写。
+
+          ## 当前研究状态
+
+          - 【事实】待填写。
+          - 【判断】待填写。
+          - 【推测】暂无，或写明待验证线索。
+
+          ## 本周更新节奏
+
+          - 待填写。
+
+          ## 风险与边界
+
+          - 待填写。
+
+          仅作研究交流，不构成投资建议。

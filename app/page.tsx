@@ -2,115 +2,111 @@ import Link from "next/link";
 import { ArticleCard } from "@/app/components/ArticleCard";
 import { SiteFooter } from "@/app/components/SiteFooter";
 import { SiteHeader } from "@/app/components/SiteHeader";
-import { categories, formatDate, getAllArticles } from "@/lib/content";
+import { categories, formatDate, getAllArticles, getLatestWeeklyBrief } from "@/lib/content";
+
+const rhythm = [
+  ["周一", "提出问题"],
+  ["周四", "发布研究"],
+  ["周日", "复盘变化"],
+];
 
 export default function Home() {
   const articles = getAllArticles();
-  const featured = articles.find((article) => article.featured) ?? articles[0];
-  const latest = articles.filter((article) => article.slug !== featured?.slug).slice(0, 4);
+  const weekly = getLatestWeeklyBrief();
+  const latest = articles.slice(0, 3);
 
   return (
     <>
       <SiteHeader />
       <main>
-        <section className="hero section-shell">
-          <div className="hero-kicker"><span>AI INDUSTRY RESEARCH / LONG-TERM RECORD</span><span>白胡子盐话</span></div>
-          <div className="hero-grid">
-            <div className="hero-title-wrap">
-              <p className="hero-eyebrow">WHITEBEARD<br />RESEARCH INSTITUTE</p>
-              <h1><span>白胡子</span><br />研究院</h1>
-              <div className="hero-stamp" aria-hidden="true">研究<br />求真</div>
+        <section className="home-hero section-shell">
+          <p className="home-kicker">白胡子研究院 · 面向股民的 AI 产业链研究</p>
+          <div className="home-hero-grid">
+            <div>
+              <span className="home-issue">STOCK RESEARCH / 2026</span>
+              <h1>把 AI 产业变化，<br />研究成<span>可跟踪的股票线索。</span></h1>
             </div>
-            <div className="hero-intro">
-              <p className="hero-lead">看懂 AI 产业链，<br />跟踪真实变化。</p>
-              <p>面向个人投资者，聚焦 AI 算力与硬件、具身智能与物理 AI。从技术、产业到公司，建立可以持续验证的研究框架。</p>
-              <Link className="primary-button" href="/articles">进入研究档案 <span>→</span></Link>
+            <div className="home-hero-copy">
+              <p>从小红书、公众号或爱股票社区来到这里，都可以在同一个地方找到完整研究、判断变化和下一步跟踪。</p>
+              <p>聚焦 AI 算力与硬件、具身智能、物理 AI，持续连接产业环节、上市公司与财务验证。</p>
+              <div className="home-actions">
+                <Link className="primary-button" href="/weekly">查看本周跟踪 <span>→</span></Link>
+                <Link className="text-link" href="/articles">浏览研究档案 ↗</Link>
+              </div>
             </div>
           </div>
-          <div className="hero-ticker" aria-label="研究原则">
-            <span>NO. 001</span><strong>不追逐概念，验证产业。</strong><span>FACTS · EVIDENCE · FALSIFICATION</span>
+          <div className="research-rhythm" aria-label="每周研究节奏">
+            {rhythm.map(([day, action]) => <div key={day}><b>{day}</b><span>{action}</span></div>)}
+            <p>先看事实，再写判断；允许变化，保留证伪。</p>
           </div>
         </section>
 
-        {featured && (
-          <section className="featured section-shell">
-            <div className="section-heading">
-              <div><span className="section-index">01</span><p>本期研判<br /><small>FEATURED RESEARCH</small></p></div>
-              <Link href="/articles">全部研究 ↗</Link>
-            </div>
-            <article className="featured-card">
-              <div className="featured-visual">
-                <div className="visual-grid" aria-hidden="true">
-                  <span className="v-line v-one" /><span className="v-line v-two" /><span className="v-line v-three" />
-                  <b>THESIS<br />/{featured.issue}</b><em>趋势不是直线<br />而是多重变量的共振</em>
+        <section className="weekly-preview section-shell">
+          <div className="section-heading compact-heading">
+            <div><span className="section-index">01</span><p>本周与你一起研究<br /><small>THIS WEEK</small></p></div>
+            <Link href="/weekly">查看完整进度 ↗</Link>
+          </div>
+          {weekly ? (
+            <article className="weekly-card">
+              <div className="weekly-card-meta">
+                <span>W{weekly.issue}</span>
+                <strong><i />{weekly.state}</strong>
+                <small>{formatDate(weekly.startDate)}—{formatDate(weekly.endDate).slice(5)}</small>
+              </div>
+              <div className="weekly-card-main">
+                <p>本周核心问题</p>
+                <h2>{weekly.title}</h2>
+                <div className="weekly-card-bottom">
+                  <p>{weekly.description}</p>
+                  <Link className="outline-button" href="/weekly">进入本周 <span>→</span></Link>
                 </div>
               </div>
-              <div className="featured-content">
-                <div className="article-meta"><Link href={`/categories/${featured.categorySlug}`}>{featured.category}</Link><span>{formatDate(featured.date)}</span><span>{featured.readingTime} MIN</span></div>
-                <h2><Link href={`/articles/${featured.slug}`}>{featured.title}</Link></h2>
-                <p>{featured.description}</p>
-                <div className="featured-points">
-                  <span>研究议题</span>
-                  {featured.tags.slice(0, 3).map((tag, index) => <div key={tag}><b>0{index + 1}</b>{tag}</div>)}
-                </div>
-                <Link className="primary-button button-dark" href={`/articles/${featured.slug}`}>阅读完整报告 <span>↗</span></Link>
+              <div className="weekly-focus">
+                <span>覆盖方向</span>
+                {weekly.focus.map((item, index) => <div key={item}><b>0{index + 1}</b>{item}</div>)}
               </div>
             </article>
-          </section>
-        )}
+          ) : (
+            <div className="empty-state"><span>WEEKLY RESEARCH</span><h2>本周研究问题正在整理</h2><p>不为了更新而制造结论，确认问题后再开始跟踪。</p></div>
+          )}
+        </section>
 
-        <section className="latest section-shell">
-          <div className="section-heading">
-            <div><span className="section-index">02</span><p>最新研究<br /><small>LATEST NOTES</small></p></div>
-            <span className="heading-note">每一篇都源于一个真实的问题</span>
+        <section className="home-research section-shell">
+          <div className="section-heading compact-heading">
+            <div><span className="section-index">02</span><p>最新研究<br /><small>RESEARCH ARCHIVE</small></p></div>
+            <Link href="/articles">全部研究 ↗</Link>
           </div>
           {latest.length > 0 ? (
-            <>
-              <div className="article-list">
-                {latest.map((article, index) => <ArticleCard article={article} index={index + 1} key={article.slug} />)}
-              </div>
-              <div className="center-action"><Link className="outline-button" href="/articles">浏览全部研究 <span>→</span></Link></div>
-            </>
+            <div className="article-list">{latest.map((article, index) => <ArticleCard article={article} index={index + 1} key={article.slug} />)}</div>
           ) : (
-            <div className="empty-state">
-              <span>RESEARCH IN PROGRESS</span>
-              <h2>首批正式研究正在准备中</h2>
-              <p>只有完成来源核验、反方观点和证伪条件检查的文章，才会进入公开档案。</p>
+            <div className="research-empty">
+              <div><span>0</span><small>篇正式研究</small></div>
+              <div><h2>这里宁可暂时空着，<br />也不放未经核验的“示例结论”。</h2><p>首批文章会明确区分事实、判断和推测，并保留来源、反方观点与证伪条件。</p></div>
             </div>
           )}
         </section>
 
-        <section className="category-section">
+        <section className="fields-section">
           <div className="section-shell">
-            <div className="section-heading light-heading">
-              <div><span className="section-index">03</span><p>研究领域<br /><small>OUR FIELDS</small></p></div>
-              <span className="heading-note">五个入口，一套可验证的方法</span>
+            <div className="section-heading compact-heading light-heading">
+              <div><span className="section-index">03</span><p>股票研究地图<br /><small>RESEARCH MAP</small></p></div>
+              <span className="heading-note">产业变化最终要接受公司经营数据验证</span>
             </div>
-            <div className="category-grid">
+            <div className="field-list">
               {categories.map((category) => {
                 const count = articles.filter((article) => article.categorySlug === category.slug).length;
-                return (
-                  <Link href={`/categories/${category.slug}`} className="category-card" key={category.slug}>
-                    <span>{category.index}</span>
-                    <div className="category-glyph" aria-hidden="true">{category.short.slice(0, 1)}</div>
-                    <h3>{category.name}</h3>
-                    <p>{category.description}</p>
-                    <small>{String(count).padStart(2, "0")} 篇研究 <b>↗</b></small>
-                  </Link>
-                );
+                return <Link href={`/categories/${category.slug}`} key={category.slug}>
+                  <span>{category.index}</span><h3>{category.name}</h3><p>{category.description}</p><small>{count} 篇 ↗</small>
+                </Link>;
               })}
             </div>
           </div>
         </section>
 
-        <section className="manifesto section-shell">
-          <div className="manifesto-label">OUR WAY OF THINKING</div>
-          <blockquote>“研究不是寻找一个漂亮的答案，<br />而是不断逼近<span>真实</span>。”</blockquote>
-          <div className="principles">
-            <div><b>01</b><h3>事实优先</h3><p>先确认我们知道什么，再讨论它意味着什么。</p></div>
-            <div><b>02</b><h3>跟踪验证</h3><p>把叙事还原为订单、产能、财务和可持续更新的数据。</p></div>
-            <div><b>03</b><h3>主动证伪</h3><p>写下反方观点和失效条件，也允许自己修正判断。</p></div>
-          </div>
+        <section className="join-band section-shell">
+          <span className="join-band-label">STAY CONNECTED</span>
+          <div><h2>平台会变，<br />这张名片一直在。</h2><p>收藏永久域名，跟着每周研究节奏阅读；想加入候补名单，可以从你来的平台私信关键词。</p></div>
+          <Link className="primary-button button-dark" href="/join">加入研究院 <span>→</span></Link>
         </section>
       </main>
       <SiteFooter />

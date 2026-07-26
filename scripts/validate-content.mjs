@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const contentDirectory = path.join(process.cwd(), "content", "articles");
+const weeklyDirectory = path.join(process.cwd(), "content", "weekly");
 const categorySlugs = new Set([
   "ai-compute-hardware",
   "embodied-intelligence",
@@ -64,6 +65,44 @@ for (const file of files) {
   }
 }
 
+const weeklyFiles = fs.existsSync(weeklyDirectory)
+  ? fs.readdirSync(weeklyDirectory).filter((file) => file.endsWith(".md"))
+  : [];
+
+for (const file of weeklyFiles) {
+  const raw = fs.readFileSync(path.join(weeklyDirectory, file), "utf8");
+  const match = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  if (!match) {
+    errors.push(`${file}: 每周跟踪缺少完整的 front matter。`);
+    continue;
+  }
+
+  const fields = new Map();
+  for (const line of match[1].split("\n")) {
+    const separator = line.indexOf(":");
+    if (separator > 0) fields.set(line.slice(0, separator).trim(), line.slice(separator + 1).trim().replace(/^['"]|['"]$/g, ""));
+  }
+
+  const status = fields.get("status") ?? "draft";
+  if (!new Set(["draft", "published"]).has(status)) errors.push(`${file}: status 只能是 draft 或 published。`);
+  if (status !== "published") continue;
+
+  for (const field of ["title", "description", "startDate", "endDate", "issue", "state", "focus", "status"]) {
+    if (!fields.get(field)) errors.push(`${file}: 正式每周跟踪缺少 ${field}。`);
+  }
+  for (const field of ["startDate", "endDate"]) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(fields.get(field) ?? "")) errors.push(`${file}: ${field} 必须是 YYYY-MM-DD。`);
+  }
+  const body = match[2];
+  for (const section of ["## 本周核心问题", "## 当前研究状态", "## 风险与边界"]) {
+    if (!body.includes(section)) errors.push(`${file}: 缺少“${section.replace("## ", "")}”章节。`);
+  }
+  if (!body.includes("仅作研究交流，不构成投资建议")) errors.push(`${file}: 缺少统一风险声明。`);
+  for (const phrase of bannedPromises) {
+    if (body.includes(phrase)) errors.push(`${file}: 包含禁止的收益承诺用语“${phrase}”。`);
+  }
+}
+
 if (errors.length > 0) {
   console.error("内容检查未通过：\n");
   for (const error of errors) console.error(`- ${error}`);
@@ -74,4 +113,4 @@ const publishedCount = files.filter((file) => {
   const raw = fs.readFileSync(path.join(contentDirectory, file), "utf8");
   return /\nstatus:\s*["']?published["']?\s*\n/.test(raw);
 }).length;
-console.log(`内容检查通过：${publishedCount} 篇正式文章，${files.length - publishedCount} 篇草稿。`);
+console.log(`内容检查通过：${publishedCount} 篇正式文章，${files.length - publishedCount} 篇文章草稿，${weeklyFiles.length} 份每周跟踪。`);

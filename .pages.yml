@@ -24,6 +24,18 @@ content:
         label: 文章标题
         type: string
         required: true
+      - name: status
+        label: 发布状态
+        type: select
+        default: draft
+        required: true
+        description: 写作时保持草稿；全部核验完成后再选择正式发布。
+        options:
+          values:
+            - value: draft
+              label: 草稿（官网不可见）
+            - value: published
+              label: 正式发布
       - name: description
         label: 首页摘要
         type: text
@@ -69,18 +81,6 @@ content:
         default: "000"
         description: 使用三位数字，例如 001。
         required: true
-      - name: status
-        label: 发布状态
-        type: select
-        default: draft
-        required: true
-        description: 新文章先保存为草稿；完成核验后再改为正式发布。
-        options:
-          values:
-            - value: draft
-              label: 草稿（官网不可见）
-            - value: published
-              label: 正式发布
       - name: body
         label: 正文
         type: rich-text
@@ -143,6 +143,18 @@ content:
         label: 本周核心问题
         type: string
         required: true
+      - name: status
+        label: 发布状态
+        type: select
+        default: draft
+        required: true
+        description: 写作时保持草稿；确认后再选择正式发布。
+        options:
+          values:
+            - value: draft
+              label: 草稿（官网不可见）
+            - value: published
+              label: 正式发布
       - name: description
         label: 本周研究说明
         type: text
@@ -179,17 +191,6 @@ content:
         type: string
         list: true
         required: true
-      - name: status
-        label: 发布状态
-        type: select
-        default: draft
-        required: true
-        options:
-          values:
-            - value: draft
-              label: 草稿（官网不可见）
-            - value: published
-              label: 正式发布
       - name: body
         label: 本周跟踪正文
         type: rich-text

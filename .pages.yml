@@ -1,90 +1,57 @@
+media:
+  - name: article_images
+    label: 文章图片
+    input: public/uploads
+    output: /uploads
+    extensions: [png, jpg, jpeg, webp]
+    categories: [image]
+    rename: random
+
 content:
   - name: articles
-    label: 研究文章
+    label: 公开文章
     type: collection
     path: content/articles
-    filename: "{fields.slug}.md"
+    filename:
+      template: "{year}-{month}-{day}-{hour}{minute}{second}.md"
+      field: false
     view:
-      fields: [title, status, categorySlug, date, featured]
+      fields: [title, categorySlug, status]
       primary: title
-      sort: [date, title]
-      default:
-        sort: date
-        order: desc
+      sort: [title]
     fields:
-      - name: slug
-        label: 文章网址代号
-        type: string
-        description: 只使用英文小写、数字和短横线，例如 ai-chip-cycle。
-        required: true
-        pattern:
-          regex: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-          message: 只能填写英文小写、数字和短横线。
       - name: title
         label: 文章标题
         type: string
         required: true
-      - name: status
-        label: 发布状态
+      - name: categorySlug
+        label: 所属栏目
         type: select
-        default: draft
         required: true
-        description: 写作时保持草稿；全部核验完成后再选择正式发布。
         options:
           values:
-            - value: draft
-              label: 草稿（官网不可见）
-            - value: published
-              label: 正式发布
+            - value: ai-industry
+              label: AI产业链研究
+            - value: market-review
+              label: A股市场复盘
+            - value: trading-cognition
+              label: 交易与认知
       - name: description
         label: 首页摘要
         type: text
-        description: 用一到两句话说明研究对象、核心问题和当前结论。
-        required: true
-      - name: date
-        label: 发布日期
-        type: date
-        required: true
-      - name: categorySlug
-        label: 文章分类
-        type: select
-        required: true
-        options:
-          values:
-            - value: ai-compute-hardware
-              label: AI算力与硬件
-            - value: embodied-intelligence
-              label: 具身智能
-            - value: physical-ai-applications
-              label: 物理AI与应用
-            - value: company-industry-tracking
-              label: 公司与产业跟踪
-            - value: research-methods
-              label: 研究方法
-      - name: tags
-        label: 标签
-        type: string
-        list: true
-        required: true
-      - name: readingTime
-        label: 预计阅读分钟数
-        type: number
-        default: 8
-        required: true
-      - name: featured
-        label: 首页重点推荐
-        type: boolean
-        default: false
-      - name: issue
-        label: 研究编号
-        type: string
-        default: "000"
-        description: 使用三位数字，例如 001。
+        description: 用200字以内说明研究问题和当前结论。
         required: true
       - name: body
         label: 正文
         type: rich-text
         required: true
+        options:
+          format: markdown
+          switcher: false
+          media: article_images
+          path: articles
+          extensions: [png, jpg, jpeg, webp]
+          rename: random
         default: |
           用不超过150字说明研究对象、核心问题和当前结论。
 
@@ -118,6 +85,79 @@ content:
           - 机构或公司，《材料标题》，发布日期，[原文](https://example.com)。
 
           仅作研究交流，不构成投资建议。
+      - name: status
+        label: 保存方式
+        type: select
+        default: draft
+        required: true
+        description: 默认保存草稿；全部核验完成后再选择正式发布。
+        options:
+          values:
+            - value: draft
+              label: 保存草稿（官网不可见）
+            - value: published
+              label: 正式发布
+
+  - name: previews
+    label: 星球试读
+    type: collection
+    path: content/previews
+    filename:
+      template: "{year}-{month}-{day}-{hour}{minute}{second}.md"
+      field: false
+    view:
+      fields: [title, categorySlug, status]
+      primary: title
+      sort: [title]
+    fields:
+      - name: title
+        label: 文章标题
+        type: string
+        required: true
+      - name: categorySlug
+        label: 所属栏目
+        type: select
+        required: true
+        options:
+          values:
+            - value: ai-industry
+              label: AI产业链研究
+            - value: market-review
+              label: A股市场复盘
+            - value: trading-cognition
+              label: 交易与认知
+      - name: description
+        label: 公开试读摘要
+        type: text
+        description: 填写200—400字，只说明研究问题、事实边界和读者能获得什么。
+        required: true
+      - name: keyPoints
+        label: 文章包含的3个要点
+        type: string
+        list: true
+        description: 必须恰好填写3条，每条只写一个重点。
+        required: true
+      - name: zsxqUrl
+        label: 知识星球原文链接
+        type: string
+        description: 先在知识星球发布全文，再复制该主题的分享链接。
+        required: true
+        pattern:
+          regex: "^https://wx\\.zsxq\\.com/(group/15554884215522/topic/[0-9]+|mweb/views/topicdetail/topicdetail\\.html\\?topic_id=[0-9]+&group_id=15554884215522)$"
+          message: 请输入“白胡子研究室（持续研究版）”的主题分享链接。
+      - name: status
+        label: 保存方式
+        type: select
+        default: draft
+        required: true
+        description: 默认保存草稿；确认摘要无误后再选择正式发布。
+        options:
+          values:
+            - value: draft
+              label: 保存草稿（官网不可见）
+            - value: published
+              label: 正式发布
+
   - name: weekly
     label: 每周研究跟踪
     type: collection
@@ -144,15 +184,14 @@ content:
         type: string
         required: true
       - name: status
-        label: 发布状态
+        label: 保存方式
         type: select
         default: draft
         required: true
-        description: 写作时保持草稿；确认后再选择正式发布。
         options:
           values:
             - value: draft
-              label: 草稿（官网不可见）
+              label: 保存草稿（官网不可见）
             - value: published
               label: 正式发布
       - name: description
@@ -171,7 +210,6 @@ content:
         label: 周次编号
         type: string
         default: "001"
-        description: 使用三位数字，例如 002。
         required: true
       - name: state
         label: 当前状态
@@ -195,6 +233,13 @@ content:
         label: 本周跟踪正文
         type: rich-text
         required: true
+        options:
+          format: markdown
+          switcher: false
+          media: article_images
+          path: weekly
+          extensions: [png, jpg, jpeg, webp]
+          rename: random
         default: |
           简要说明本周为什么研究这个问题。
 

@@ -13,22 +13,22 @@ const rhythm = [
 export default function Home() {
   const articles = getAllArticles();
   const weekly = getLatestWeeklyBrief();
-  const latest = articles.slice(0, 3);
+  const latest = categories.map((category) => articles.find((article) => article.categorySlug === category.slug)).filter((article) => article !== undefined);
 
   return (
     <>
       <SiteHeader />
       <main>
         <section className="home-hero section-shell">
-          <p className="home-kicker">白胡子研究院 · 面向股民的 AI 产业链研究</p>
+          <p className="home-kicker">白胡子研究院 · 面向股民的产业研究与市场复盘</p>
           <div className="home-hero-grid">
             <div>
               <span className="home-issue">STOCK RESEARCH / 2026</span>
               <h1>把 AI 产业变化，<br />研究成<span>可跟踪的股票线索。</span></h1>
             </div>
             <div className="home-hero-copy">
-              <p>无论在哪里认识白胡子，都可以在这里找到完整研究、判断变化和下一步跟踪。</p>
-              <p>聚焦 AI 算力与硬件、具身智能、物理 AI，持续连接产业环节、上市公司与财务验证。</p>
+              <p>无论在哪里认识白胡子，都可以在这里找到公开研究、星球试读、判断变化和下一步跟踪。</p>
+              <p>聚焦 AI 产业链、A股市场复盘和交易认知，持续连接产业环节、上市公司与财务验证。</p>
               <div className="home-actions">
                 <Link className="primary-button" href="/weekly">查看本周跟踪 <span>→</span></Link>
                 <Link className="text-link" href="/articles">浏览研究档案 ↗</Link>
@@ -73,7 +73,7 @@ export default function Home() {
 
         <section className="home-research section-shell">
           <div className="section-heading compact-heading">
-            <div><span className="section-index">02</span><p>最新研究<br /><small>RESEARCH ARCHIVE</small></p></div>
+            <div><span className="section-index">02</span><p>三个栏目最新研究<br /><small>PUBLIC & MEMBER RESEARCH</small></p></div>
             <Link href="/articles">全部研究 ↗</Link>
           </div>
           {latest.length > 0 ? (
@@ -81,7 +81,7 @@ export default function Home() {
           ) : (
             <div className="research-empty">
               <div><span>0</span><small>篇正式研究</small></div>
-              <div><h2>这里宁可暂时空着，<br />也不放未经核验的“示例结论”。</h2><p>首批文章会明确区分事实、判断和推测，并保留来源、反方观点与证伪条件。</p></div>
+              <div><h2>首批星球试读<br />正在等待你的确认。</h2><p>草稿不会在官网出现；确认后的试读只展示摘要和三个要点，不保存付费全文。</p></div>
             </div>
           )}
         </section>
@@ -89,7 +89,7 @@ export default function Home() {
         <section className="fields-section">
           <div className="section-shell">
             <div className="section-heading compact-heading light-heading">
-              <div><span className="section-index">03</span><p>股票研究地图<br /><small>RESEARCH MAP</small></p></div>
+            <div><span className="section-index">03</span><p>三个长期栏目<br /><small>RESEARCH MAP</small></p></div>
               <span className="heading-note">产业变化最终要接受公司经营数据验证</span>
             </div>
             <div className="field-list">
@@ -105,7 +105,7 @@ export default function Home() {
 
         <section className="join-band section-shell">
           <span className="join-band-label">STAY CONNECTED</span>
-          <div><h2>平台会变，<br />这张名片一直在。</h2><p>收藏永久域名，跟着每周研究节奏阅读。研究服务开放时，官网会同步说明加入方式。</p></div>
+          <div><h2>平台会变，<br />这张名片一直在。</h2><p>收藏永久域名阅读公开研究；需要完整星球专享内容时，从官网直接进入知识星球原文。</p></div>
           <Link className="primary-button button-dark" href="/join">加入研究院 <span>→</span></Link>
         </section>
       </main>

@@ -2,9 +2,10 @@ import Link from "next/link";
 
 const links = [
   { href: "/weekly", label: "本周" },
-  { href: "/articles", label: "研究" },
+  { href: "/categories/ai-industry", label: "AI研究" },
+  { href: "/categories/market-review", label: "市场复盘" },
+  { href: "/categories/trading-cognition", label: "交易认知" },
   { href: "/join", label: "加入" },
-  { href: "/about", label: "关于" },
 ];
 
 export function SiteHeader() {

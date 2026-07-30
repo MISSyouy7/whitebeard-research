@@ -1,31 +1,15 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const slug = process.argv[2];
+const now = new Date();
+const date = now.toISOString().slice(0, 10);
+const time = now.toTimeString().slice(0, 8).replaceAll(":", "");
+const articlePath = path.join(process.cwd(), "content", "articles", `${date}-${time}.md`);
 
-if (!slug || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
-  console.error("用法：pnpm new:article ai-industry-chain-map");
-  console.error("文章代号只能包含英文小写、数字和连字符。");
-  process.exit(1);
-}
-
-const articlePath = path.join(process.cwd(), "content", "articles", `${slug}.md`);
-if (fs.existsSync(articlePath)) {
-  console.error(`文章已存在：${articlePath}`);
-  process.exit(1);
-}
-
-const today = new Date().toISOString().slice(0, 10);
 const template = `---
 title: "待填写：文章标题"
 description: "待填写：用于首页和分享的简短摘要"
-date: "${today}"
-category: "AI算力与硬件"
-categorySlug: "ai-compute-hardware"
-tags: ["AI产业链"]
-readingTime: 8
-featured: false
-issue: "000"
+categorySlug: "ai-industry"
 status: "draft"
 ---
 用不超过150字说明研究对象、核心问题和当前结论。
@@ -61,6 +45,11 @@ status: "draft"
 
 仅作研究交流，不构成投资建议。
 `;
+
+if (fs.existsSync(articlePath)) {
+  console.error(`同一秒已存在文章：${articlePath}`);
+  process.exit(1);
+}
 
 fs.writeFileSync(articlePath, template, "utf8");
 console.log(`已创建草稿：${articlePath}`);

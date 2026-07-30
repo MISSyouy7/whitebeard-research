@@ -5,24 +5,26 @@ import { SiteHeader } from "@/app/components/SiteHeader";
 
 export const metadata: Metadata = {
   title: "加入研究院",
-  description: "收藏白胡子研究院永久网址，获取公开研究，并登记 AI 产业链研究内测意向。",
+  description: "收藏白胡子研究院永久网址，阅读公开研究，并从官网进入知识星球专享全文。",
 };
+
+const groupUrl = "https://wx.zsxq.com/group/15554884215522";
 
 export default function JoinPage() {
   return <><SiteHeader /><main className="join-page section-shell">
-    <header className="page-masthead join-masthead"><p>JOIN / STAY CONNECTED</p><h1>加入</h1><span>这不是复杂的会员中心，而是一条不会失联的研究路径。</span></header>
+    <header className="page-masthead join-masthead"><p>JOIN / STAY CONNECTED</p><h1>加入</h1><span>官网负责长期沉淀，知识星球负责订阅与专享全文。</span></header>
     <section className="join-intro">
       <div><span>永久名片</span><strong>baihuzigl.com</strong></div>
-      <div><h2>先免费同行，<br />再决定要不要走得更深。</h2><p>公开研究始终保留在官网。更深入的研究服务仍在准备，开放时间与具体方式以官网正式说明为准。</p></div>
+      <div><h2>先免费阅读，<br />再决定要不要深入。</h2><p>公开文章保留在官网；标注“星球专享”的内容只展示摘要和三个要点，完整研究由知识星球管理订阅权限。</p></div>
     </section>
     <section className="join-path" aria-label="加入路径">
-      <article><b>01</b><small>现在即可</small><h2>免费公开研究</h2><p>收藏官网，阅读每周跟踪、完整研究与判断修正记录。</p><Link href="/weekly">从本周开始 ↗</Link></article>
-      <article><b>02</b><small>正在登记</small><h2>研究候补名单</h2><p>通过白胡子的公开账号私信关键词，登记后续研究服务意向：</p><strong className="join-keyword">研究院</strong></article>
-      <article><b>03</b><small>准备完成后</small><h2>深度研究服务</h2><p>开放后会在官网说明研究内容、更新周期、承载方式和费用，不通过私下承诺提前收费。</p><span>当前尚未开放</span></article>
+      <article><b>01</b><small>免费</small><h2>官网公开研究</h2><p>阅读本周跟踪、公开全文、判断修正记录与三个长期研究栏目。</p><Link href="/articles">浏览研究档案 ↗</Link></article>
+      <article><b>02</b><small>试读</small><h2>星球文章摘要</h2><p>先在官网阅读200—400字摘要和三个要点，判断内容是否值得继续。</p><Link href="/articles">查看最新试读 ↗</Link></article>
+      <article><b>03</b><small>订阅后</small><h2>知识星球全文</h2><p>付费正文不存放在公开官网。订阅、到期与全文权限全部由知识星球处理。</p><a href={groupUrl} target="_blank" rel="noreferrer">进入白胡子研究室 ↗</a></article>
     </section>
     <section className="join-boundary">
-      <div><span>提供什么</span><p>产业跟踪简报、完整产业或公司研究、集中答疑、原有判断与反方证据更新。</p></div>
-      <div><span>不提供什么</span><p>实时喊单、具体买卖点、收益承诺、个人持仓复制或用公开内容为持仓制造交易动机。</p></div>
+      <div><span>内容边界</span><p>产业链研究、A股市场复盘、交易与认知，以及原有判断、反方证据和证伪条件的更新。</p></div>
+      <div><span>明确不提供</span><p>实时喊单、具体买卖点、收益承诺、个人持仓复制或用公开内容为持仓制造交易动机。</p></div>
     </section>
   </main><SiteFooter /></>;
 }

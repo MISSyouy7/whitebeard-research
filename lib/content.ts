@@ -1,19 +1,23 @@
 import fs from "node:fs";
 import path from "node:path";
 
-export type Article = {
+export type CategorySlug = "ai-industry" | "market-review" | "trading-cognition";
+export type ResearchAccess = "public" | "zsxq";
+
+export type ResearchEntry = {
   slug: string;
   title: string;
   description: string;
   date: string;
   category: string;
-  categorySlug: string;
-  tags: string[];
-  readingTime: number;
-  featured: boolean;
-  issue: string;
+  categorySlug: CategorySlug;
+  access: ResearchAccess;
   status: "draft" | "published";
+  author: "广路";
+  readingTime: number;
   content: string;
+  keyPoints: string[];
+  zsxqUrl?: string;
 };
 
 export type WeeklyBrief = {
@@ -31,132 +35,183 @@ export type WeeklyBrief = {
 
 export const categories = [
   {
-    slug: "ai-compute-hardware",
-    name: "AI算力与硬件",
-    short: "算力",
+    slug: "ai-industry",
+    name: "AI产业链研究",
+    short: "AI研究",
     index: "01",
-    description: "跟踪芯片、服务器、光通信、PCB、液冷与电源等关键环节。",
+    description: "从算力、具身智能到物理 AI，持续核验产业环节、上市公司与业绩传导。",
   },
   {
-    slug: "embodied-intelligence",
-    name: "具身智能",
-    short: "具身",
+    slug: "market-review",
+    name: "A股市场复盘",
+    short: "市场复盘",
     index: "02",
-    description: "拆解机器人本体、执行器、传感器、控制系统与核心零部件。",
+    description: "记录指数、量能、市场结构与主线变化，把盘面判断交给后续数据验证。",
   },
   {
-    slug: "physical-ai-applications",
-    name: "物理AI与应用",
-    short: "物理",
+    slug: "trading-cognition",
+    name: "交易与认知",
+    short: "交易认知",
     index: "03",
-    description: "研究自动驾驶、工业机器人、无人机与智能制造的真实落地。",
-  },
-  {
-    slug: "company-industry-tracking",
-    name: "公司与产业跟踪",
-    short: "跟踪",
-    index: "04",
-    description: "用公告、财报、订单、产能与经营数据持续验证产业逻辑。",
-  },
-  {
-    slug: "research-methods",
-    name: "研究方法",
-    short: "方法",
-    index: "05",
-    description: "公开信息源、研究框架、反方证据与判断修正过程。",
+    description: "沉淀研究方法、交易纪律与复盘规则，不提供实时喊单或收益承诺。",
   },
 ] as const;
 
+export const categoryAliases: Record<string, CategorySlug> = {
+  "ai-compute-hardware": "ai-industry",
+  "embodied-intelligence": "ai-industry",
+  "physical-ai-applications": "ai-industry",
+  "company-industry-tracking": "ai-industry",
+  "industry-observation": "ai-industry",
+  "company-research": "ai-industry",
+  "macro-strategy": "market-review",
+  "research-methods": "trading-cognition",
+  "methods-tools": "trading-cognition",
+};
+
+export const legacyCategorySlugs = [
+  "ai-compute-hardware",
+  "embodied-intelligence",
+  "physical-ai-applications",
+  "company-industry-tracking",
+  "research-methods",
+] as const;
+
 const contentDirectory = path.join(process.cwd(), "content", "articles");
+const previewDirectory = path.join(process.cwd(), "content", "previews");
 const weeklyDirectory = path.join(process.cwd(), "content", "weekly");
 
-function parseValue(value: string): string | boolean | number | string[] {
+type FrontMatterValue = string | boolean | number | string[];
+
+function unquote(value: string): string {
+  const clean = value.trim();
+  if ((clean.startsWith('"') && clean.endsWith('"')) || (clean.startsWith("'") && clean.endsWith("'"))) {
+    return clean.slice(1, -1).replaceAll('\\"', '"').replaceAll("\\'", "'");
+  }
+  return clean;
+}
+
+function parseScalar(value: string): FrontMatterValue {
   const clean = value.trim();
   if (clean === "true") return true;
   if (clean === "false") return false;
-  if (/^\d+$/.test(clean)) return Number(clean);
+  if (/^\d+(?:\.\d+)?$/.test(clean)) return Number(clean);
   if (clean.startsWith("[") && clean.endsWith("]")) {
     return clean
       .slice(1, -1)
       .split(",")
-      .map((item) => item.trim().replace(/^['"]|['"]$/g, ""))
+      .map((item) => unquote(item))
       .filter(Boolean);
   }
-  return clean.replace(/^['"]|['"]$/g, "");
+  return unquote(clean);
 }
 
-function parseArticle(fileName: string): Article {
-  const slug = fileName.replace(/\.md$/, "");
-  const raw = fs.readFileSync(path.join(contentDirectory, fileName), "utf8");
-  const match = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+function parseDocument(raw: string, fileName: string): { data: Record<string, FrontMatterValue>; body: string } {
+  const match = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+  if (!match) throw new Error(`${fileName} is missing front matter.`);
 
-  if (!match) {
-    throw new Error(`Article ${fileName} is missing front matter.`);
-  }
-
-  const data: Record<string, string | boolean | number | string[]> = {};
-  for (const line of match[1].split("\n")) {
+  const data: Record<string, FrontMatterValue> = {};
+  const lines = match[1].split("\n");
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index];
     const separator = line.indexOf(":");
-    if (separator < 0) continue;
-    data[line.slice(0, separator).trim()] = parseValue(line.slice(separator + 1));
+    if (separator < 1 || /^\s/.test(line)) continue;
+    const key = line.slice(0, separator).trim();
+    const rawValue = line.slice(separator + 1).trim();
+    if (rawValue) {
+      data[key] = parseScalar(rawValue);
+      continue;
+    }
+
+    const items: string[] = [];
+    while (index + 1 < lines.length && /^\s+-\s+/.test(lines[index + 1])) {
+      index += 1;
+      items.push(unquote(lines[index].replace(/^\s+-\s+/, "")));
+    }
+    data[key] = items;
   }
 
-  const categorySlug = String(data.categorySlug ?? "uncategorized");
-  const category = categories.find((item) => item.slug === categorySlug)?.name ?? String(data.category ?? "未分类");
+  return { data, body: match[2].trim() };
+}
+
+function resolveCategorySlug(value: string): CategorySlug {
+  const canonical = categoryAliases[value] ?? value;
+  return categories.some((category) => category.slug === canonical) ? canonical as CategorySlug : "ai-industry";
+}
+
+export function getCategory(slug: string) {
+  const canonical = resolveCategorySlug(slug);
+  return categories.find((category) => category.slug === canonical);
+}
+
+function inferDate(fileName: string, value: FrontMatterValue | undefined): string {
+  const explicit = String(value ?? "");
+  if (/^\d{4}-\d{2}-\d{2}$/.test(explicit)) return explicit;
+  return fileName.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] ?? "";
+}
+
+function estimateReadingTime(content: string): number {
+  const chineseCharacters = content.match(/[\u3400-\u9fff]/g)?.length ?? 0;
+  const latinWords = content.match(/[A-Za-z0-9]+/g)?.length ?? 0;
+  return Math.max(1, Math.ceil(chineseCharacters / 400 + latinWords / 200));
+}
+
+function parseResearchEntry(fileName: string, directory: string, access: ResearchAccess): ResearchEntry {
+  const raw = fs.readFileSync(path.join(directory, fileName), "utf8");
+  const { data, body } = parseDocument(raw, fileName);
+  const categorySlug = resolveCategorySlug(String(data.categorySlug ?? "ai-industry"));
+  const category = categories.find((item) => item.slug === categorySlug)?.name ?? "AI产业链研究";
+  const keyPoints = Array.isArray(data.keyPoints) ? data.keyPoints.map(String) : [];
+  const description = String(data.description ?? "");
+  const readingSource = access === "public" ? body : `${description} ${keyPoints.join(" ")}`;
 
   return {
-    slug,
-    title: String(data.title ?? slug),
-    description: String(data.description ?? ""),
-    date: String(data.date ?? ""),
+    slug: fileName.replace(/\.md$/, ""),
+    title: String(data.title ?? fileName.replace(/\.md$/, "")),
+    description,
+    date: inferDate(fileName, data.date),
     category,
     categorySlug,
-    tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
-    readingTime: Number(data.readingTime ?? 5),
-    featured: Boolean(data.featured ?? false),
-    issue: String(data.issue ?? "000"),
+    access,
     status: data.status === "published" ? "published" : "draft",
-    content: match[2].trim(),
+    author: "广路",
+    readingTime: estimateReadingTime(readingSource),
+    content: access === "public" ? body : "",
+    keyPoints,
+    zsxqUrl: access === "zsxq" ? String(data.zsxqUrl ?? "") : undefined,
   };
 }
 
-export function getAllArticles(): Article[] {
-  if (!fs.existsSync(contentDirectory)) return [];
+function readResearchDirectory(directory: string, access: ResearchAccess): ResearchEntry[] {
+  if (!fs.existsSync(directory)) return [];
   return fs
-    .readdirSync(contentDirectory)
+    .readdirSync(directory)
     .filter((fileName) => fileName.endsWith(".md"))
-    .map(parseArticle)
-    .filter((article) => article.status === "published")
-    .sort((a, b) => b.date.localeCompare(a.date));
+    .map((fileName) => parseResearchEntry(fileName, directory, access));
 }
 
-export function getArticle(slug: string): Article | undefined {
+export function getAllArticles(): ResearchEntry[] {
+  return [...readResearchDirectory(contentDirectory, "public"), ...readResearchDirectory(previewDirectory, "zsxq")]
+    .filter((article) => article.status === "published")
+    .sort((a, b) => b.date.localeCompare(a.date) || b.slug.localeCompare(a.slug));
+}
+
+export function getArticle(slug: string): ResearchEntry | undefined {
   return getAllArticles().find((article) => article.slug === slug);
 }
 
-export function getArticlesByCategory(categorySlug: string): Article[] {
-  return getAllArticles().filter((article) => article.categorySlug === categorySlug);
+export function getArticlesByCategory(categorySlug: string): ResearchEntry[] {
+  const canonical = resolveCategorySlug(categorySlug);
+  return getAllArticles().filter((article) => article.categorySlug === canonical);
 }
 
 function parseWeeklyBrief(fileName: string): WeeklyBrief {
-  const slug = fileName.replace(/\.md$/, "");
   const raw = fs.readFileSync(path.join(weeklyDirectory, fileName), "utf8");
-  const match = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-
-  if (!match) {
-    throw new Error(`Weekly brief ${fileName} is missing front matter.`);
-  }
-
-  const data: Record<string, string | boolean | number | string[]> = {};
-  for (const line of match[1].split("\n")) {
-    const separator = line.indexOf(":");
-    if (separator < 0) continue;
-    data[line.slice(0, separator).trim()] = parseValue(line.slice(separator + 1));
-  }
+  const { data, body } = parseDocument(raw, fileName);
 
   return {
-    slug,
-    title: String(data.title ?? slug),
+    slug: fileName.replace(/\.md$/, ""),
+    title: String(data.title ?? fileName.replace(/\.md$/, "")),
     description: String(data.description ?? ""),
     startDate: String(data.startDate ?? ""),
     endDate: String(data.endDate ?? ""),
@@ -164,7 +219,7 @@ function parseWeeklyBrief(fileName: string): WeeklyBrief {
     state: String(data.state ?? "跟踪中"),
     focus: Array.isArray(data.focus) ? data.focus.map(String) : [],
     status: data.status === "published" ? "published" : "draft",
-    content: match[2].trim(),
+    content: body,
   };
 }
 
@@ -183,7 +238,7 @@ export function getLatestWeeklyBrief(): WeeklyBrief | undefined {
 }
 
 export function formatDate(date: string): string {
-  return date.replaceAll("-", ".");
+  return date ? date.replaceAll("-", ".") : "日期待定";
 }
 
 function escapeHtml(value: string): string {
@@ -196,12 +251,20 @@ function escapeHtml(value: string): string {
 
 function inlineMarkdown(value: string): string {
   const code: string[] = [];
+  const images: string[] = [];
   const links: string[] = [];
   let result = escapeHtml(value);
 
   result = result.replace(/`([^`]+)`/g, (_, content: string) => {
     code.push(`<code>${content}</code>`);
     return `%%CODE${code.length - 1}%%`;
+  });
+
+  result = result.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (_, alt: string, src: string) => {
+    const safeSrc = /^(https?:\/\/|\/)/.test(src) ? src : "";
+    if (!safeSrc) return alt;
+    images.push(`<img src="${safeSrc}" alt="${alt}" loading="lazy" decoding="async" />`);
+    return `%%IMAGE${images.length - 1}%%`;
   });
 
   result = result.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label: string, href: string) => {
@@ -216,6 +279,7 @@ function inlineMarkdown(value: string): string {
     .replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, "<em>$1</em>");
 
   result = result.replace(/%%CODE(\d+)%%/g, (_, index: string) => code[Number(index)]);
+  result = result.replace(/%%IMAGE(\d+)%%/g, (_, index: string) => images[Number(index)]);
   return result.replace(/%%LINK(\d+)%%/g, (_, index: string) => links[Number(index)]);
 }
 

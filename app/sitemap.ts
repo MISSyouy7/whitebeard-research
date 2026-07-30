@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${siteUrl}/articles/${article.slug}`,
     lastModified: article.date,
     changeFrequency: "monthly" as const,
-    priority: article.featured ? 0.9 : 0.7,
+    priority: article.access === "public" ? 0.8 : 0.7,
   }));
 
   return [...staticRoutes, ...categoryRoutes, ...articleRoutes];

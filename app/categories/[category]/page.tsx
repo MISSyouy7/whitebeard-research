@@ -4,22 +4,28 @@ import Link from "next/link";
 import { ArticleCard } from "@/app/components/ArticleCard";
 import { SiteFooter } from "@/app/components/SiteFooter";
 import { SiteHeader } from "@/app/components/SiteHeader";
-import { categories, getArticlesByCategory } from "@/lib/content";
+import { categories, getArticlesByCategory, getCategory, legacyCategorySlugs } from "@/lib/content";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
 
-export function generateStaticParams() { return categories.map((category) => ({ category: category.slug })); }
+export function generateStaticParams() {
+  return [...categories.map((category) => category.slug), ...legacyCategorySlugs].map((category) => ({ category }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ category: string }> }): Promise<Metadata> {
   const { category: slug } = await params;
-  const category = categories.find((item) => item.slug === slug);
-  return category ? { title: category.name, description: category.description } : {};
+  const category = getCategory(slug);
+  return category ? {
+    title: category.name,
+    description: category.description,
+    alternates: { canonical: `/categories/${category.slug}` },
+  } : {};
 }
 
 export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
   const { category: slug } = await params;
-  const category = categories.find((item) => item.slug === slug);
+  const category = getCategory(slug);
   if (!category) notFound();
   const articles = getArticlesByCategory(category.slug);
 

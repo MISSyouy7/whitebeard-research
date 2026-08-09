@@ -50,7 +50,15 @@ a { color: inherit; text-decoration: none; }
 .research-rhythm span { font-size: 11px; }
 .research-rhythm p { align-self: center; margin: 0; padding-left: 35px; color: var(--muted); font: 13px var(--serif); text-align: right; }
 
-.weekly-preview, .home-research { padding-top: 110px; }
+.start-here, .weekly-preview, .home-research { padding-top: 110px; }
+.start-here-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.start-here-grid > a { min-height: 260px; padding: 32px 30px 30px 0; color: inherit; text-decoration: none; border-right: 1px solid var(--line); }
+.start-here-grid > a + a { padding-left: 30px; }
+.start-here-grid > a:last-child { border-right: 0; }
+.start-here-grid b { color: var(--red); font-size: 10px; letter-spacing: .12em; }
+.start-here-grid h2 { margin: 42px 0 14px; font: 500 28px/1.35 var(--serif); }
+.start-here-grid p { min-height: 66px; margin: 0 0 28px; color: var(--muted); font-size: 12px; line-height: 1.8; }
+.start-here-grid span { font-size: 11px; }
 .compact-heading { padding-bottom: 18px; }
 .weekly-card { display: grid; grid-template-columns: 150px minmax(0, 1fr) 245px; min-height: 390px; border-bottom: 1px solid var(--ink); }
 .weekly-card-meta { padding: 38px 28px 35px 0; display: flex; flex-direction: column; border-right: 1px solid var(--line); }
@@ -441,7 +449,12 @@ a { color: inherit; text-decoration: none; }
   .research-rhythm { grid-template-columns: 1fr; }
   .research-rhythm > div { min-height: 52px; padding-inline: 5px; border-right: 0; border-bottom: 1px solid var(--line); }
   .research-rhythm p { grid-column: auto; }
-  .weekly-preview, .home-research { padding-top: 78px; }
+  .start-here, .weekly-preview, .home-research { padding-top: 78px; }
+  .start-here-grid { grid-template-columns: 1fr; }
+  .start-here-grid > a, .start-here-grid > a + a { min-height: 0; padding: 28px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .start-here-grid > a:last-child { border-bottom: 0; }
+  .start-here-grid h2 { margin-top: 24px; }
+  .start-here-grid p { min-height: 0; }
   .weekly-card { grid-template-columns: 1fr; }
   .weekly-card-meta { min-height: 125px; padding: 27px 0; border-right: 0; border-bottom: 1px solid var(--line); }
   .weekly-card-meta > span { font-size: 38px; }

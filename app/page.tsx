@@ -41,6 +41,18 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="start-here section-shell">
+          <div className="section-heading compact-heading">
+            <div><span className="section-index">00</span><p>第一次来，从这里开始<br /><small>START HERE</small></p></div>
+            <Link href="/about">了解研究院 ↗</Link>
+          </div>
+          <div className="start-here-grid">
+            <Link href="/weekly"><b>01</b><h2>先看本周问题</h2><p>了解研究院此刻在跟踪什么、证据走到哪里，以及下一步准备验证什么。</p><span>进入本周 ↗</span></Link>
+            <Link href="/articles/2026-08-09-from-concept-to-financial-verification"><b>02</b><h2>再看研究方法</h2><p>用五级证据区分概念、订单与财务兑现，避免把产业空间直接等同于公司利润。</p><span>阅读入门文章 ↗</span></Link>
+            <Link href="/articles"><b>03</b><h2>最后浏览档案</h2><p>按 AI 产业链、市场复盘和交易认知三个栏目，继续阅读已经公开的研究。</p><span>浏览全部研究 ↗</span></Link>
+          </div>
+        </section>
+
         <section className="weekly-preview section-shell">
           <div className="section-heading compact-heading">
             <div><span className="section-index">01</span><p>本周与你一起研究<br /><small>THIS WEEK</small></p></div>

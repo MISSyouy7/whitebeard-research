@@ -1,5 +1,4 @@
-import fs from "node:fs";
-import path from "node:path";
+import { generatedContent } from "./generated-content";
 
 export type CategorySlug = "ai-industry" | "market-review" | "trading-cognition";
 export type ResearchAccess = "public" | "zsxq";
@@ -77,10 +76,6 @@ export const legacyCategorySlugs = [
   "research-methods",
 ] as const;
 
-const contentDirectory = path.join(process.cwd(), "content", "articles");
-const previewDirectory = path.join(process.cwd(), "content", "previews");
-const weeklyDirectory = path.join(process.cwd(), "content", "weekly");
-
 type FrontMatterValue = string | boolean | number | string[];
 
 function unquote(value: string): string {
@@ -156,8 +151,7 @@ function estimateReadingTime(content: string): number {
   return Math.max(1, Math.ceil(chineseCharacters / 400 + latinWords / 200));
 }
 
-function parseResearchEntry(fileName: string, directory: string, access: ResearchAccess): ResearchEntry {
-  const raw = fs.readFileSync(path.join(directory, fileName), "utf8");
+function parseResearchEntry(fileName: string, raw: string, access: ResearchAccess): ResearchEntry {
   const { data, body } = parseDocument(raw, fileName);
   const categorySlug = resolveCategorySlug(String(data.categorySlug ?? "ai-industry"));
   const category = categories.find((item) => item.slug === categorySlug)?.name ?? "AI产业链研究";
@@ -182,16 +176,12 @@ function parseResearchEntry(fileName: string, directory: string, access: Researc
   };
 }
 
-function readResearchDirectory(directory: string, access: ResearchAccess): ResearchEntry[] {
-  if (!fs.existsSync(directory)) return [];
-  return fs
-    .readdirSync(directory)
-    .filter((fileName) => fileName.endsWith(".md"))
-    .map((fileName) => parseResearchEntry(fileName, directory, access));
+function readResearchDirectory(directory: Record<string, string>, access: ResearchAccess): ResearchEntry[] {
+  return Object.entries(directory).map(([fileName, raw]) => parseResearchEntry(fileName, raw, access));
 }
 
 export function getAllArticles(): ResearchEntry[] {
-  return [...readResearchDirectory(contentDirectory, "public"), ...readResearchDirectory(previewDirectory, "zsxq")]
+  return [...readResearchDirectory(generatedContent.articles, "public"), ...readResearchDirectory(generatedContent.previews, "zsxq")]
     .filter((article) => article.status === "published")
     .sort((a, b) => b.date.localeCompare(a.date) || b.slug.localeCompare(a.slug));
 }
@@ -205,8 +195,7 @@ export function getArticlesByCategory(categorySlug: string): ResearchEntry[] {
   return getAllArticles().filter((article) => article.categorySlug === canonical);
 }
 
-function parseWeeklyBrief(fileName: string): WeeklyBrief {
-  const raw = fs.readFileSync(path.join(weeklyDirectory, fileName), "utf8");
+function parseWeeklyBrief(fileName: string, raw: string): WeeklyBrief {
   const { data, body } = parseDocument(raw, fileName);
 
   return {
@@ -224,11 +213,8 @@ function parseWeeklyBrief(fileName: string): WeeklyBrief {
 }
 
 export function getWeeklyBriefs(): WeeklyBrief[] {
-  if (!fs.existsSync(weeklyDirectory)) return [];
-  return fs
-    .readdirSync(weeklyDirectory)
-    .filter((fileName) => fileName.endsWith(".md"))
-    .map(parseWeeklyBrief)
+  return Object.entries(generatedContent.weekly)
+    .map(([fileName, raw]) => parseWeeklyBrief(fileName, raw))
     .filter((brief) => brief.status === "published")
     .sort((a, b) => b.startDate.localeCompare(a.startDate));
 }

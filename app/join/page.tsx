@@ -4,8 +4,8 @@ import { SiteFooter } from "@/app/components/SiteFooter";
 import { SiteHeader } from "@/app/components/SiteHeader";
 
 export const metadata: Metadata = {
-  title: "加入研究院",
-  description: "收藏白胡子研究院永久网址，阅读公开研究，并从官网进入知识星球专享全文。",
+  title: "订阅与防失联",
+  description: "收藏路见资本永久网址，阅读公开研究，并从官网进入知识星球专享全文。",
 };
 
 const groupUrl = "https://wx.zsxq.com/group/15554884215522";
@@ -18,9 +18,9 @@ export default function JoinPage() {
       <div><h2>先免费阅读，<br />再决定要不要深入。</h2><p>公开文章保留在官网；标注“星球专享”的内容只展示摘要和三个要点，完整研究由知识星球管理订阅权限。</p></div>
     </section>
     <section className="join-path" aria-label="加入路径">
-      <article><b>01</b><small>免费</small><h2>官网公开研究</h2><p>阅读本周跟踪、公开全文、判断修正记录与三个长期研究栏目。</p><Link href="/articles">浏览研究档案 ↗</Link></article>
+      <article><b>01</b><small>免费</small><h2>官网公开研究</h2><p>阅读资金迁徙、主线生命、A股棋盘、公开全文与判断修正记录。</p><Link href="/articles">浏览研究文章 ↗</Link></article>
       <article><b>02</b><small>试读</small><h2>星球文章摘要</h2><p>先在官网阅读200—400字摘要和三个要点，判断内容是否值得继续。</p><Link href="/articles">查看最新试读 ↗</Link></article>
-      <article><b>03</b><small>订阅后</small><h2>知识星球全文</h2><p>付费正文不存放在公开官网。订阅、到期与全文权限全部由知识星球处理。</p><a href={groupUrl} target="_blank" rel="noreferrer">进入白胡子研究室 ↗</a></article>
+      <article><b>03</b><small>订阅后</small><h2>知识星球全文</h2><p>付费正文不存放在公开官网。订阅、到期与全文权限全部由知识星球处理。</p><a href={groupUrl} target="_blank" rel="noreferrer">进入知识星球 ↗</a></article>
     </section>
     <section className="join-boundary">
       <div><span>内容边界</span><p>产业链研究、A股市场复盘、交易与认知，以及原有判断、反方证据和证伪条件的更新。</p></div>

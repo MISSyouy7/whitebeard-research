@@ -2,13 +2,13 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
-const groups = ["articles", "previews", "weekly"];
+const groups = ["articles", "previews", "weekly", "capital-flow", "mainline", "boards", "her-perspective"];
 const sources = {};
 
 for (const group of groups) {
   const directory = path.join(root, "content", group);
   sources[group] = Object.fromEntries(
-    fs.readdirSync(directory)
+    (fs.existsSync(directory) ? fs.readdirSync(directory) : [])
       .filter((fileName) => fileName.endsWith(".md"))
       .sort()
       .map((fileName) => [fileName, fs.readFileSync(path.join(directory, fileName), "utf8")]),

@@ -32,7 +32,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <header className="article-hero section-shell">
         <Link className="back-link" href={`/categories/${article.categorySlug}`}>← 返回{article.category}</Link>
         <div className="article-hero-grid">
-          <div className={`issue-mark${isZsxq ? " issue-mark-zsxq" : ""}`}><span>{isZsxq ? "MEMBER" : "PUBLIC"}</span><strong>{isZsxq ? "星球" : "公开"}</strong><small>WHITEBEARD<br />RESEARCH</small></div>
+          <div className={`issue-mark${isZsxq ? " issue-mark-zsxq" : ""}`}><span>{isZsxq ? "MEMBER" : "PUBLIC"}</span><strong>{isZsxq ? "星球" : "公开"}</strong><small>LUJIAN<br />RESEARCH</small></div>
           <div>
             <div className="article-meta"><Link href={`/categories/${article.categorySlug}`}>{article.category}</Link><span>{formatDate(article.date)}</span><span>主理人 · 广路</span><span className={`access-badge access-${article.access}`}>{isZsxq ? "星球专享" : "公开全文"}</span></div>
             <h1>{article.title}</h1>

@@ -6,7 +6,7 @@ import { formatDate, getWeeklyBriefs, markdownToHtml } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "本周研究跟踪",
-  description: "白胡子研究院每周股票研究问题、研究进度、判断变化与下一步跟踪。",
+  description: "路见资本每周股票研究问题、研究进度、判断变化与下一步跟踪。",
 };
 
 export default function WeeklyPage() {

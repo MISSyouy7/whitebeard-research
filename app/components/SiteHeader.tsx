@@ -1,22 +1,23 @@
 import Link from "next/link";
 
 const links = [
-  { href: "/weekly", label: "本周" },
-  { href: "/categories/ai-industry", label: "AI研究" },
-  { href: "/categories/market-review", label: "市场复盘" },
-  { href: "/categories/trading-cognition", label: "交易认知" },
-  { href: "/join", label: "加入" },
+  { href: "/capital-flow", label: "资金迁徙" },
+  { href: "/mainline", label: "主线生命" },
+  { href: "/board", label: "A股棋盘" },
+  { href: "/articles", label: "研究文章" },
+  { href: "/her-perspective", label: "她的资本视角" },
+  { href: "/about", label: "关于" },
 ];
 
 export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="header-inner">
-        <Link className="brand" href="/" aria-label="白胡子研究院首页">
-          <span className="brand-seal" aria-hidden="true">白</span>
+        <Link className="brand" href="/" aria-label="路见资本首页">
+          <span className="brand-seal" aria-hidden="true">路</span>
           <span className="brand-copy">
-            <strong>白胡子研究院</strong>
-            <small>WHITEBEARD INSTITUTE</small>
+            <strong>路见资本</strong>
+            <small>LUJIAN CAPITAL</small>
           </span>
         </Link>
         <nav className="desktop-nav" aria-label="主导航">

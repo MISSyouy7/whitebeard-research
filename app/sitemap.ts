@@ -1,15 +1,15 @@
 import type { MetadataRoute } from "next";
-import { categories, getAllArticles } from "@/lib/content";
+import { categories, getAllArticles, getCapitalFlows, getHerPerspectiveEntries, getMainlines } from "@/lib/content";
 
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://baihuzigl.com").replace(/\/$/, "");
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/weekly", "/articles", "/join", "/about"].map((route) => ({
+  const staticRoutes = ["", "/capital-flow", "/mainline", "/board", "/articles", "/her-perspective", "/about", "/weekly", "/join"].map((route) => ({
     url: `${siteUrl}${route}`,
-    changeFrequency: route === "" ? ("weekly" as const) : ("monthly" as const),
-    priority: route === "" ? 1 : route === "/weekly" ? 0.9 : 0.8,
+    changeFrequency: ["", "/capital-flow", "/mainline", "/board"].includes(route) ? ("weekly" as const) : ("monthly" as const),
+    priority: route === "" ? 1 : ["/capital-flow", "/mainline", "/board"].includes(route) ? 0.9 : 0.8,
   }));
   const categoryRoutes = categories.map((category) => ({
     url: `${siteUrl}/categories/${category.slug}`,
@@ -22,6 +22,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly" as const,
     priority: article.access === "public" ? 0.8 : 0.7,
   }));
+  const capitalFlowRoutes = getCapitalFlows().map((record) => ({
+    url: `${siteUrl}/capital-flow/${record.slug}`,
+    lastModified: record.date,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+  const mainlineRoutes = getMainlines().map((record) => ({
+    url: `${siteUrl}/mainline/${record.slug}`,
+    lastModified: record.date,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+  const perspectiveRoutes = getHerPerspectiveEntries().map((entry) => ({
+    url: `${siteUrl}/her-perspective/${entry.slug}`,
+    lastModified: entry.date,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
 
-  return [...staticRoutes, ...categoryRoutes, ...articleRoutes];
+  return [...staticRoutes, ...capitalFlowRoutes, ...mainlineRoutes, ...articleRoutes, ...perspectiveRoutes, ...categoryRoutes];
 }

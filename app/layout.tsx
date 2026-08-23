@@ -4,30 +4,55 @@ import "./globals.css";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://baihuzigl.com";
 const assetBase = process.env.PAGES_BASE_PATH ?? "";
 const metadataOrigin = new URL(siteUrl).origin;
+const websiteStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${metadataOrigin}/#website`,
+      name: "路见资本",
+      alternateName: "LUJIAN CAPITAL",
+      url: metadataOrigin,
+      description: "看见资本流向，理解产业周期，记录市场情绪。",
+      inLanguage: "zh-CN",
+    },
+    {
+      "@type": "Organization",
+      "@id": `${metadataOrigin}/#organization`,
+      name: "路见资本",
+      alternateName: "LUJIAN CAPITAL",
+      url: metadataOrigin,
+      founder: { "@type": "Person", name: "广路" },
+    },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(metadataOrigin),
   title: {
-    default: "白胡子研究院｜AI产业链、A股复盘与交易认知",
-    template: "%s｜白胡子研究院",
+    default: "路见资本｜看见资本流向，理解产业周期",
+    template: "%s｜路见资本",
   },
-  description: "面向个人投资者的股票研究平台，沉淀 AI 产业链研究、A股市场复盘、交易认知与知识星球试读。",
-  keywords: ["白胡子研究院", "广路", "股票研究", "AI产业链", "A股复盘", "交易认知", "知识星球"],
+  description: "路见资本是一套面向个人投资者的资本观察系统，持续记录资金迁徙、产业周期、市场情绪与A股研究。",
+  keywords: ["路见资本", "广路", "资金迁徙", "产业周期", "A股研究", "资本观察", "女性财经漫画"],
   openGraph: {
     type: "website",
     locale: "zh_CN",
-    siteName: "白胡子研究院",
-    title: "白胡子研究院｜AI产业链、A股复盘与交易认知",
-    description: "公开研究与星球试读都在这张长期数字名片中持续沉淀。",
-    images: [{ url: `${assetBase}/og-research.png`, width: 1536, height: 1024, alt: "白胡子研究院股票研究官网" }],
+    siteName: "路见资本",
+    title: "路见资本｜看见资本流向，理解产业周期",
+    description: "看见资本流向，理解产业周期，记录市场情绪。",
+    images: [{ url: `${assetBase}/og-lujian-capital.png`, width: 1693, height: 929, alt: "路见资本抽象资本迁徙地图" }],
   },
-  twitter: { card: "summary_large_image", images: [`${assetBase}/og-research.png`] },
+  twitter: { card: "summary_large_image", images: [`${assetBase}/og-lujian-capital.png`] },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="zh-CN">
-      <body>{children}</body>
+      <body>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }} />
+        {children}
+      </body>
     </html>
   );
 }

@@ -8,6 +8,207 @@ media:
     rename: random
 
 content:
+  - name: capital-flow
+    label: 资金迁徙
+    type: collection
+    path: content/capital-flow
+    filename:
+      template: "{year}-{month}-{day}-{hour}{minute}{second}.md"
+      field: false
+    view:
+      fields: [title, date, coreIndustry, status]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: 标题
+        type: string
+        required: true
+      - name: summary
+        label: 摘要
+        type: text
+        required: true
+      - name: date
+        label: 交易日期
+        type: date
+        required: true
+      - name: dataCutoff
+        label: 数据截止时间
+        type: string
+        description: 例如 2026-08-21 15:00。
+        required: true
+      - name: coreIndustry
+        label: 核心行业
+        type: string
+        required: true
+      - name: continuity
+        label: 连续性
+        type: string
+        description: 例如“连续回流·2日”或“单日脉冲，待验证”。
+        required: true
+      - name: inflows
+        label: 资金流入方向
+        type: object
+        list: true
+        required: true
+        fields:
+          - { name: name, label: 行业名称, type: string, required: true }
+          - { name: reason, label: 资金逻辑, type: text, required: true }
+          - { name: evidence, label: 关键证据, type: text, required: true }
+      - name: outflows
+        label: 资金流出方向
+        type: object
+        list: true
+        required: true
+        fields:
+          - { name: name, label: 行业名称, type: string, required: true }
+          - { name: reason, label: 资金逻辑, type: text, required: true }
+          - { name: evidence, label: 关键证据, type: text, required: true }
+      - { name: logic, label: 背后逻辑, type: text, required: true }
+      - { name: methodology, label: 来源与统计口径, type: text, required: true }
+      - { name: counterEvidence, label: 反方证据, type: text, required: true }
+      - name: sources
+        label: 来源
+        type: string
+        list: true
+        required: true
+      - name: risks
+        label: 风险提示
+        type: string
+        list: true
+        required: true
+      - name: body
+        label: 可选补充说明
+        type: rich-text
+        options:
+          format: markdown
+          switcher: false
+      - name: status
+        label: 保存方式
+        type: select
+        default: draft
+        required: true
+        options:
+          values:
+            - { value: draft, label: 保存草稿（官网不可见） }
+            - { value: published, label: 正式发布 }
+
+  - name: mainline
+    label: 主线生命
+    type: collection
+    path: content/mainline
+    filename:
+      template: "{year}-{month}-{day}-{hour}{minute}{second}.md"
+      field: false
+    view:
+      fields: [title, industry, currentStage, status]
+      primary: title
+      sort: [date, title]
+    fields:
+      - { name: title, label: 标题, type: string, required: true }
+      - { name: summary, label: 摘要, type: text, required: true }
+      - { name: date, label: 更新日期, type: date, required: true }
+      - { name: industry, label: 产业名称, type: string, required: true }
+      - name: currentStage
+        label: 当前阶段
+        type: select
+        required: true
+        options:
+          values: [萌芽, 基础设施建设, 爆发, 生态竞争, 重构]
+      - { name: stageBasis, label: 阶段判断依据, type: text, required: true }
+      - { name: industryTraits, label: 产业特点, type: string, list: true, required: true }
+      - { name: representativeLinks, label: 代表环节, type: string, list: true, required: true }
+      - name: companyMappings
+        label: 上市公司研究映射
+        type: object
+        list: true
+        required: true
+        fields:
+          - { name: name, label: 公司名称, type: string, required: true }
+          - { name: role, label: 产业链位置, type: string, required: true }
+          - { name: evidenceStatus, label: 证据状态, type: text, required: true }
+      - { name: capitalBehavior, label: 资金行为, type: text, required: true }
+      - { name: catalysts, label: 催化窗口, type: string, list: true, required: true }
+      - { name: risks, label: 风险, type: string, list: true, required: true }
+      - { name: falsification, label: 证伪条件, type: string, list: true, required: true }
+      - { name: trackingIndicators, label: 下一步跟踪指标, type: string, list: true, required: true }
+      - { name: sources, label: 来源, type: string, list: true, required: true }
+      - name: body
+        label: 可选补充研究
+        type: rich-text
+        options:
+          format: markdown
+          switcher: false
+      - name: status
+        label: 保存方式
+        type: select
+        default: draft
+        required: true
+        options:
+          values:
+            - { value: draft, label: 保存草稿（官网不可见） }
+            - { value: published, label: 正式发布 }
+
+  - name: boards
+    label: A股棋盘
+    type: collection
+    path: content/boards
+    filename:
+      template: "{year}-{month}-{day}-{hour}{minute}{second}.md"
+      field: false
+    view:
+      fields: [title, date, status]
+      primary: title
+      sort: [date, title]
+    fields:
+      - { name: title, label: 快照标题, type: string, required: true }
+      - { name: summary, label: 棋盘说明, type: text, required: true }
+      - { name: date, label: 快照日期, type: date, required: true }
+      - { name: dataCutoff, label: 数据截止时间, type: string, required: true }
+      - name: pieces
+        label: 棋子
+        type: object
+        list: true
+        required: true
+        fields:
+          - { name: name, label: 行业名称, type: string, required: true }
+          - name: stage
+            label: 产业阶段
+            type: select
+            required: true
+            options:
+              values: [萌芽, 基础设施建设, 爆发, 生态竞争, 重构]
+          - name: capitalStrength
+            label: 资金强弱
+            type: select
+            required: true
+            options:
+              values: [偏强, 中性, 偏弱, 待核验]
+          - name: researchHeat
+            label: 人工研究热度
+            type: select
+            required: true
+            options:
+              values: [高, 中, 低, 待核验]
+          - { name: capitalDirection, label: 资金方向, type: text, required: true }
+          - { name: evidenceStatus, label: 证据状态, type: string, required: true }
+          - { name: updatedAt, label: 更新时间, type: string, required: true }
+          - { name: evidence, label: 关键证据, type: text, required: true }
+      - { name: sources, label: 来源, type: string, list: true, required: true }
+      - { name: risks, label: 风险提示, type: string, list: true, required: true }
+      - name: status
+        label: 保存方式
+        type: select
+        default: draft
+        required: true
+        options:
+          values:
+            - { value: draft, label: 保存草稿（官网不可见） }
+            - { value: published, label: 正式发布 }
+
   - name: articles
     label: 公开文章
     type: collection
@@ -144,7 +345,7 @@ content:
         required: true
         pattern:
           regex: "^https://wx\\.zsxq\\.com/(group/15554884215522/topic/[0-9]+|mweb/views/topicdetail/topicdetail\\.html\\?topic_id=[0-9]+&group_id=15554884215522)$"
-          message: 请输入“白胡子研究室（持续研究版）”的主题分享链接。
+          message: 请输入当前知识星球的主题分享链接。
       - name: status
         label: 保存方式
         type: select
@@ -157,6 +358,54 @@ content:
               label: 保存草稿（官网不可见）
             - value: published
               label: 正式发布
+
+  - name: her-perspective
+    label: 她的资本视角
+    type: collection
+    path: content/her-perspective
+    filename:
+      template: "{year}-{month}-{day}-{hour}{minute}{second}.md"
+      field: false
+    view:
+      fields: [title, issue, date, status]
+      primary: title
+      sort: [date, issue]
+    fields:
+      - { name: title, label: 漫画标题, type: string, required: true }
+      - { name: summary, label: 卡片摘要, type: text, required: true }
+      - { name: date, label: 发布时间, type: date, required: true }
+      - { name: issue, label: 期数, type: string, required: true }
+      - name: cover
+        label: 封面图片
+        type: image
+        required: true
+        options:
+          media: article_images
+          path: her-perspective
+      - name: images
+        label: 7张漫画（按顺序）
+        type: image
+        required: true
+        options:
+          media: article_images
+          path: her-perspective
+          multiple: true
+      - { name: marketContext, label: 市场背景或现实议题, type: text, required: true }
+      - { name: keyData, label: 关键数据, type: string, list: true, required: true }
+      - { name: explanation, label: 内容解释, type: text, required: true }
+      - { name: womenInsight, label: 给女性读者的认知提示, type: text, required: true }
+      - { name: risks, label: 风险与免责声明, type: text, required: true }
+      - { name: source, label: 来源, type: text, required: true }
+      - { name: videoUrl, label: 可选外部视频链接, type: string }
+      - name: status
+        label: 保存方式
+        type: select
+        default: draft
+        required: true
+        options:
+          values:
+            - { value: draft, label: 保存草稿（官网不可见） }
+            - { value: published, label: 正式发布 }
 
   - name: weekly
     label: 每周研究跟踪

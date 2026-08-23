@@ -1,7 +1,12 @@
+import { parse as parseYaml } from "yaml";
 import { generatedContent } from "./generated-content";
 
+export type PublishStatus = "draft" | "published";
 export type CategorySlug = "ai-industry" | "market-review" | "trading-cognition";
 export type ResearchAccess = "public" | "zsxq";
+export type MainlineStage = "萌芽" | "基础设施建设" | "爆发" | "生态竞争" | "重构";
+export type CapitalStrength = "偏强" | "中性" | "偏弱" | "待核验";
+export type ResearchHeat = "高" | "中" | "低" | "待核验";
 
 export type ResearchEntry = {
   slug: string;
@@ -11,7 +16,7 @@ export type ResearchEntry = {
   category: string;
   categorySlug: CategorySlug;
   access: ResearchAccess;
-  status: "draft" | "published";
+  status: PublishStatus;
   author: "广路";
   readingTime: number;
   content: string;
@@ -28,8 +33,101 @@ export type WeeklyBrief = {
   issue: string;
   state: string;
   focus: string[];
-  status: "draft" | "published";
+  status: PublishStatus;
   content: string;
+};
+
+export type DirectionItem = {
+  name: string;
+  reason: string;
+  evidence: string;
+};
+
+export type CapitalFlowRecord = {
+  slug: string;
+  title: string;
+  summary: string;
+  date: string;
+  dataCutoff: string;
+  coreIndustry: string;
+  continuity: string;
+  inflows: DirectionItem[];
+  outflows: DirectionItem[];
+  logic: string;
+  methodology: string;
+  counterEvidence: string;
+  sources: string[];
+  risks: string[];
+  status: PublishStatus;
+  content: string;
+};
+
+export type CompanyMapping = {
+  name: string;
+  role: string;
+  evidenceStatus: string;
+};
+
+export type MainlineRecord = {
+  slug: string;
+  title: string;
+  summary: string;
+  date: string;
+  industry: string;
+  currentStage: MainlineStage;
+  stageBasis: string;
+  industryTraits: string[];
+  representativeLinks: string[];
+  companyMappings: CompanyMapping[];
+  capitalBehavior: string;
+  catalysts: string[];
+  risks: string[];
+  falsification: string[];
+  trackingIndicators: string[];
+  sources: string[];
+  status: PublishStatus;
+  content: string;
+};
+
+export type BoardPiece = {
+  name: string;
+  stage: MainlineStage;
+  capitalStrength: CapitalStrength;
+  researchHeat: ResearchHeat;
+  capitalDirection: string;
+  evidenceStatus: string;
+  updatedAt: string;
+  evidence: string;
+};
+
+export type BoardSnapshot = {
+  slug: string;
+  title: string;
+  summary: string;
+  date: string;
+  dataCutoff: string;
+  pieces: BoardPiece[];
+  sources: string[];
+  risks: string[];
+  status: PublishStatus;
+};
+
+export type HerPerspectiveEntry = {
+  slug: string;
+  title: string;
+  summary: string;
+  date: string;
+  issue: string;
+  cover: string;
+  images: string[];
+  marketContext: string;
+  keyData: string[];
+  explanation: string;
+  womenInsight: string;
+  risks: string;
+  source: string;
+  videoUrl?: string;
+  status: PublishStatus;
 };
 
 export const categories = [
@@ -56,6 +154,8 @@ export const categories = [
   },
 ] as const;
 
+export const mainlineStages: MainlineStage[] = ["萌芽", "基础设施建设", "爆发", "生态竞争", "重构"];
+
 export const categoryAliases: Record<string, CategorySlug> = {
   "ai-compute-hardware": "ai-industry",
   "embodied-intelligence": "ai-industry",
@@ -76,57 +176,40 @@ export const legacyCategorySlugs = [
   "research-methods",
 ] as const;
 
-type FrontMatterValue = string | boolean | number | string[];
+type ContentGroup = "articles" | "previews" | "weekly" | "capital-flow" | "mainline" | "boards" | "her-perspective";
+type ParsedDocument = { data: Record<string, unknown>; body: string };
 
-function unquote(value: string): string {
-  const clean = value.trim();
-  if ((clean.startsWith('"') && clean.endsWith('"')) || (clean.startsWith("'") && clean.endsWith("'"))) {
-    return clean.slice(1, -1).replaceAll('\\"', '"').replaceAll("\\'", "'");
-  }
-  return clean;
-}
+const contentGroups = generatedContent as unknown as Record<ContentGroup, Record<string, string>>;
 
-function parseScalar(value: string): FrontMatterValue {
-  const clean = value.trim();
-  if (clean === "true") return true;
-  if (clean === "false") return false;
-  if (/^\d+(?:\.\d+)?$/.test(clean)) return Number(clean);
-  if (clean.startsWith("[") && clean.endsWith("]")) {
-    return clean
-      .slice(1, -1)
-      .split(",")
-      .map((item) => unquote(item))
-      .filter(Boolean);
-  }
-  return unquote(clean);
-}
-
-function parseDocument(raw: string, fileName: string): { data: Record<string, FrontMatterValue>; body: string } {
+function parseDocument(raw: string, fileName: string): ParsedDocument {
   const match = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
   if (!match) throw new Error(`${fileName} is missing front matter.`);
+  const parsed = parseYaml(match[1]);
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) throw new Error(`${fileName} has invalid front matter.`);
+  return { data: parsed as Record<string, unknown>, body: match[2].trim() };
+}
 
-  const data: Record<string, FrontMatterValue> = {};
-  const lines = match[1].split("\n");
-  for (let index = 0; index < lines.length; index += 1) {
-    const line = lines[index];
-    const separator = line.indexOf(":");
-    if (separator < 1 || /^\s/.test(line)) continue;
-    const key = line.slice(0, separator).trim();
-    const rawValue = line.slice(separator + 1).trim();
-    if (rawValue) {
-      data[key] = parseScalar(rawValue);
-      continue;
-    }
+function asString(value: unknown, fallback = ""): string {
+  if (value === null || value === undefined) return fallback;
+  return String(value);
+}
 
-    const items: string[] = [];
-    while (index + 1 < lines.length && /^\s+-\s+/.test(lines[index + 1])) {
-      index += 1;
-      items.push(unquote(lines[index].replace(/^\s+-\s+/, "")));
-    }
-    data[key] = items;
-  }
+function asStringArray(value: unknown): string[] {
+  return Array.isArray(value) ? value.map((item) => asString(item)).filter(Boolean) : [];
+}
 
-  return { data, body: match[2].trim() };
+function asRecordArray(value: unknown): Array<Record<string, unknown>> {
+  return Array.isArray(value)
+    ? value.filter((item): item is Record<string, unknown> => Boolean(item) && typeof item === "object" && !Array.isArray(item))
+    : [];
+}
+
+function publishedStatus(value: unknown): PublishStatus {
+  return value === "published" ? "published" : "draft";
+}
+
+function readGroup(group: ContentGroup): Array<[string, string]> {
+  return Object.entries(contentGroups[group] ?? {});
 }
 
 function resolveCategorySlug(value: string): CategorySlug {
@@ -139,8 +222,8 @@ export function getCategory(slug: string) {
   return categories.find((category) => category.slug === canonical);
 }
 
-function inferDate(fileName: string, value: FrontMatterValue | undefined): string {
-  const explicit = String(value ?? "");
+function inferDate(fileName: string, value: unknown): string {
+  const explicit = asString(value);
   if (/^\d{4}-\d{2}-\d{2}$/.test(explicit)) return explicit;
   return fileName.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] ?? "";
 }
@@ -153,35 +236,34 @@ function estimateReadingTime(content: string): number {
 
 function parseResearchEntry(fileName: string, raw: string, access: ResearchAccess): ResearchEntry {
   const { data, body } = parseDocument(raw, fileName);
-  const categorySlug = resolveCategorySlug(String(data.categorySlug ?? "ai-industry"));
+  const categorySlug = resolveCategorySlug(asString(data.categorySlug, "ai-industry"));
   const category = categories.find((item) => item.slug === categorySlug)?.name ?? "AI产业链研究";
-  const keyPoints = Array.isArray(data.keyPoints) ? data.keyPoints.map(String) : [];
-  const description = String(data.description ?? "");
+  const keyPoints = asStringArray(data.keyPoints);
+  const description = asString(data.description);
   const readingSource = access === "public" ? body : `${description} ${keyPoints.join(" ")}`;
 
   return {
     slug: fileName.replace(/\.md$/, ""),
-    title: String(data.title ?? fileName.replace(/\.md$/, "")),
+    title: asString(data.title, fileName.replace(/\.md$/, "")),
     description,
     date: inferDate(fileName, data.date),
     category,
     categorySlug,
     access,
-    status: data.status === "published" ? "published" : "draft",
+    status: publishedStatus(data.status),
     author: "广路",
     readingTime: estimateReadingTime(readingSource),
     content: access === "public" ? body : "",
     keyPoints,
-    zsxqUrl: access === "zsxq" ? String(data.zsxqUrl ?? "") : undefined,
+    zsxqUrl: access === "zsxq" ? asString(data.zsxqUrl) : undefined,
   };
 }
 
-function readResearchDirectory(directory: Record<string, string>, access: ResearchAccess): ResearchEntry[] {
-  return Object.entries(directory).map(([fileName, raw]) => parseResearchEntry(fileName, raw, access));
-}
-
 export function getAllArticles(): ResearchEntry[] {
-  return [...readResearchDirectory(generatedContent.articles, "public"), ...readResearchDirectory(generatedContent.previews, "zsxq")]
+  return [
+    ...readGroup("articles").map(([fileName, raw]) => parseResearchEntry(fileName, raw, "public")),
+    ...readGroup("previews").map(([fileName, raw]) => parseResearchEntry(fileName, raw, "zsxq")),
+  ]
     .filter((article) => article.status === "published")
     .sort((a, b) => b.date.localeCompare(a.date) || b.slug.localeCompare(a.slug));
 }
@@ -197,23 +279,22 @@ export function getArticlesByCategory(categorySlug: string): ResearchEntry[] {
 
 function parseWeeklyBrief(fileName: string, raw: string): WeeklyBrief {
   const { data, body } = parseDocument(raw, fileName);
-
   return {
     slug: fileName.replace(/\.md$/, ""),
-    title: String(data.title ?? fileName.replace(/\.md$/, "")),
-    description: String(data.description ?? ""),
-    startDate: String(data.startDate ?? ""),
-    endDate: String(data.endDate ?? ""),
-    issue: String(data.issue ?? "000"),
-    state: String(data.state ?? "跟踪中"),
-    focus: Array.isArray(data.focus) ? data.focus.map(String) : [],
-    status: data.status === "published" ? "published" : "draft",
+    title: asString(data.title, fileName.replace(/\.md$/, "")),
+    description: asString(data.description),
+    startDate: asString(data.startDate),
+    endDate: asString(data.endDate),
+    issue: asString(data.issue, "000"),
+    state: asString(data.state, "跟踪中"),
+    focus: asStringArray(data.focus),
+    status: publishedStatus(data.status),
     content: body,
   };
 }
 
 export function getWeeklyBriefs(): WeeklyBrief[] {
-  return Object.entries(generatedContent.weekly)
+  return readGroup("weekly")
     .map(([fileName, raw]) => parseWeeklyBrief(fileName, raw))
     .filter((brief) => brief.status === "published")
     .sort((a, b) => b.startDate.localeCompare(a.startDate));
@@ -221,6 +302,168 @@ export function getWeeklyBriefs(): WeeklyBrief[] {
 
 export function getLatestWeeklyBrief(): WeeklyBrief | undefined {
   return getWeeklyBriefs()[0];
+}
+
+function parseDirections(value: unknown): DirectionItem[] {
+  return asRecordArray(value).map((item) => ({
+    name: asString(item.name),
+    reason: asString(item.reason),
+    evidence: asString(item.evidence),
+  }));
+}
+
+function parseCapitalFlow(fileName: string, raw: string): CapitalFlowRecord {
+  const { data, body } = parseDocument(raw, fileName);
+  return {
+    slug: fileName.replace(/\.md$/, ""),
+    title: asString(data.title),
+    summary: asString(data.summary),
+    date: inferDate(fileName, data.date),
+    dataCutoff: asString(data.dataCutoff),
+    coreIndustry: asString(data.coreIndustry),
+    continuity: asString(data.continuity),
+    inflows: parseDirections(data.inflows),
+    outflows: parseDirections(data.outflows),
+    logic: asString(data.logic),
+    methodology: asString(data.methodology),
+    counterEvidence: asString(data.counterEvidence),
+    sources: asStringArray(data.sources),
+    risks: asStringArray(data.risks),
+    status: publishedStatus(data.status),
+    content: body,
+  };
+}
+
+export function getCapitalFlows(): CapitalFlowRecord[] {
+  return readGroup("capital-flow")
+    .map(([fileName, raw]) => parseCapitalFlow(fileName, raw))
+    .filter((item) => item.status === "published")
+    .sort((a, b) => b.date.localeCompare(a.date) || b.slug.localeCompare(a.slug));
+}
+
+export function getCapitalFlow(slug: string): CapitalFlowRecord | undefined {
+  return getCapitalFlows().find((item) => item.slug === slug);
+}
+
+export function getLatestCapitalFlow(): CapitalFlowRecord | undefined {
+  return getCapitalFlows()[0];
+}
+
+function parseCompanyMappings(value: unknown): CompanyMapping[] {
+  return asRecordArray(value).map((item) => ({
+    name: asString(item.name),
+    role: asString(item.role),
+    evidenceStatus: asString(item.evidenceStatus),
+  }));
+}
+
+function parseMainline(fileName: string, raw: string): MainlineRecord {
+  const { data, body } = parseDocument(raw, fileName);
+  const stage = asString(data.currentStage, "萌芽") as MainlineStage;
+  return {
+    slug: fileName.replace(/\.md$/, ""),
+    title: asString(data.title),
+    summary: asString(data.summary),
+    date: inferDate(fileName, data.date),
+    industry: asString(data.industry),
+    currentStage: mainlineStages.includes(stage) ? stage : "萌芽",
+    stageBasis: asString(data.stageBasis),
+    industryTraits: asStringArray(data.industryTraits),
+    representativeLinks: asStringArray(data.representativeLinks),
+    companyMappings: parseCompanyMappings(data.companyMappings),
+    capitalBehavior: asString(data.capitalBehavior),
+    catalysts: asStringArray(data.catalysts),
+    risks: asStringArray(data.risks),
+    falsification: asStringArray(data.falsification),
+    trackingIndicators: asStringArray(data.trackingIndicators),
+    sources: asStringArray(data.sources),
+    status: publishedStatus(data.status),
+    content: body,
+  };
+}
+
+export function getMainlines(): MainlineRecord[] {
+  return readGroup("mainline")
+    .map(([fileName, raw]) => parseMainline(fileName, raw))
+    .filter((item) => item.status === "published")
+    .sort((a, b) => b.date.localeCompare(a.date) || b.slug.localeCompare(a.slug));
+}
+
+export function getMainline(slug: string): MainlineRecord | undefined {
+  return getMainlines().find((item) => item.slug === slug);
+}
+
+function parseBoard(fileName: string, raw: string): BoardSnapshot {
+  const { data } = parseDocument(raw, fileName);
+  const pieces = asRecordArray(data.pieces).map((item) => {
+    const stage = asString(item.stage, "萌芽") as MainlineStage;
+    const strength = asString(item.capitalStrength, "待核验") as CapitalStrength;
+    const heat = asString(item.researchHeat, "待核验") as ResearchHeat;
+    return {
+      name: asString(item.name),
+      stage: mainlineStages.includes(stage) ? stage : "萌芽",
+      capitalStrength: (["偏强", "中性", "偏弱", "待核验"] as const).includes(strength) ? strength : "待核验",
+      researchHeat: (["高", "中", "低", "待核验"] as const).includes(heat) ? heat : "待核验",
+      capitalDirection: asString(item.capitalDirection),
+      evidenceStatus: asString(item.evidenceStatus, "待核验"),
+      updatedAt: asString(item.updatedAt),
+      evidence: asString(item.evidence),
+    };
+  });
+  return {
+    slug: fileName.replace(/\.md$/, ""),
+    title: asString(data.title),
+    summary: asString(data.summary),
+    date: inferDate(fileName, data.date),
+    dataCutoff: asString(data.dataCutoff),
+    pieces,
+    sources: asStringArray(data.sources),
+    risks: asStringArray(data.risks),
+    status: publishedStatus(data.status),
+  };
+}
+
+export function getBoards(): BoardSnapshot[] {
+  return readGroup("boards")
+    .map(([fileName, raw]) => parseBoard(fileName, raw))
+    .filter((item) => item.status === "published")
+    .sort((a, b) => b.date.localeCompare(a.date) || b.slug.localeCompare(a.slug));
+}
+
+export function getLatestBoard(): BoardSnapshot | undefined {
+  return getBoards()[0];
+}
+
+function parseHerPerspective(fileName: string, raw: string): HerPerspectiveEntry {
+  const { data } = parseDocument(raw, fileName);
+  return {
+    slug: fileName.replace(/\.md$/, ""),
+    title: asString(data.title),
+    summary: asString(data.summary),
+    date: inferDate(fileName, data.date),
+    issue: asString(data.issue),
+    cover: asString(data.cover),
+    images: asStringArray(data.images),
+    marketContext: asString(data.marketContext),
+    keyData: asStringArray(data.keyData),
+    explanation: asString(data.explanation),
+    womenInsight: asString(data.womenInsight),
+    risks: asString(data.risks),
+    source: asString(data.source),
+    videoUrl: asString(data.videoUrl) || undefined,
+    status: publishedStatus(data.status),
+  };
+}
+
+export function getHerPerspectiveEntries(): HerPerspectiveEntry[] {
+  return readGroup("her-perspective")
+    .map(([fileName, raw]) => parseHerPerspective(fileName, raw))
+    .filter((item) => item.status === "published")
+    .sort((a, b) => b.date.localeCompare(a.date) || b.issue.localeCompare(a.issue));
+}
+
+export function getHerPerspectiveEntry(slug: string): HerPerspectiveEntry | undefined {
+  return getHerPerspectiveEntries().find((item) => item.slug === slug);
 }
 
 export function formatDate(date: string): string {

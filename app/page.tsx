@@ -1,124 +1,154 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { ArticleCard } from "@/app/components/ArticleCard";
 import { SiteFooter } from "@/app/components/SiteFooter";
 import { SiteHeader } from "@/app/components/SiteHeader";
-import { categories, formatDate, getAllArticles, getLatestWeeklyBrief } from "@/lib/content";
-
-const rhythm = [
-  ["周一", "提出问题"],
-  ["周四", "发布研究"],
-  ["周日", "复盘变化"],
-];
+import {
+  formatDate,
+  getAllArticles,
+  getHerPerspectiveEntries,
+  getLatestBoard,
+  getLatestCapitalFlow,
+  getMainlines,
+  mainlineStages,
+} from "@/lib/content";
 
 export default function Home() {
-  const articles = getAllArticles();
-  const weekly = getLatestWeeklyBrief();
-  const latest = categories.map((category) => articles.find((article) => article.categorySlug === category.slug)).filter((article) => article !== undefined);
+  const flow = getLatestCapitalFlow();
+  const mainlines = getMainlines();
+  const board = getLatestBoard();
+  const articles = getAllArticles().slice(0, 4);
+  const perspectives = getHerPerspectiveEntries().slice(0, 3);
 
   return (
     <>
       <SiteHeader />
       <main>
-        <section className="home-hero section-shell">
-          <p className="home-kicker">白胡子研究院 · 面向股民的产业研究与市场复盘</p>
-          <div className="home-hero-grid">
-            <div>
-              <span className="home-issue">STOCK RESEARCH / 2026</span>
-              <h1>把 AI 产业变化，<br />研究成<span>可跟踪的股票线索。</span></h1>
-            </div>
-            <div className="home-hero-copy">
-              <p>无论在哪里认识白胡子，都可以在这里找到公开研究、星球试读、判断变化和下一步跟踪。</p>
-              <p>聚焦 AI 产业链、A股市场复盘和交易认知，持续连接产业环节、上市公司与财务验证。</p>
-              <div className="home-actions">
-                <Link className="primary-button" href="/weekly">查看本周跟踪 <span>→</span></Link>
-                <Link className="text-link" href="/articles">浏览研究档案 ↗</Link>
+        <section className="capital-hero">
+          <div className="capital-hero-map" aria-hidden="true">
+            <span className="map-orbit map-orbit-one" />
+            <span className="map-orbit map-orbit-two" />
+            <span className="map-path map-path-one" />
+            <span className="map-path map-path-two" />
+            <i className="map-node map-node-one" />
+            <i className="map-node map-node-two" />
+            <i className="map-node map-node-three" />
+          </div>
+          <div className="capital-hero-inner section-shell">
+            <div className="capital-hero-copy">
+              <p className="capital-eyebrow">LUJIAN CAPITAL · CAPITAL OBSERVATION SYSTEM</p>
+              <h1>路见资本</h1>
+              <p className="capital-lead">看见资本流向，<br />理解产业未来。</p>
+              <p className="capital-intro">追踪资金迁徙、产业周期与市场情绪，用可复查的事实和持续更新的证据，建立自己的资本观察坐标。</p>
+              <div className="capital-actions">
+                <Link className="capital-primary" href="/capital-flow">进入资金迁徙 <span>↗</span></Link>
+                <Link className="capital-secondary" href="/articles">浏览研究文章</Link>
               </div>
             </div>
-          </div>
-          <div className="research-rhythm" aria-label="每周研究节奏">
-            {rhythm.map(([day, action]) => <div key={day}><b>{day}</b><span>{action}</span></div>)}
-            <p>先看事实，再写判断；允许变化，保留证伪。</p>
-          </div>
-        </section>
-
-        <section className="start-here section-shell">
-          <div className="section-heading compact-heading">
-            <div><span className="section-index">00</span><p>第一次来，从这里开始<br /><small>START HERE</small></p></div>
-            <Link href="/about">了解研究院 ↗</Link>
-          </div>
-          <div className="start-here-grid">
-            <Link href="/weekly"><b>01</b><h2>先看本周问题</h2><p>了解研究院此刻在跟踪什么、证据走到哪里，以及下一步准备验证什么。</p><span>进入本周 ↗</span></Link>
-            <Link href="/articles/2026-08-09-from-concept-to-financial-verification"><b>02</b><h2>再看研究方法</h2><p>用五级证据区分概念、订单与财务兑现，避免把产业空间直接等同于公司利润。</p><span>阅读入门文章 ↗</span></Link>
-            <Link href="/articles"><b>03</b><h2>最后浏览档案</h2><p>按 AI 产业链、市场复盘和交易认知三个栏目，继续阅读已经公开的研究。</p><span>浏览全部研究 ↗</span></Link>
-          </div>
-        </section>
-
-        <section className="weekly-preview section-shell">
-          <div className="section-heading compact-heading">
-            <div><span className="section-index">01</span><p>本周与你一起研究<br /><small>THIS WEEK</small></p></div>
-            <Link href="/weekly">查看完整进度 ↗</Link>
-          </div>
-          {weekly ? (
-            <article className="weekly-card">
-              <div className="weekly-card-meta">
-                <span>W{weekly.issue}</span>
-                <strong><i />{weekly.state}</strong>
-                <small>{formatDate(weekly.startDate)}—{formatDate(weekly.endDate).slice(5)}</small>
-              </div>
-              <div className="weekly-card-main">
-                <p>本周核心问题</p>
-                <h2>{weekly.title}</h2>
-                <div className="weekly-card-bottom">
-                  <p>{weekly.description}</p>
-                  <Link className="outline-button" href="/weekly">进入本周 <span>→</span></Link>
+            {flow ? (
+              <aside className="capital-signal-panel" aria-label="最近交易日资本迁徙">
+                <div className="signal-panel-head"><span>最近交易日资本迁徙</span><b>{formatDate(flow.date)} / {flow.dataCutoff.slice(-5)}</b></div>
+                <div className="signal-core"><small>核心方向</small><strong>{flow.coreIndustry}</strong><p>{flow.continuity}。{flow.inflows[0]?.reason}</p></div>
+                <div className="signal-grid">
+                  <div><small>流入观察</small><b>{flow.inflows[1]?.name ?? flow.inflows[0]?.name}</b><span>{flow.inflows[1]?.evidence ?? flow.continuity}</span></div>
+                  <div><small>流出观察</small><b>{flow.outflows[0]?.name}</b><span>{flow.outflows[0]?.reason}</span></div>
                 </div>
+                <p className="signal-note">数据来自最近一条已核验、正式发布的记录，不代表实时行情或买卖建议。</p>
+              </aside>
+            ) : (
+              <aside className="capital-signal-panel signal-empty"><span>WAITING FOR VERIFIED DATA</span><strong>等待核验记录</strong><p>没有正式数据时，首页不会补造实时行情。</p></aside>
+            )}
+          </div>
+        </section>
+
+        <section className="system-section section-shell">
+          <div className="section-heading compact-heading">
+            <div><span className="section-index">01</span><p>最近交易日资金迁徙<br /><small>LATEST CAPITAL FLOW</small></p></div>
+            <Link href="/capital-flow">查看全部记录 ↗</Link>
+          </div>
+          {flow && (
+            <article className="flow-feature">
+              <div className="flow-feature-lead">
+                <div className="record-time"><span>数据截至</span><b>{flow.dataCutoff}</b></div>
+                <h2>{flow.title}</h2>
+                <p>{flow.summary}</p>
+                <Link href={`/capital-flow/${flow.slug}`}>打开完整资金地图 ↗</Link>
               </div>
-              <div className="weekly-focus">
-                <span>覆盖方向</span>
-                {weekly.focus.map((item, index) => <div key={item}><b>0{index + 1}</b>{item}</div>)}
+              <div className="flow-directions">
+                <div><span className="direction-label inflow-label">流入</span>{flow.inflows.slice(0, 3).map((item) => <div key={item.name}><b>{item.name}</b><p>{item.reason}</p></div>)}</div>
+                <div><span className="direction-label outflow-label">流出</span>{flow.outflows.slice(0, 3).map((item) => <div key={item.name}><b>{item.name}</b><p>{item.reason}</p></div>)}</div>
               </div>
             </article>
-          ) : (
-            <div className="empty-state"><span>WEEKLY RESEARCH</span><h2>本周研究问题正在整理</h2><p>不为了更新而制造结论，确认问题后再开始跟踪。</p></div>
+          )}
+        </section>
+
+        <section className="mainline-home">
+          <div className="section-shell">
+            <div className="section-heading compact-heading light-heading">
+              <div><span className="section-index">02</span><p>当前主线生命周期<br /><small>MAINLINE LIFECYCLE</small></p></div>
+              <Link href="/mainline">进入产业地图 ↗</Link>
+            </div>
+            <div className="lifecycle-axis" aria-label="产业生命周期五阶段">
+              {mainlineStages.map((stage) => <span key={stage}>{stage}</span>)}
+            </div>
+            <div className="mainline-home-grid">
+              {mainlines.slice(0, 2).map((item, index) => (
+                <Link href={`/mainline/${item.slug}`} key={item.slug}>
+                  <div className="mainline-card-head"><span>0{index + 1}</span><b>{item.industry}</b></div>
+                  <strong>{item.currentStage}</strong>
+                  <h3>{item.title}</h3>
+                  <p>{item.summary}</p>
+                  <small>查看证据与证伪条件 ↗</small>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="system-section section-shell">
+          <div className="section-heading compact-heading">
+            <div><span className="section-index">03</span><p>A股棋盘快照<br /><small>A-SHARE BOARD</small></p></div>
+            <Link href="/board">查看完整棋盘 ↗</Link>
+          </div>
+          {board && (
+            <div className="board-snapshot">
+              <div className="board-snapshot-copy"><span>{formatDate(board.date)}</span><h2>产业阶段 × 资金强弱</h2><p>{board.summary}</p><small>研究热度是人工研究标记，不是量化预测。</small></div>
+              <div className="board-piece-strip">
+                {board.pieces.map((piece) => <article data-strength={piece.capitalStrength} key={piece.name}><span>{piece.capitalStrength}</span><h3>{piece.name}</h3><p>{piece.stage}</p><small>{piece.evidenceStatus}</small></article>)}
+              </div>
+            </div>
           )}
         </section>
 
         <section className="home-research section-shell">
           <div className="section-heading compact-heading">
-            <div><span className="section-index">02</span><p>三个栏目最新研究<br /><small>PUBLIC & MEMBER RESEARCH</small></p></div>
+            <div><span className="section-index">04</span><p>最新研究文章<br /><small>RESEARCH ARCHIVE</small></p></div>
             <Link href="/articles">全部研究 ↗</Link>
           </div>
-          {latest.length > 0 ? (
-            <div className="article-list">{latest.map((article, index) => <ArticleCard article={article} index={index + 1} key={article.slug} />)}</div>
-          ) : (
-            <div className="research-empty">
-              <div><span>0</span><small>篇正式研究</small></div>
-              <div><h2>首批星球试读<br />正在等待你的确认。</h2><p>草稿不会在官网出现；确认后的试读只展示摘要和三个要点，不保存付费全文。</p></div>
-            </div>
-          )}
+          <div className="article-list">{articles.map((article, index) => <ArticleCard article={article} index={index + 1} key={article.slug} />)}</div>
         </section>
 
-        <section className="fields-section">
-          <div className="section-shell">
-            <div className="section-heading compact-heading light-heading">
-            <div><span className="section-index">03</span><p>三个长期栏目<br /><small>RESEARCH MAP</small></p></div>
-              <span className="heading-note">产业变化最终要接受公司经营数据验证</span>
-            </div>
-            <div className="field-list">
-              {categories.map((category) => {
-                const count = articles.filter((article) => article.categorySlug === category.slug).length;
-                return <Link href={`/categories/${category.slug}`} key={category.slug}>
-                  <span>{category.index}</span><h3>{category.name}</h3><p>{category.description}</p><small>{count} 篇 ↗</small>
-                </Link>;
-              })}
-            </div>
+        <section className="perspective-home section-shell">
+          <div className="section-heading compact-heading">
+            <div><span className="section-index">05</span><p>她的资本视角<br /><small>FINANCE, RISK & LIFE</small></p></div>
+            <Link href="/her-perspective">查看全部漫画 ↗</Link>
+          </div>
+          <div className="perspective-grid">
+            {perspectives.map((entry) => (
+              <Link href={`/her-perspective/${entry.slug}`} key={entry.slug}>
+                <div className="perspective-cover"><img src={entry.cover} alt={`${entry.title}封面`} loading="lazy" decoding="async" /></div>
+                <div className="perspective-card-copy"><span>ISSUE {entry.issue} · {formatDate(entry.date)}</span><h3>{entry.title.replace(/^\d+｜/, "")}</h3><p>{entry.summary}</p></div>
+              </Link>
+            ))}
           </div>
         </section>
 
-        <section className="join-band section-shell">
-          <span className="join-band-label">STAY CONNECTED</span>
-          <div><h2>平台会变，<br />这张名片一直在。</h2><p>收藏永久域名阅读公开研究；需要完整星球专享内容时，从官网直接进入知识星球原文。</p></div>
-          <Link className="primary-button button-dark" href="/join">加入研究院 <span>→</span></Link>
+        <section className="principles-band">
+          <div className="section-shell principles-band-grid">
+            <div><span>06 / RESEARCH PRINCIPLES</span><h2>结论可以变化，<br />证据必须留下。</h2></div>
+            <div className="principle-list"><p><b>01</b>事实、判断与推测分开</p><p><b>02</b>记录来源、日期与统计口径</p><p><b>03</b>保留反方观点与证伪条件</p><p><b>04</b>不提供喊单、收益承诺或持仓复制</p></div>
+            <Link className="capital-primary" href="/about">关于路见资本 <span>↗</span></Link>
+          </div>
         </section>
       </main>
       <SiteFooter />

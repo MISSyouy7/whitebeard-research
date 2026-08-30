@@ -12,12 +12,12 @@ export function SiteFooter() {
         </div>
         <div className="footer-links">
           <Link href="/capital-flow">资金迁徙</Link>
-          <Link href="/mainline">主线生命</Link>
-          <Link href="/board">A股棋盘</Link>
-          <Link href="/articles">研究文章</Link>
-          <Link href="/her-perspective">她的资本视角</Link>
+          <Link href="/weekly">一周资金</Link>
+          <Link href="/quarterly">季度报告</Link>
+          <Link href="/articles">研究档案</Link>
+          <Link href="/qingdan">领取免费清单</Link>
           <Link href="/about">关于路见资本</Link>
-          <Link href="/join">订阅与防失联</Link>
+          <Link href="/join">订阅｜299元/年</Link>
           <Link href="/admin">内容后台</Link>
         </div>
         <div className="footer-note">

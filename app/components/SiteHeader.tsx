@@ -2,11 +2,10 @@ import Link from "next/link";
 
 const links = [
   { href: "/capital-flow", label: "资金迁徙" },
-  { href: "/mainline", label: "主线生命" },
-  { href: "/board", label: "A股棋盘" },
-  { href: "/articles", label: "研究文章" },
-  { href: "/her-perspective", label: "她的资本视角" },
-  { href: "/about", label: "关于" },
+  { href: "/weekly", label: "一周资金" },
+  { href: "/quarterly", label: "季度报告" },
+  { href: "/articles", label: "研究档案" },
+  { href: "/join", label: "订阅｜299元/年" },
 ];
 
 export function SiteHeader() {

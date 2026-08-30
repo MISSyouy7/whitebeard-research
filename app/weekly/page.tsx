@@ -5,8 +5,8 @@ import { SiteHeader } from "@/app/components/SiteHeader";
 import { formatDate, getWeeklyBriefs, markdownToHtml } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "本周研究跟踪",
-  description: "路见资本每周股票研究问题、研究进度、判断变化与下一步跟踪。",
+  title: "一周资金战场",
+  description: "路见资本每周资金进攻、回流、撤退方向与下一周验证清单。",
 };
 
 export default function WeeklyPage() {
@@ -14,7 +14,7 @@ export default function WeeklyPage() {
   const current = briefs[0];
 
   return <><SiteHeader /><main className="weekly-page section-shell">
-    <header className="page-masthead weekly-masthead"><p>THIS WEEK / STOCK RESEARCH</p><h1>本周</h1><span>陪你把一个问题研究到底，而不是每天换一个热点。</span></header>
+    <header className="page-masthead weekly-masthead"><p>WEEKLY CAPITAL BATTLEFIELD</p><h1>一周资金</h1><span>把五个收盘快照连起来，分清进攻、回流、脉冲和撤退。</span></header>
     {current ? <>
       <section className="weekly-head">
         <div className="weekly-number"><small>WEEK</small><strong>{current.issue}</strong><span>{current.state}</span></div>
@@ -28,6 +28,6 @@ export default function WeeklyPage() {
       <article className="weekly-body markdown-body" dangerouslySetInnerHTML={{ __html: markdownToHtml(current.content) }} />
       {briefs.length > 1 && <section className="weekly-history"><h2>往期跟踪</h2>{briefs.slice(1).map((brief) => <article key={brief.slug}><span>W{brief.issue}</span><div><h3>{brief.title}</h3><p>{formatDate(brief.startDate)}—{formatDate(brief.endDate).slice(5)}</p></div></article>)}</section>}
     </> : <div className="empty-state"><span>WEEKLY RESEARCH</span><h2>本周研究问题正在整理</h2><p>研究开始后，这里会持续记录问题、证据和判断变化。</p></div>}
-    <section className="weekly-cta"><p>想长期跟踪，而不是只看一条结论？</p><Link className="primary-button button-dark" href="/join">查看加入方式 <span>→</span></Link></section>
+    <section className="weekly-cta"><p>想看完整90行业，而不是只看前三名？</p><Link className="primary-button button-dark" href="/qingdan">领取本周清单 <span>→</span></Link></section>
   </main><SiteFooter /></>;
 }

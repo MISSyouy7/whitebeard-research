@@ -7,6 +7,7 @@ export type ResearchAccess = "public" | "zsxq";
 export type MainlineStage = "萌芽" | "基础设施建设" | "爆发" | "生态竞争" | "重构";
 export type CapitalStrength = "偏强" | "中性" | "偏弱" | "待核验";
 export type ResearchHeat = "高" | "中" | "低" | "待核验";
+export type QuarterlyStatus = "upcoming" | "published";
 
 export type ResearchEntry = {
   slug: string;
@@ -34,6 +35,27 @@ export type WeeklyBrief = {
   state: string;
   focus: string[];
   status: PublishStatus;
+  content: string;
+};
+
+export type QuarterlyReport = {
+  slug: string;
+  title: string;
+  quarter: string;
+  startDate: string;
+  endDate: string;
+  dueDate: string;
+  publishedAt: string;
+  status: QuarterlyStatus;
+  summary: string;
+  keyFindings: string[];
+  outline: string[];
+  coverImage?: string;
+  previewImages: string[];
+  previewFile?: string;
+  zsxqUrl?: string;
+  sources: string[];
+  risks: string[];
   content: string;
 };
 
@@ -176,7 +198,7 @@ export const legacyCategorySlugs = [
   "research-methods",
 ] as const;
 
-type ContentGroup = "articles" | "previews" | "weekly" | "capital-flow" | "mainline" | "boards" | "her-perspective";
+type ContentGroup = "articles" | "previews" | "weekly" | "quarterly" | "capital-flow" | "mainline" | "boards" | "her-perspective";
 type ParsedDocument = { data: Record<string, unknown>; body: string };
 
 const contentGroups = generatedContent as unknown as Record<ContentGroup, Record<string, string>>;
@@ -302,6 +324,41 @@ export function getWeeklyBriefs(): WeeklyBrief[] {
 
 export function getLatestWeeklyBrief(): WeeklyBrief | undefined {
   return getWeeklyBriefs()[0];
+}
+
+function parseQuarterlyReport(fileName: string, raw: string): QuarterlyReport {
+  const { data, body } = parseDocument(raw, fileName);
+  const rawStatus = asString(data.status, "upcoming");
+  return {
+    slug: fileName.replace(/\.md$/, ""),
+    title: asString(data.title),
+    quarter: asString(data.quarter),
+    startDate: asString(data.startDate),
+    endDate: asString(data.endDate),
+    dueDate: asString(data.dueDate),
+    publishedAt: asString(data.publishedAt),
+    status: rawStatus === "published" ? "published" : "upcoming",
+    summary: asString(data.summary),
+    keyFindings: asStringArray(data.keyFindings),
+    outline: asStringArray(data.outline),
+    coverImage: asString(data.coverImage) || undefined,
+    previewImages: asStringArray(data.previewImages),
+    previewFile: asString(data.previewFile) || undefined,
+    zsxqUrl: asString(data.zsxqUrl) || undefined,
+    sources: asStringArray(data.sources),
+    risks: asStringArray(data.risks),
+    content: body,
+  };
+}
+
+export function getQuarterlyReports(): QuarterlyReport[] {
+  return readGroup("quarterly")
+    .map(([fileName, raw]) => parseQuarterlyReport(fileName, raw))
+    .sort((a, b) => b.startDate.localeCompare(a.startDate));
+}
+
+export function getLatestQuarterlyReport(): QuarterlyReport | undefined {
+  return getQuarterlyReports()[0];
 }
 
 function parseDirections(value: unknown): DirectionItem[] {

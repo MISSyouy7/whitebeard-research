@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
-const groups = ["articles", "previews", "weekly", "capital-flow", "mainline", "boards", "her-perspective"];
+const groups = ["articles", "previews", "weekly", "quarterly", "capital-flow", "mainline", "boards", "her-perspective"];
 const sources = {};
 
 for (const group of groups) {

@@ -286,6 +286,83 @@ content:
           - 机构或公司，《材料标题》，发布日期，[原文](https://example.com)。
 
           仅作研究交流，不构成投资建议。
+
+  - name: quarterly
+    label: 季度资金报告
+    type: collection
+    path: content/quarterly
+    filename:
+      template: "{year}-{month}-{day}-{hour}{minute}{second}.md"
+      field: false
+    view:
+      fields: [title, quarter, status, dueDate]
+      primary: title
+      sort: [startDate, title]
+      default:
+        sort: startDate
+        order: desc
+    fields:
+      - { name: title, label: 报告标题, type: string, required: true }
+      - { name: quarter, label: 报告季度, type: string, required: true }
+      - { name: startDate, label: 数据开始日, type: date, required: true }
+      - { name: endDate, label: 数据截止日, type: date, required: true }
+      - { name: dueDate, label: 最晚交付日, type: date, required: true }
+      - { name: publishedAt, label: 实际发布日期, type: date }
+      - name: status
+        label: 报告状态
+        type: select
+        default: upcoming
+        required: true
+        options:
+          values:
+            - { value: upcoming, label: 即将交付（不展示结论） }
+            - { value: published, label: 已正式发布 }
+      - { name: summary, label: 公开摘要, type: text, required: true }
+      - { name: keyFindings, label: 三条关键发现, type: string, list: true }
+      - name: coverImage
+        label: 报告封面
+        type: image
+        options:
+          media: article_images
+          path: quarterly
+          extensions: [png, jpg, jpeg, webp]
+          rename: random
+      - { name: outline, label: 八项报告目录, type: string, list: true, required: true }
+      - name: previewImages
+        label: 公开试读图片
+        type: image
+        list: true
+        options:
+          media: article_images
+          path: quarterly
+          extensions: [png, jpg, jpeg, webp]
+          rename: random
+      - name: previewFile
+        label: 公开试读文件
+        type: file
+        options:
+          media: article_images
+          path: quarterly
+          extensions: [pdf]
+          rename: random
+      - { name: zsxqUrl, label: 知识星球完整报告链接, type: string }
+      - { name: sources, label: 数据来源, type: string, list: true, required: true }
+      - { name: risks, label: 风险与口径说明, type: string, list: true, required: true }
+      - name: body
+        label: 公开试读正文
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          switcher: false
+          media: article_images
+          path: quarterly
+          extensions: [png, jpg, jpeg, webp]
+          rename: random
+        default: |
+          本页只公开摘要、目录和2—3页试读。
+
+          季度未结束时，不提前编写季度结论。
       - name: status
         label: 保存方式
         type: select

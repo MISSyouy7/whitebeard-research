@@ -4,7 +4,7 @@ import { parse as parseYaml } from "yaml";
 
 const root = process.cwd();
 const directories = Object.fromEntries(
-  ["articles", "previews", "weekly", "capital-flow", "mainline", "boards", "her-perspective"]
+  ["articles", "previews", "weekly", "quarterly", "capital-flow", "mainline", "boards", "her-perspective"]
     .map((name) => [name, path.join(root, "content", name)]),
 );
 const categorySlugs = new Set(["ai-industry", "market-review", "trading-cognition"]);
@@ -146,6 +146,38 @@ for (const file of weeklyFiles) {
   }
   if (!body.includes("仅作研究交流，不构成投资建议")) errors.push(`${file}: 缺少统一风险声明。`);
   checkBannedLanguage(file, `${asString(data.title)} ${asString(data.description)} ${body}`);
+}
+
+const quarterlyFiles = listMarkdownFiles(directories.quarterly);
+for (const file of quarterlyFiles) {
+  const document = parseDocument(directories.quarterly, file);
+  if (!document.valid) {
+    errors.push(`${file}: 季度报告缺少完整的 front matter。`);
+    continue;
+  }
+  const { data, body } = document;
+  const status = asString(data.status || "upcoming");
+  if (!new Set(["upcoming", "published"]).has(status)) errors.push(`${file}: 季度报告 status 只能是 upcoming 或 published。`);
+  requireFields(file, data, ["title", "quarter", "startDate", "endDate", "dueDate", "summary", "outline", "sources", "risks", "status"], "季度报告");
+  for (const field of ["startDate", "endDate", "dueDate"]) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(asString(data[field]))) errors.push(`${file}: ${field} 必须是 YYYY-MM-DD。`);
+  }
+  if (!/^\d{4} Q[1-4]$/.test(asString(data.quarter))) errors.push(`${file}: quarter 必须类似 2026 Q3。`);
+  if (!Array.isArray(data.outline) || data.outline.length !== 8) errors.push(`${file}: 季度报告目录必须恰好包含8项。`);
+  if (!isNonEmptyArray(data.sources) || !isNonEmptyArray(data.risks)) errors.push(`${file}: 季度报告来源和风险提示必须是非空列表。`);
+  if (status === "upcoming") {
+    if (Array.isArray(data.keyFindings) && data.keyFindings.length > 0) errors.push(`${file}: 季度未结束时不得预写关键结论。`);
+    if (data.zsxqUrl) errors.push(`${file}: upcoming 季度报告不得预填知识星球原文链接。`);
+  }
+  if (status === "published") {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(asString(data.publishedAt))) errors.push(`${file}: 正式季度报告必须提供 publishedAt。`);
+    if (!Array.isArray(data.keyFindings) || data.keyFindings.length !== 3) errors.push(`${file}: 正式季度报告必须恰好公开3条关键结论。`);
+    if (!/^https:\/\/wx\.zsxq\.com\//.test(asString(data.zsxqUrl))) errors.push(`${file}: 正式季度报告必须提供知识星球链接。`);
+    if (!/^\/uploads\/quarterly\/.+\.(png|jpe?g|webp)$/i.test(asString(data.coverImage))) errors.push(`${file}: 正式季度报告必须提供季度目录下的公开封面。`);
+    if (!/^\/uploads\/quarterly\/.+\.pdf$/i.test(asString(data.previewFile)) || /full|完整版|完整报告/i.test(asString(data.previewFile))) errors.push(`${file}: 正式季度报告必须提供独立的公开试读PDF，且不得指向完整版。`);
+  }
+  if (!body.includes("不提前编写季度结论") && status === "upcoming") errors.push(`${file}: upcoming 页面必须明确不提前编写季度结论。`);
+  checkBannedLanguage(file, `${asString(data.title)} ${asString(data.summary)} ${body}`);
 }
 
 const capitalFlowFiles = listMarkdownFiles(directories["capital-flow"]);

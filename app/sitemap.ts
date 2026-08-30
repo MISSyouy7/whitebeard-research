@@ -6,10 +6,10 @@ const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://baihuzigl.com").re
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/capital-flow", "/mainline", "/board", "/articles", "/her-perspective", "/about", "/weekly", "/join"].map((route) => ({
+  const staticRoutes = ["", "/capital-flow", "/weekly", "/quarterly", "/articles", "/mainline", "/board", "/her-perspective", "/about", "/join"].map((route) => ({
     url: `${siteUrl}${route}`,
-    changeFrequency: ["", "/capital-flow", "/mainline", "/board"].includes(route) ? ("weekly" as const) : ("monthly" as const),
-    priority: route === "" ? 1 : ["/capital-flow", "/mainline", "/board"].includes(route) ? 0.9 : 0.8,
+    changeFrequency: ["", "/capital-flow", "/weekly"].includes(route) ? ("weekly" as const) : ("monthly" as const),
+    priority: route === "" ? 1 : ["/capital-flow", "/weekly", "/quarterly", "/join"].includes(route) ? 0.9 : 0.7,
   }));
   const categoryRoutes = categories.map((category) => ({
     url: `${siteUrl}/categories/${category.slug}`,

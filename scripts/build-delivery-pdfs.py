@@ -293,14 +293,9 @@ def build_weekly_pdf(csv_path: Path, audit_path: Path, output_path: Path):
 
 def main():
     PUBLIC_PDF_DIR.mkdir(parents=True, exist_ok=True)
-    mapping = {
-        "2026-07-30-170905.md": "2026-07-30-market-review-ai-transition.pdf",
-        "2026-07-30-ai-applications-physical-ai.md": "2026-07-30-ai-applications-physical-ai.pdf",
-        "2026-08-09-from-concept-to-financial-verification.md": "2026-08-09-five-level-evidence.pdf",
-        "2026-08-25-market-breadth-repair.md": "2026-08-25-market-breadth-repair.pdf",
-        "2026-08-26-finance-metals-support-index.md": "2026-08-26-finance-metals-support-index.pdf",
-        "2026-08-27-technology-expansion.md": "2026-08-27-technology-expansion.pdf",
-    }
+    # Public research PDFs are curated from verified client deliverables.
+    # This builder must not regenerate the retired article-derived PDFs.
+    mapping = {}
     for source, output in mapping.items():
         build_public_article_pdf(ROOT / "content" / "articles" / source, PUBLIC_PDF_DIR / output)
 

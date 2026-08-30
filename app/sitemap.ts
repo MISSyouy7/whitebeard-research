@@ -6,7 +6,7 @@ const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://baihuzigl.com").re
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/capital-flow", "/weekly", "/quarterly", "/articles", "/mainline", "/board", "/her-perspective", "/about", "/join"].map((route) => ({
+  const staticRoutes = ["", "/capital-flow", "/research", "/pro", "/weekly", "/quarterly", "/articles", "/mainline", "/board", "/her-perspective", "/about", "/join"].map((route) => ({
     url: `${siteUrl}${route}`,
     changeFrequency: ["", "/capital-flow", "/weekly"].includes(route) ? ("weekly" as const) : ("monthly" as const),
     priority: route === "" ? 1 : ["/capital-flow", "/weekly", "/quarterly", "/join"].includes(route) ? 0.9 : 0.7,
@@ -34,6 +34,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
+  const industryRoutes = getMainlines().map((record) => ({
+    url: `${siteUrl}/industry/${record.slug}`,
+    lastModified: record.date,
+    changeFrequency: "monthly" as const,
+    priority: 0.75,
+  }));
   const perspectiveRoutes = getHerPerspectiveEntries().map((entry) => ({
     url: `${siteUrl}/her-perspective/${entry.slug}`,
     lastModified: entry.date,
@@ -41,5 +47,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...capitalFlowRoutes, ...mainlineRoutes, ...articleRoutes, ...perspectiveRoutes, ...categoryRoutes];
+  return [...staticRoutes, ...capitalFlowRoutes, ...mainlineRoutes, ...industryRoutes, ...articleRoutes, ...perspectiveRoutes, ...categoryRoutes];
 }

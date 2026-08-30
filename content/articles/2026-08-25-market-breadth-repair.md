@@ -4,6 +4,11 @@ description: "【事实】全A超过4200只上涨，但沪深京成交额缩至�
 categorySlug: "market-review"
 date: 2026-08-25
 status: "published"
+updatedAt: 2026-08-25
+reportType: market
+industrySlugs: ["market-structure"]
+tags: ["A股复盘", "市场广度", "结构换防"]
+pdfFile: "/research-pdf/2026-08-25-market-breadth-repair.pdf"
 ---
 盘面最容易制造的错觉，是把“多数股票上涨”直接等同于“所有风险偏好都回来了”。8月25日的市场确实出现大面积修复，但指数、成交和板块结构仍在提醒我们：这更像一次换防，而不是无差别反攻。
 

@@ -4,6 +4,11 @@ description: "【事实】沪深京成交额重回约2.14万亿元，科创50上
 categorySlug: "market-review"
 date: 2026-08-27
 status: "published"
+updatedAt: 2026-08-27
+reportType: market
+industrySlugs: ["ai-hardware", "communication-hardware"]
+tags: ["A股复盘", "科技硬件", "通信设备"]
+pdfFile: "/research-pdf/2026-08-27-technology-expansion.pdf"
 ---
 8月27日最重要的变化不是指数全部收红，而是成交额重新站上2万亿元，同时科技制造出现多层扩散。相比前两天的缩量修复，这一天的风险偏好有了更清晰的量能证据，但仍不能把单日强势直接外推成长期趋势。
 

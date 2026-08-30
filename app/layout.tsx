@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AnalyticsScript } from "@/app/components/Analytics";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://baihuzigl.com";
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="zh-CN">
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }} />
+        <AnalyticsScript />
         {children}
       </body>
     </html>

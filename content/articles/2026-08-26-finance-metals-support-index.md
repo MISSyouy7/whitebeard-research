@@ -4,6 +4,11 @@ description: "【事实】五个主要指数全部收红，科创50上涨1.71%�
 categorySlug: "market-review"
 date: 2026-08-26
 status: "published"
+updatedAt: 2026-08-26
+reportType: market
+industrySlugs: ["market-structure", "resources"]
+tags: ["A股复盘", "券商", "有色金属"]
+pdfFile: "/research-pdf/2026-08-26-finance-metals-support-index.pdf"
 ---
 8月26日的指数看起来比前一天更整齐，但量能和个股广度没有同步增强。判断市场质量，不能只看指数颜色，还要看是谁在托举、多少方向能够跟随，以及成交是否愿意留下。
 

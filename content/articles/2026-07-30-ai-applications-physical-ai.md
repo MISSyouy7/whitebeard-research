@@ -3,6 +3,11 @@ title: "AI硬件阶段性告一段落：下一站，看AI应用与物理AI"
 description: "【判断】AI硬件并非结束，而是从高预期定价转入业绩验证。下一阶段研究重心，应从“谁在卖算力”扩展到“谁能用AI创造收入”，以及“谁能让AI进入真实世界”。AI应用看付费、留存和降本增效，物理AI看感知—决策—执行闭环，以及订单、交付和收入确认。"
 categorySlug: "ai-industry"
 status: "published"
+updatedAt: 2026-07-30
+reportType: industry
+industrySlugs: ["ai-applications", "physical-ai"]
+tags: ["AI应用", "物理AI", "产业链"]
+pdfFile: "/research-pdf/2026-07-30-ai-applications-physical-ai.pdf"
 ---
 最近市场最容易出现的误区，是把研究方向的切换理解成产业的彻底结束。
 

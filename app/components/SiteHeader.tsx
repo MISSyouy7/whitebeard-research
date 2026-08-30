@@ -2,9 +2,9 @@ import Link from "next/link";
 
 const links = [
   { href: "/capital-flow", label: "资金迁徙" },
+  { href: "/research", label: "免费研究库" },
   { href: "/weekly", label: "一周资金" },
   { href: "/quarterly", label: "季度报告" },
-  { href: "/articles", label: "研究档案" },
   { href: "/join", label: "订阅｜299元/年" },
 ];
 

@@ -3,6 +3,11 @@ title: "从概念映射到财务验证：研究一条A股主线的五级证据"
 description: "一条产业主线能不能走远，不能只看技术叙事和公司标签。本文把研究证据拆成技术储备、送样认证、定点订单、交付收入和现金流五级，帮助识别哪些变化已经发生，哪些仍停留在预期。"
 categorySlug: "trading-cognition"
 status: "published"
+updatedAt: 2026-08-09
+reportType: method
+industrySlugs: ["research-methods"]
+tags: ["研究方法", "财务验证", "产业证据"]
+pdfFile: "/research-pdf/2026-08-09-five-level-evidence.pdf"
 ---
 市场最热的时候，信息往往最多，真正能够证明业绩的证据却未必同步增加。
 

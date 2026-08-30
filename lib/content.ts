@@ -23,7 +23,29 @@ export type ResearchEntry = {
   content: string;
   keyPoints: string[];
   zsxqUrl?: string;
+  updatedAt: string;
+  reportType: "company" | "industry" | "market" | "method";
+  companyName?: string;
+  stockCode?: string;
+  industrySlugs: string[];
+  tags: string[];
+  pdfFile?: string;
+  accessModel: "public_full" | "public_preview" | "external_member";
 };
+
+export type PublicResearchCard = Pick<
+  ResearchEntry,
+  | "slug"
+  | "title"
+  | "description"
+  | "category"
+  | "updatedAt"
+  | "companyName"
+  | "stockCode"
+  | "industrySlugs"
+  | "tags"
+  | "pdfFile"
+>;
 
 export type WeeklyBrief = {
   slug: string;
@@ -263,6 +285,7 @@ function parseResearchEntry(fileName: string, raw: string, access: ResearchAcces
   const keyPoints = asStringArray(data.keyPoints);
   const description = asString(data.description);
   const readingSource = access === "public" ? body : `${description} ${keyPoints.join(" ")}`;
+  const reportType = asString(data.reportType, categorySlug === "market-review" ? "market" : categorySlug === "trading-cognition" ? "method" : "industry") as ResearchEntry["reportType"];
 
   return {
     slug: fileName.replace(/\.md$/, ""),
@@ -278,6 +301,14 @@ function parseResearchEntry(fileName: string, raw: string, access: ResearchAcces
     content: access === "public" ? body : "",
     keyPoints,
     zsxqUrl: access === "zsxq" ? asString(data.zsxqUrl) : undefined,
+    updatedAt: asString(data.updatedAt, inferDate(fileName, data.date)),
+    reportType: (["company", "industry", "market", "method"] as const).includes(reportType) ? reportType : "industry",
+    companyName: asString(data.companyName) || undefined,
+    stockCode: asString(data.stockCode) || undefined,
+    industrySlugs: asStringArray(data.industrySlugs),
+    tags: asStringArray(data.tags),
+    pdfFile: access === "public" ? asString(data.pdfFile) || undefined : undefined,
+    accessModel: access === "public" ? "public_full" : "external_member",
   };
 }
 
@@ -297,6 +328,25 @@ export function getArticle(slug: string): ResearchEntry | undefined {
 export function getArticlesByCategory(categorySlug: string): ResearchEntry[] {
   const canonical = resolveCategorySlug(categorySlug);
   return getAllArticles().filter((article) => article.categorySlug === canonical);
+}
+
+export function getPublicResearch(): ResearchEntry[] {
+  return getAllArticles().filter((article) => article.accessModel === "public_full");
+}
+
+export function getPublicResearchCards(): PublicResearchCard[] {
+  return getPublicResearch().map(({ slug, title, description, category, updatedAt, companyName, stockCode, industrySlugs, tags, pdfFile }) => ({
+    slug,
+    title,
+    description,
+    category,
+    updatedAt,
+    companyName,
+    stockCode,
+    industrySlugs,
+    tags,
+    pdfFile,
+  }));
 }
 
 function parseWeeklyBrief(fileName: string, raw: string): WeeklyBrief {
@@ -448,6 +498,20 @@ export function getMainlines(): MainlineRecord[] {
 
 export function getMainline(slug: string): MainlineRecord | undefined {
   return getMainlines().find((item) => item.slug === slug);
+}
+
+export function getResearchStats() {
+  const publicResearch = getPublicResearch();
+  const mainlines = getMainlines();
+  const companies = new Set([
+    ...publicResearch.map((item) => item.companyName).filter(Boolean),
+    ...mainlines.flatMap((item) => item.companyMappings.map((company) => company.name)),
+  ]);
+  const industries = new Set([
+    ...publicResearch.flatMap((item) => item.industrySlugs),
+    ...mainlines.map((item) => item.industry).filter(Boolean),
+  ]);
+  return { companies: companies.size, industries: industries.size, reports: publicResearch.length };
 }
 
 function parseBoard(fileName: string, raw: string): BoardSnapshot {

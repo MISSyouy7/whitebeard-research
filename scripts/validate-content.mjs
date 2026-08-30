@@ -92,6 +92,15 @@ for (const file of articleFiles) {
   if (!body.includes("仅作研究交流，不构成投资建议")) errors.push(`${file}: 缺少统一风险声明。`);
   if (/!\[[^\]]*\]\((?!https?:\/\/|\/)/.test(body)) errors.push(`${file}: 图片链接只允许 HTTPS 或站内绝对路径。`);
   checkBannedLanguage(file, `${asString(data.title)} ${asString(data.description)} ${body}`);
+  if (data.pdfFile) {
+    const pdfFile = asString(data.pdfFile);
+    if (!/^\/research-pdf\/.+\.pdf$/i.test(pdfFile)) errors.push(`${file}: 公开PDF必须位于 /research-pdf/。`);
+    if (!fs.existsSync(path.join(root, "public", pdfFile.replace(/^\//, "")))) errors.push(`${file}: 公开PDF不存在：${pdfFile}。`);
+  }
+  if (data.reportType && !new Set(["company", "industry", "market", "method"]).has(asString(data.reportType))) errors.push(`${file}: reportType 无效。`);
+  for (const field of ["industrySlugs", "tags"]) {
+    if (data[field] !== undefined && !Array.isArray(data[field])) errors.push(`${file}: ${field} 必须是数组。`);
+  }
 }
 
 const previewFiles = listMarkdownFiles(directories.previews);

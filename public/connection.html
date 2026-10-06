@@ -23,7 +23,7 @@
 <script>
 (function(){
  'use strict';
- var base=/^(www\.)?baihuzigl\.com$/.test(location.hostname)?'https://api.baihuzigl.com':'';
+ var base=/^(www\.)?baihuzigl\.com$/.test(location.hostname)?'https://test-api.baihuzigl.com':'';
  var button=document.getElementById('run'),list=document.getElementById('results'),report=document.getElementById('report');
  var status=document.getElementById('status'),rows=[],meta=[],remaining=0;
  document.getElementById('health').href=base+'/api/mirror/health';

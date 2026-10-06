@@ -12,7 +12,7 @@ function browser(t){
 test('older browsers without AbortSignal.timeout send one authenticated request',async t=>{
  browser(t);t.mock.method(AbortSignal,'timeout',undefined);
  let calls=0;
- t.mock.method(globalThis,'fetch',async(url,opts)=>{calls++;assert.equal(url,'https://api.baihuzigl.com/api/mirror/redeem');assert.equal(opts.headers.Authorization,'Bearer saved-session');assert.equal(opts.body,JSON.stringify({code:'example'}));return {ok:true,json:async()=>({unlocked:true})};});
+ t.mock.method(globalThis,'fetch',async(url,opts)=>{calls++;assert.equal(url,'https://test-api.baihuzigl.com/api/mirror/redeem');assert.equal(opts.headers.Authorization,'Bearer saved-session');assert.equal(opts.body,JSON.stringify({code:'example'}));return {ok:true,json:async()=>({unlocked:true})};});
  assert.deepEqual(await api('redeem',{code:'example'}),{unlocked:true});assert.equal(calls,1);
 });
 test('AbortController is optional for successful requests',async t=>{

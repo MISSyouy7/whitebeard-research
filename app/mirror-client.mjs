@@ -2,7 +2,7 @@ const TOKEN='market-mirror-access-v2';
 export const readToken=()=>{try{return localStorage.getItem(TOKEN);}catch{return null;}};
 export const writeToken=token=>{try{localStorage.setItem(TOKEN,token);}catch{throw new Error('浏览器不允许保存凭证，请开启存储后再兑换。');}};
 export async function api(action,body,adminToken){
-  const remote=['baihuzigl.com','www.baihuzigl.com'].includes(location.hostname)?'https://api.baihuzigl.com':'';
+  const remote=['baihuzigl.com','www.baihuzigl.com','api.baihuzigl.com','whitebeard-research-institute.prime-cabin-3794.chatgpt.site'].includes(location.hostname)?'https://test-api.baihuzigl.com':'';
   const token=adminToken||readToken();
   if(typeof fetch!=='function')throw new Error('当前浏览器版本较旧，请复制网址到手机自带浏览器打开。');
   const controller=typeof AbortController==='function'?new AbortController():null;

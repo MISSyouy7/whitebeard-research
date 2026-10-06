@@ -46,7 +46,7 @@ async function admin(db,request,env){
 export async function mirrorAPI(request,env){
   const url=new URL(request.url);if(!url.pathname.startsWith(API))return null;
   const origin=request.headers.get('Origin');
-  const allowed=new Set(['https://baihuzigl.com','https://www.baihuzigl.com',url.origin]);
+  const allowed=new Set(['https://baihuzigl.com','https://www.baihuzigl.com','https://api.baihuzigl.com','https://whitebeard-research-institute.prime-cabin-3794.chatgpt.site',url.origin]);
   if(url.hostname==='localhost'||url.hostname==='127.0.0.1')allowed.add('http://localhost:3000');
   const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Vary':'Origin'};
   if(origin&&allowed.has(origin)){headers['Access-Control-Allow-Origin']=origin;headers['Access-Control-Allow-Methods']='GET,POST,OPTIONS';headers['Access-Control-Allow-Headers']='Authorization,Content-Type';headers['Access-Control-Max-Age']='600';}
@@ -55,6 +55,7 @@ export async function mirrorAPI(request,env){
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers});
   try{
     const db=dbOf(env),action=url.pathname.slice(API.length).replace(/\/$/,'');
+    if(env.MIRROR_READ_ONLY==='true'&&request.method!=='GET'&&action!=='health')fail(503,'服务正在迁移，进度和兑换码已保留。请几分钟后刷新重试。');
     if(action==='health'){
       if(!['GET','POST'].includes(request.method))fail(405,'不支持的请求方式。');
       // POST probes exercise the same transport as gameplay without creating a session or claiming a code.

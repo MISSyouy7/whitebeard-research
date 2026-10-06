@@ -10,8 +10,21 @@ function fixture(){
  const DB={prepare,async batch(items){sqlite.exec('BEGIN');try{const result=[];for(const s of items)result.push(await s.run());sqlite.exec('COMMIT');return result;}catch(e){sqlite.exec('ROLLBACK');throw e;}}};
  const adminToken='a'.repeat(64),env={DB};
  const call=async(action,body,token,origin='https://baihuzigl.com')=>{env.MIRROR_ADMIN_HASH=await hash(adminToken);const response=await mirrorAPI(new Request('https://site.test/api/mirror/'+action,{method:body===undefined?'GET':'POST',headers:{Origin:origin,...(token?{Authorization:'Bearer '+token}:{}),...(body===undefined?{}:{'Content-Type':'application/json'})},...(body===undefined?{}:{body:JSON.stringify(body)})}),env);return {status:response.status,data:await response.json(),headers:response.headers};};
- return {call,sqlite,adminToken};
+ return {call,sqlite,adminToken,env};
 }
+test('migration read-only mode preserves state and entitlements and blocks mutations',async()=>{
+ const {call,sqlite,adminToken,env}=fixture();
+ const s=(await call('start',{edition:2})).data;
+ const code=(await call('admin/issue',{count:1,batch:'migration'},adminToken)).data.codes[0].code;
+ const before=JSON.stringify(sqlite.prepare('SELECT * FROM mirror_sessions').all());
+ env.MIRROR_READ_ONLY='true';
+ assert.equal((await call('health',{})).status,200);
+ assert.equal((await call('state',undefined,s.token)).status,200);
+ for(const [action,body,token] of [['start',{edition:2}],['turn',{version:0,target:0,reason:'plan'},s.token],['redeem',{code},s.token],['admin/issue',{count:1,batch:'blocked'},adminToken]])assert.equal((await call(action,body,token)).status,503);
+ assert.equal(JSON.stringify(sqlite.prepare('SELECT * FROM mirror_sessions').all()),before);
+ assert.equal(sqlite.prepare('SELECT claimed_by FROM mirror_codes').get().claimed_by,null);
+ env.MIRROR_READ_ONLY='false';assert.equal((await call('redeem',{code},s.token)).status,200);
+});
 test('connection probes are read-only, allow permitted origins and preserve origin restrictions',async()=>{
  const {call,sqlite}=fixture();
  for(const body of [undefined,{}]){

@@ -40,8 +40,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Validate published research
-        run: pnpm validate:content
+      - name: Check simulation rules
+        run: pnpm test
 
       - name: Build static site
         shell: bash

@@ -45,3 +45,6 @@ next-env.d.ts
 
 # 私人交易、访谈和付费用户数据不得进入公开仓库
 /private/
+
+.dev.vars*
+!.env.example

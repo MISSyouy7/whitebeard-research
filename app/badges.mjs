@@ -1,4 +1,4 @@
-import {roles} from './market.mjs';
+import {roles} from './catalog.mjs';
 const palettes={calm:['#9fcbea','#142b3b'],chase:['#f3a27e','#3b211e'],rumor:['#c1b2f2','#29223d'],hold:['#dac38f','#322c22'],dip:['#b3cba1','#263226'],plan:['#8ee0d0','#183833']};
 const tags={calm:'留意风险',chase:'怕错过机会',rumor:'在意消息',hold:'不舍旧判断',dip:'关注低价格',plan:'判断要有据'};
 export const badgeStyles=Object.fromEntries(Object.entries(roles).map(([key,r])=>[key,{number:r.number,color:palettes[r.family][0],dark:palettes[r.family][1],lines:r.lines,motto:r.motto,tag:tags[r.family],band:r.band}]));

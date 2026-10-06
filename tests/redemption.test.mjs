@@ -52,3 +52,24 @@ test('admin authorization, token isolation, stale turns and rate limits',async()
  assert.equal((await call('redeem',{code:'bad'},s.token)).status,429);
  const list=(await call('admin/codes',undefined,adminToken)).data;assert.ok(Array.isArray(list.codes));
 });
+
+test('new fifteen-chapter edition uses the same redemption entitlement and preserves old saves',async()=>{
+ const {call,adminToken}=fixture();const old=(await call('start',{})).data;
+ assert.equal(old.game.total,10);assert.equal(old.game.edition,1);
+ let oldTurn=(await call('turn',{version:0,target:.25,reason:'plan'},old.token)).data;
+ assert.equal(oldTurn.chapter.title,'先买一点试试');
+ const code=(await call('admin/issue',{count:1,batch:'upgrade'},adminToken)).data.codes[0].code;
+ assert.equal((await call('redeem',{code},old.token)).status,200);
+ let r=await call('restart',{version:oldTurn.version,edition:2},old.token);
+ assert.equal(r.data.game.total,15);assert.equal(r.data.unlocked,true);assert.equal(r.data.game.edition,2);
+ for(let i=0;i<15;i++){
+  const reason=r.data.chapter.reasons.find(x=>x.tag==='plan')||r.data.chapter.reasons[0];
+  r=await call('turn',{version:r.data.version,target:.6,reason:reason.tag},old.token);assert.equal(r.status,200);
+  if(i===9){assert.equal(r.data.game.step,10);assert.equal(r.data.out,null);assert.ok(r.data.chapter);}
+ }
+ assert.equal(r.data.game.step,15);assert.equal(r.data.out.name,'股市公务员');assert.equal(r.data.out.dimensions.length,6);
+ const restored=(await call('state',undefined,old.token)).data;assert.equal(restored.game.history.length,15);assert.deepEqual(restored.out,r.data.out);
+ const fresh=(await call('start',{edition:2})).data;
+ let v=fresh;for(let i=0;i<2;i++)v=(await call('turn',{version:v.version,target:0,reason:v.chapter.reasons[0].tag},fresh.token)).data;
+ assert.equal(v.locked,true);assert.equal(v.chapter,null);assert.equal((await call('turn',{version:v.version,target:0,reason:'plan'},fresh.token)).status,402);
+});

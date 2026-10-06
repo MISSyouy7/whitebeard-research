@@ -40,9 +40,27 @@ export const roleCatalog={
  plan:[
  ['独立观察员','独立','观察员','行情说它的，你等自己的条件。','保持观察 · 不赶热闹'],
  ['人间清醒','人间','清醒','群聊可以静音，自己的计划不能。','看得见热闹 · 守得住自己'],
- ['计划执行官','计划','执行官','你下单之前，已经给自己写好备忘录。','有据入场 · 事后复盘'],
+ ['股市公务员','股市','公务员','行情可以发疯，我的下单流程不能。','按章下单 · 情绪请假'],
  ['清醒冒险家','清醒','冒险家','风险你都写下了，仓位你也真上了。','想过风险 · 仍愿重仓']
  ]
 };
+export const specialRoles={
+ calm:['账户守夜人','账户','守夜人','交易所三点下班，你的脑子全天值班。','人已收盘 · 心还挂单'],
+ chase:['反复横跳王','反复','横跳王','每次下单都很坚定，每次坚定都不太久。','左右横跳 · 主打参与'],
+ rumor:['截图战神','截图','战神','别人的截图是信号，你的截图是战报。','群聊封神 · 账户保密'],
+ hold:['回本许愿池','回本','许愿池','愿望朴素到只剩四个字：让我回本。','不求封神 · 只求原谅'],
+ dip:['地心施工队','地心','施工队','别人研究底在哪，你负责把底继续挖深。','向下探索 · 预算追加'],
+ plan:['概率炼金师','概率','炼金师','不求每次猜中，只求每次都说得清。','允许看错 · 拒绝糊涂']
+};
+for(const [family,item] of Object.entries(specialRoles))roleCatalog[family].push(item);
+export const familyLabels={calm:'安全感需求',chase:'错过焦虑',rumor:'外部信号依赖',hold:'回本与证明',dip:'低价吸引力',plan:'自主与复盘'};
+export const personalityProfiles={
+ calm:{trigger:'最容易被“不知道还会发生什么”牵动。',defense:'习惯留退路、减少暴露，让生活重新可控。',need:'比一时热闹更在意安全感，但等待也可能变成持续盯梢。'},
+ chase:{trigger:'别人已经赚到、自己还没参与的时候，最难平静。',defense:'用立刻行动缓解后悔，想赶快追回那个想象中的自己。',need:'想要机会，也想跟得上。未必不知道风险，只是错过更刺眼。'},
+ rumor:{trigger:'遇到模糊局面时，很在意别人是否已经有了答案。',defense:'向熟人、群聊和截图借一点确定感。',need:'想被理解、被印证；有人同行，会让不确定显得没那么孤单。'},
+ hold:{trigger:'成本价、过去的投入和“我是不是错了”容易绑在一起。',defense:'用继续等待保护原来的判断，不愿让这一段显得白费。',need:'你想要的有时不只是钱回来，也是一句对自己的交代。'},
+ dip:{trigger:'看到价格比之前更低，就容易重新找回主动感。',defense:'用计算、摊低成本和追加行动，把失控感变成“还可以修”。',need:'愿意逆着情绪走，也容易把能继续行动误当成能控制结局。'},
+ plan:{trigger:'当别人的语气很确定、证据却不够时，习惯先停一下。',defense:'通过核实、记录和设条件，保留自己的判断空间。',need:'在意自主与可解释性；理性也需要容得下自己的失误和情绪。'}
+};
 export const exposureBands=['平均目标仓位不超过 10%','平均目标仓位超过 10%、不超过 40%','平均目标仓位超过 40%、不超过 75%','平均目标仓位超过 75%'];
-export const roles=Object.fromEntries(Object.entries(roleCatalog).flatMap(([family,items],fi)=>items.map(([name,first,second,line,motto],band)=>[family+'_'+band,{...families[family],name,line,motto,lines:[first,second],family,band,number:String(fi*4+band+1).padStart(2,'0')}])));
+export const roles=Object.fromEntries(Object.entries(roleCatalog).flatMap(([family,items],fi)=>items.map(([name,first,second,line,motto],band)=>[family+'_'+band,{...families[family],name,line,motto,lines:[first,second],family,band,special:band===4,number:String(band===4?25+fi:fi*4+band+1).padStart(2,'0')}])));

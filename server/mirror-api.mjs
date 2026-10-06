@@ -1,4 +1,7 @@
-import {PATHS,chapters,initial,settle,result,equity,exposure} from '../app/market.mjs';
+import * as current from '../app/market.mjs';
+import * as legacy from './legacy-market.mjs';
+const engine=s=>s.v===2?current:legacy;
+const newGame=input=>(input.edition===2?current:legacy).initial(crypto.getRandomValues(new Uint8Array(1))[0]%3);
 
 const API='/api/mirror/';
 const codeAlphabet='23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
@@ -26,8 +29,8 @@ async function sessionOf(db,request){
 }
 async function isUnlocked(db,id){return !!await db.prepare("SELECT id FROM mirror_codes WHERE claimed_by=? AND status='active' LIMIT 1").bind(id).first();}
 function view(row,unlocked){
-  const s=row.game,locked=s.step>=2&&!unlocked;
-  return {version:row.version,unlocked,locked,game:{step:s.step,cash:s.cash,shares:s.shares,drawdown:s.drawdown,trades:s.trades,assets:equity(s),exposure:exposure(s),prices:PATHS[s.path].slice(0,s.step+1),history:s.history.map(h=>({...h,title:chapters[h.chapter].title,reasonText:chapters[h.chapter].reasons.find(r=>r.tag===h.reason).text}))},chapter:!locked&&s.step<10?chapters[s.step]:null,out:!locked&&s.step===10?result(s):null};
+  const s=row.game,locked=s.step>=2&&!unlocked,logic=engine(s),{chapters,PATHS,equity,exposure,result}=logic,total=chapters.length;
+  return {version:row.version,unlocked,locked,game:{edition:s.v,total,step:s.step,cash:s.cash,shares:s.shares,drawdown:s.drawdown,trades:s.trades,assets:equity(s),exposure:exposure(s),prices:PATHS[s.path].slice(0,s.step+1),history:s.history.map(h=>({...h,title:chapters[h.chapter].title,reasonText:chapters[h.chapter].reasons.find(r=>r.tag===h.reason).text,echo:chapters[h.chapter].reasons.find(r=>r.tag===h.reason).echo||null}))},chapter:!locked&&s.step<total?(logic.currentChapter?logic.currentChapter(s):chapters[s.step]):null,out:!locked&&s.step===total?result(s):null};
 }
 async function saveGame(db,row,game){
   const changed=await db.prepare('UPDATE mirror_sessions SET state=?,version=version+1,updated_at=? WHERE id=? AND version=? RETURNING version').bind(JSON.stringify(game),Date.now(),row.id,row.version).first();
@@ -77,7 +80,8 @@ export async function mirrorAPI(request,env){
     }
     if(action==='start'&&request.method==='POST'){
       await rateLimit(db,request,'start',30);
-      const token=randomToken(),id=await hash(token),game=initial(crypto.getRandomValues(new Uint8Array(1))[0]%PATHS.length),now=Date.now();
+      const input=await bodyOf(request);
+      const token=randomToken(),id=await hash(token),game=newGame(input),now=Date.now();
       await db.prepare('INSERT INTO mirror_sessions (id,state,version,created_at,updated_at) VALUES (?,?,0,?,?)').bind(id,JSON.stringify(game),now,now).run();return json({token,...view({game,version:0},false)});
     }
     const row=await sessionOf(db,request);let unlocked=await isUnlocked(db,row.id);
@@ -95,12 +99,13 @@ export async function mirrorAPI(request,env){
     }
     if(action==='restart'){
       if(input.version!==row.version)fail(409,'进度已更新，请刷新后重试。');
-      return json(view(await saveGame(db,row,initial(crypto.getRandomValues(new Uint8Array(1))[0]%PATHS.length)),unlocked));
+      return json(view(await saveGame(db,row,newGame(input)),unlocked));
     }
     if(action==='turn'){
       if(row.game.step>=2&&!unlocked)fail(402,'请先兑换，解锁后续剧情。');
       if(input.version!==row.version)fail(409,'进度已更新，请刷新后继续。');
-      if(![0,.25,.6,1].includes(input.target)||row.game.step>=10||!chapters[row.game.step].reasons.some(r=>r.tag===input.reason))fail(400,'请选择本关的操作和理由。');
+      const {chapters,settle}=engine(row.game);
+      if(![0,.25,.6,1].includes(input.target)||row.game.step>=chapters.length||!chapters[row.game.step].reasons.some(r=>r.tag===input.reason))fail(400,'请选择本关的操作和理由。');
       return json(view(await saveGame(db,row,settle(row.game,input.target,input.reason)),unlocked));
     }
     fail(404,'操作不存在。');

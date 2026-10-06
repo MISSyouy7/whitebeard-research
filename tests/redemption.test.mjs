@@ -12,6 +12,18 @@ function fixture(){
  const call=async(action,body,token,origin='https://baihuzigl.com')=>{env.MIRROR_ADMIN_HASH=await hash(adminToken);const response=await mirrorAPI(new Request('https://site.test/api/mirror/'+action,{method:body===undefined?'GET':'POST',headers:{Origin:origin,...(token?{Authorization:'Bearer '+token}:{}),...(body===undefined?{}:{'Content-Type':'application/json'})},...(body===undefined?{}:{body:JSON.stringify(body)})}),env);return {status:response.status,data:await response.json(),headers:response.headers};};
  return {call,sqlite,adminToken};
 }
+test('connection probes are read-only, allow permitted origins and preserve origin restrictions',async()=>{
+ const {call,sqlite}=fixture();
+ for(const body of [undefined,{}]){
+  const r=await call('health',body,'0'.repeat(64));
+  assert.equal(r.status,200);assert.deepEqual(r.data,{ok:true});
+  assert.equal(r.headers.get('Cache-Control'),'no-store');
+  assert.equal(r.headers.get('Access-Control-Allow-Origin'),'https://baihuzigl.com');
+ }
+ assert.equal((await call('health',{},undefined,'https://evil.test')).status,403);
+ assert.equal((await call('health',{text:'x'.repeat(4097)})).status,413);
+ for(const table of ['mirror_sessions','mirror_codes','mirror_limits'])assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM '+table).get().n,0);
+});
 test('two free turns, server gate, valid redemption, reload and ten-turn result',async()=>{
  const {call,sqlite,adminToken}=fixture();let r=await call('start',{}),token=r.data.token;
  for(let i=0;i<2;i++){r=await call('turn',{version:r.data.version,target:.25,reason:'plan'},token);assert.equal(r.status,200);}

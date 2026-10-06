@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>连接检测 · 股市照妖镜</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#111c24;color:#ede7d5;font:16px/1.7 system-ui,-apple-system,sans-serif}main{max-width:680px;margin:auto;padding:32px 20px}h1{font-size:26px;margin:0 0 10px}p{color:#b7c3c7}.panel{padding:18px;border:1px solid #58625c;border-radius:14px;margin:20px 0;background:#1c2a31}button,a{font:inherit}button{background:#dec383;color:#17242a;border:0;border-radius:9px;padding:12px 22px;cursor:pointer}button:disabled{opacity:.55}a{color:#dec383}li{margin:12px 0;overflow-wrap:anywhere}.pass{color:#9ed3ab}.fail{color:#f2b39f}textarea{width:100%;height:270px;background:#0d171d;color:#d5e0e2;border:1px solid #58625c;border-radius:8px;padding:12px;font-size:13px;line-height:1.6}.small{font-size:13px}#status{color:#dec383}
+</style>
+</head>
+<body><main>
+<h1>连接检测</h1>
+<p>用出现报错的同一台手机、同一个浏览器打开本页。约需 10 秒，检测完成后可复制结果发给卖家。</p>
+<p class="small">只检测连接，不需要兑换码，不读取或更改体验进度，也不会产生订单。</p>
+<button id="run" type="button">开始检测</button>
+<p id="status" role="status">尚未检测</p>
+<div class="panel"><ol id="results"></ol></div>
+<label for="report">检测报告（可长按全选复制）</label>
+<textarea id="report" readonly spellcheck="false"></textarea>
+<p><button id="copy" type="button">复制报告</button> <span id="copied" class="small" role="status"></span></p>
+<p><a id="health" href="/api/mirror/health" target="_blank" rel="noopener">单独打开服务检测</a> · <a href="/">返回体验首页</a></p>
+<noscript><p>此浏览器关闭了 JavaScript，无法开始剧情或检测。请在浏览器设置中启用，或用手机自带浏览器打开。</p></noscript>
+</main>
+<script>
+(function(){
+ 'use strict';
+ var base=/^(www\.)?baihuzigl\.com$/.test(location.hostname)?'https://api.baihuzigl.com':'';
+ var button=document.getElementById('run'),list=document.getElementById('results'),report=document.getElementById('report');
+ var status=document.getElementById('status'),rows=[],meta=[],remaining=0;
+ document.getElementById('health').href=base+'/api/mirror/health';
+ function refresh(){report.value=meta.concat(rows.map(function(r){return r.name+': '+r.result;})).join('\n');}
+ function errorText(error){return String((error&&error.name||'Error')+': '+(error&&error.message||error||'未知错误')).slice(0,200);}
+ function verify(code,body){if(code!==200)return 'HTTP '+code;try{if(JSON.parse(body).ok===true)return null;}catch(e){}return 'HTTP '+code+'，返回内容不是正常检测数据';}
+ function probe(spec,id,index){
+  var row=rows[index],node=document.createElement('li'),finished=false,timer,request,controller;
+  node.textContent=row.name+'：检测中';list.appendChild(node);
+  function done(error){if(finished)return;finished=true;clearTimeout(timer);row.result=error||'通过';node.className=error?'fail':'pass';node.textContent=row.name+'：'+row.result;remaining--;refresh();if(!remaining){button.disabled=false;status.textContent='检测完成，请把下方报告发给卖家。';}}
+  timer=setTimeout(function(){done('超时（8 秒）');if(controller)controller.abort();if(request)request.abort();},8000);
+  var url=base+'/api/mirror/health?probe='+encodeURIComponent(id)+'&test='+encodeURIComponent(spec.key);
+  var headers={},method=spec.post?'POST':'GET';
+  if(spec.post)headers['Content-Type']=spec.simple?'text/plain;charset=UTF-8':'application/json';
+  if(spec.auth)headers.Authorization='Bearer '+new Array(65).join('0');
+  try{
+   if(spec.xhr){
+    request=new XMLHttpRequest();request.open(method,url,true);
+    Object.keys(headers).forEach(function(key){request.setRequestHeader(key,headers[key]);});
+    request.onload=function(){done(verify(request.status,request.responseText));};
+    request.onerror=function(){done('XHR 网络错误，HTTP '+request.status);};
+    request.onabort=function(){done('XHR 请求被中止');};request.send(spec.post?'{}':null);
+   }else{
+    if(typeof window.fetch!=='function'){done('浏览器不支持 Fetch');return;}
+    var options={method:method,headers:headers};if(spec.post)options.body='{}';
+    if(spec.signal){if(typeof window.AbortController!=='function'){done('浏览器不支持 AbortController');return;}controller=new AbortController();options.signal=controller.signal;}
+    window.fetch(url,options).then(function(response){return response.text().then(function(body){done(verify(response.status,body));});}).catch(function(error){done(errorText(error));});
+   }
+  }catch(error){done(errorText(error));}
+ }
+ button.onclick=function(){
+  button.disabled=true;list.textContent='';document.getElementById('copied').textContent='';status.textContent='正在检测，最长约 10 秒…';
+  var id=Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);
+  var specs=[
+   {key:'fetch-get',name:'普通读取（Fetch）'},
+   {key:'fetch-json',name:'提交数据（Fetch JSON）',post:true},
+   {key:'fetch-signal',name:'带超时控制的提交（当前体验方式）',post:true,signal:true},
+   {key:'fetch-simple',name:'简单提交（Fetch）',post:true,simple:true},
+   {key:'fetch-auth',name:'带模拟凭证的提交（不使用真实凭证）',post:true,auth:true},
+   {key:'xhr-get',name:'兼容读取（XHR）',xhr:true},
+   {key:'xhr-json',name:'兼容提交（XHR）',post:true,xhr:true}
+  ];
+  rows=specs.map(function(s){return {name:s.name,result:'检测中'};});remaining=specs.length;
+  meta=['股市照妖镜连接检测 v1','编号：'+id,'时间：'+new Date().toISOString(),'页面：'+location.origin,'服务：'+(base||location.origin),'浏览器：'+navigator.userAgent,''];
+  refresh();specs.forEach(function(s,i){probe(s,id,i);});
+ };
+ document.getElementById('copy').onclick=function(){
+  report.focus();report.select();report.setSelectionRange(0,report.value.length);
+  var feedback=document.getElementById('copied');
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(report.value).then(function(){feedback.textContent='已复制';},function(){feedback.textContent='请长按报告，选择复制。';});}
+  else{try{feedback.textContent=document.execCommand('copy')?'已复制':'请长按报告，选择复制。';}catch(e){feedback.textContent='请长按报告，选择复制。';}}
+ };
+})();
+</script></body></html>

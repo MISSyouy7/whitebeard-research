@@ -55,7 +55,12 @@ export async function mirrorAPI(request,env){
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers});
   try{
     const db=dbOf(env),action=url.pathname.slice(API.length).replace(/\/$/,'');
-    if(action==='health'&&request.method==='GET'){await db.prepare('SELECT id FROM mirror_sessions LIMIT 1').first();return json({ok:true});}
+    if(action==='health'){
+      if(!['GET','POST'].includes(request.method))fail(405,'不支持的请求方式。');
+      // POST probes exercise the same transport as gameplay without creating a session or claiming a code.
+      if(request.method==='POST')await bodyOf(request);
+      await db.prepare('SELECT id FROM mirror_sessions LIMIT 1').first();return json({ok:true});
+    }
     if(action.startsWith('admin/')){
       await admin(db,request,env);
       if(action==='admin/codes'&&request.method==='GET'){

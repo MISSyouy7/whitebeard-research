@@ -50,7 +50,7 @@ export function NewsSection({ data, loading, error, refresh }: { data: MarketDat
         {buffer.shown.length ? <button className="lj-button lj-button-outline" onClick={reset}>清除新闻筛选</button> : <div className="lj-empty-actions"><button className="lj-button lj-button-outline" onClick={refresh} disabled={loading}>重新连接 ↻</button><Link className="lj-text-link" href="/research/">先读研究档案 →</Link></div>}
       </div>}
       {filtered.length > visible && <button className="lj-more" onClick={() => setVisible(value => value + 10)}>继续阅读 · 还有 {filtered.length - visible} 条 <span aria-hidden="true">↓</span></button>}
-      <p className="lj-source-note">分类按关键词筛选。{snapshotMode ? '定时同步，可能延迟。' : '每60秒检查，新快讯由你选择载入。'}</p>
+      <p className="lj-source-note">分类按关键词筛选。{snapshotMode ? '约每5分钟同步，页面每分钟检查更新。' : '每60秒检查，新快讯由你选择载入。'}</p>
     </div><aside className="lj-observer"><span className="lj-kicker">研究视角</span><h3>消息之外，<br />多问一步。</h3><p>真正值得关注的，<br />是新闻如何改变企业的生意。</p><ol><li><span>01</span><div><strong>发生了什么？</strong><small>回到公告和原始信息，确认事实。</small></div></li><li><span>02</span><div><strong>影响哪一环？</strong><small>沿着产业链，寻找需求与成本的变化。</small></div></li><li><span>03</span><div><strong>怎样被验证？</strong><small>让订单、利润和现金流回答问题。</small></div></li></ol><Link href="/research/" className="lj-observer-link">阅读研究档案 <span aria-hidden="true">↗</span></Link></aside></div>
   </section>;
 }

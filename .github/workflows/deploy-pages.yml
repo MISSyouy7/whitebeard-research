@@ -43,10 +43,22 @@ jobs:
       - name: Check application rules
         run: pnpm test
 
+      - name: Restore latest public market snapshot
+        shell: bash
+        run: |
+          # Deploy only reads the data branch; update-market is its sole writer.
+          # This preserves useful fallback data without racing scheduled updates.
+          if git fetch --no-tags origin refs/heads/market-data:refs/remotes/origin/market-data && git show origin/market-data:market.json > "$RUNNER_TEMP/restored-market.json"; then
+            cp "$RUNNER_TEMP/restored-market.json" public/data/market.json
+            echo 'Restored latest public snapshot before collecting deployment data.'
+          else
+            echo '::notice::No public snapshot could be restored. Initial deployment requires successful feed collection.'
+          fi
+
       - name: Generate research and initial market snapshot
         run: |
           pnpm content:generate
-          pnpm market:update
+          node scripts/update-market-data.mjs --require-data
 
       - name: Build static site
         shell: bash

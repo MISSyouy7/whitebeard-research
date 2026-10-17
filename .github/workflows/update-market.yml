@@ -1,8 +1,16 @@
 name: Update public market data
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-market.yml'
+      - '.github/workflows/deploy-pages.yml'
+      - 'scripts/update-market-data.mjs'
+      - 'server/**'
+      - 'public/data/market.json'
   schedule:
-    - cron: '7,22,37,52 * * * *'
+    - cron: '2-57/5 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -24,34 +32,50 @@ jobs:
       - name: Restore last successful public snapshot
         shell: bash
         run: |
-          if git fetch origin market-data:refs/remotes/origin/market-data; then
-            git show origin/market-data:market.json > "$RUNNER_TEMP/market.json"
+          if git fetch --no-tags origin refs/heads/market-data:refs/remotes/origin/market-data && git show origin/market-data:market.json > "$RUNNER_TEMP/market.json"; then
+            echo 'Restored previous public snapshot; successful feed timestamps will be preserved on failure.'
+          else
+            git show HEAD:public/data/market.json > "$RUNNER_TEMP/market.json"
+            echo '::notice::No previous public snapshot could be restored. Seeded the initial update with the committed public snapshot so upstream failures retain its real data and timestamps.'
           fi
       - name: Collect public feeds
         run: node scripts/update-market-data.mjs "$RUNNER_TEMP/market.json"
       - name: Publish data branch
         shell: bash
         run: |
+          # Build a separate index from an empty tree. Only these two public
+          # files can enter the data branch; checkout files and credentials stay out.
+          export GIT_INDEX_FILE="$RUNNER_TEMP/market-publish.index"
+          trap 'rm -f "$GIT_INDEX_FILE"' EXIT
+          rm -f "$GIT_INDEX_FILE"
+          git read-tree --empty
+          MARKET_BLOB="$(git hash-object -w -- "$RUNNER_TEMP/market.json")"
+          IGNORE_BLOB="$(printf '%s\n' '*' '!.gitignore' '!market.json' | git hash-object -w --stdin)"
+          git update-index --add --cacheinfo "100644,$MARKET_BLOB,market.json"
+          git update-index --add --cacheinfo "100644,$IGNORE_BLOB,.gitignore"
+          MARKET_TREE="$(git write-tree)"
+          PARENT_ARGS=()
           if git show-ref --verify --quiet refs/remotes/origin/market-data; then
-            git switch --force-create market-data origin/market-data
-          else
-            git switch --orphan market-data
+            PREVIOUS_COMMIT="$(git rev-parse refs/remotes/origin/market-data)"
+            if [[ "$MARKET_TREE" == "$(git rev-parse "${PREVIOUS_COMMIT}^{tree}")" ]]; then
+              echo 'Public snapshot is unchanged.'
+              exit 0
+            fi
+            PARENT_ARGS=(-p "$PREVIOUS_COMMIT")
           fi
-          cp "$RUNNER_TEMP/market.json" market.json
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add market.json
-          if ! git diff --cached --quiet; then
-            git commit -m 'Update public financial feed'
-            git push origin HEAD:market-data
-          fi
+          MARKET_COMMIT="$(git commit-tree "$MARKET_TREE" "${PARENT_ARGS[@]}" -m 'Update public financial feed')"
+          # A regular fast-forward push also rejects any unexpected outside writer.
+          git push origin "$MARKET_COMMIT:refs/heads/market-data"
       - name: Report upstream availability
         run: |
           node --input-type=module - "$RUNNER_TEMP/market.json" <<'JS'
           import { readFileSync } from 'node:fs';
+          import { snapshotHealth } from './scripts/update-market-data.mjs';
           const data = JSON.parse(readFileSync(process.argv[2], 'utf8'));
-          if (data.news.status !== 'ok' || !['ok', 'empty'].includes(data.limitUp.status)) {
-            console.error('::error::Market source unavailable. Any last successful data retains its original timestamp.');
+          if (!snapshotHealth(data).fresh) {
+            console.error('::error::A market feed did not refresh. The public snapshot was still published with any last successful data and its original timestamp.');
             process.exitCode = 1;
           }
           JS

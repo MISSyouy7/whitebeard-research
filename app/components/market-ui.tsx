@@ -7,7 +7,7 @@ export const stamp = (value: string | null, full = true) => value ? new Intl.Dat
 }).format(new Date(value)) : '尚未更新';
 export const money = (value: number | null) => value === null ? '—' : value >= 1e8 ? `${(value / 1e8).toFixed(2)} 亿` : `${(value / 1e4).toFixed(0)} 万`;
 export const change = (value: number | null) => value === null ? '—' : `${value >= 0 ? '+' : ''}${value.toFixed(2)}%`;
-export const feedIsOld = (at: string | null, mode: string) => !at || Date.now() - Date.parse(at) > (mode === 'snapshot' ? 40 : 5) * 60_000;
+export const feedIsOld = (at: string | null, mode: string) => !at || Date.now() - Date.parse(at) > (mode === 'snapshot' ? 20 : 5) * 60_000;
 
 export function emptyPool(previous: MarketData['limitUp']): MarketData['limitUp'] {
   return { ...previous, status: 'unavailable', tradeDate: null, fetchedAt: null, stocks: [], summary: null, sectors: [], ladder: [], message: '涨停数据暂时未能更新，可前往来源查看。' };

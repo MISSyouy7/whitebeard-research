@@ -4,6 +4,7 @@ import type { MarketData } from '../../lib/market-types';
 import { NewsSection } from './news-feed';
 import { LimitSection } from './limit-review';
 import { emptyPool, snapshotMode } from './market-ui';
+import { MarketOverview } from './market-overview';
 
 const basePath = process.env.NEXT_PUBLIC_PAGES_BASE_PATH || '';
 const snapshotURL = process.env.NEXT_PUBLIC_MARKET_SNAPSHOT_URL || 'https://raw.githubusercontent.com/MISSyouy7/whitebeard-research/market-data/market.json';
@@ -69,6 +70,7 @@ export function MarketDashboard() {
   }, [requestedDate, attempt]);
   const refresh = useCallback(() => setAttempt(value => value + 1), []);
   return <>
+    <MarketOverview data={data} loading={loading} refresh={refresh} />
     <NewsSection data={data} loading={loading} error={error} refresh={refresh} />
     <LimitSection data={data} loading={loading} refresh={refresh} requestedDate={requestedDate} setRequestedDate={date => { setData(previous => previous ? { ...previous, limitUp: emptyPool(previous.limitUp) } : null); setRequestedDate(date); }} today={today} />
   </>;

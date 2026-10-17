@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { CopyAccount, SiteNavigation } from './navigation';
+import { SiteSearch } from './site-search';
 
 export function Brand({ small = false }: { small?: boolean }) {
   return <Link href="/" className={`lj-brand${small ? ' lj-brand-small' : ''}`} aria-label="路见资本首页">
@@ -10,6 +11,7 @@ export function Brand({ small = false }: { small?: boolean }) {
 export function SiteHeader() {
   return <header className="lj-header"><div className="lj-wrap lj-nav-inner"><Brand />
     <SiteNavigation />
+    <SiteSearch />
     <Link className="lj-nav-cta" href="/#follow">关注路见 <span aria-hidden="true">↗</span></Link>
   </div></header>;
 }

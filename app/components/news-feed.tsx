@@ -41,16 +41,16 @@ export function NewsSection({ data, loading, error, refresh }: { data: MarketDat
     <div className="lj-news-layout"><div className="lj-news-main">
       <div className="lj-news-search-row"><label className="lj-search"><span aria-hidden="true">⌕</span><input type="search" aria-label="搜索新闻" value={query} onChange={event => { setQuery(event.target.value); setVisible(7); }} placeholder="搜索公司、产业或关键词" />{query && <button className="lj-clear-input" onClick={() => setQuery('')} aria-label="清空新闻搜索">×</button>}</label><label className="lj-important-switch"><input type="checkbox" checked={important} onChange={event => { setImportant(event.target.checked); setVisible(7); }} />只看要闻</label></div>
       <div className="lj-tabs" aria-label="新闻分类">{Object.keys(FILTERS).map(item => <button key={item} aria-pressed={category === item} onClick={() => { setCategory(item); setVisible(7); }}>{item}</button>)}</div>
-      <div className="lj-feed-meta"><span>北京时间 · {data?.news.fetchedAt ? `更新于 ${stamp(data.news.fetchedAt, false)}` : '来源：东方财富'}</span><span role="status">{buffer.shown.length ? `${filtered.length} 条${hasFilters ? '匹配快讯' : '快讯'}` : '7×24 财经快讯'}</span></div>
+      <div className="lj-feed-meta"><span>北京时间 · {data?.news.fetchedAt ? `更新于 ${stamp(data.news.fetchedAt, false)}` : '等待更新'}</span><span role="status">{buffer.shown.length ? `${filtered.length} 条${hasFilters ? '匹配快讯' : '快讯'}` : '7×24 财经快讯'}</span></div>
       {newCount > 0 && <div className="lj-news-arrivals" role="status"><button onClick={() => { setBuffer({ source: incoming, shown: incoming }); setVisible(7); }}>{newCount} 条新快讯 · 点击载入 <span aria-hidden="true">↑</span></button></div>}
       {stale && <p className="lj-data-notice">当前为上次获取的快讯。请核对发布时间，也可点击原文确认。</p>}
       {filtered.length > 0 ? <ol className="lj-news-list">{filtered.slice(0, visible).map(item => <NewsRow key={item.id} item={item} />)}</ol> : loading && !buffer.shown.length ? <LoadingRows label="正在获取财经快讯" /> : <div className="lj-news-empty">
         <span className="lj-empty-icon" aria-hidden="true">{buffer.shown.length ? '⌕' : '≋'}</span><h3>{buffer.shown.length ? '没有匹配的快讯' : '快讯暂时未能更新'}</h3>
-        <p>{buffer.shown.length ? '试试更短的关键词，或清除分类和要闻条件。' : '可重新连接，或直接阅读来源网站的最新快讯。'}</p>
-        {buffer.shown.length ? <button className="lj-button lj-button-outline" onClick={reset}>清除新闻筛选</button> : <div className="lj-empty-actions"><button className="lj-button lj-button-outline" onClick={refresh} disabled={loading}>重新连接 ↻</button><SourceLink href="https://kuaixun.eastmoney.com/">查看原始快讯</SourceLink></div>}
+        <p>{buffer.shown.length ? '试试更短的关键词，或清除分类和要闻条件。' : '连接暂时中断，请稍后重试。'}</p>
+        {buffer.shown.length ? <button className="lj-button lj-button-outline" onClick={reset}>清除新闻筛选</button> : <div className="lj-empty-actions"><button className="lj-button lj-button-outline" onClick={refresh} disabled={loading}>重新连接 ↻</button><Link className="lj-text-link" href="/research/">先读研究档案 →</Link></div>}
       </div>}
       {filtered.length > visible && <button className="lj-more" onClick={() => setVisible(value => value + 10)}>继续阅读 · 还有 {filtered.length - visible} 条 <span aria-hidden="true">↓</span></button>}
-      <p className="lj-source-note">标题与摘要来自东方财富；分类按关键词筛选。{snapshotMode ? '定时同步，可能延迟。' : '每60秒检查，新快讯由你选择载入。'}</p>
+      <p className="lj-source-note">分类按关键词筛选。{snapshotMode ? '定时同步，可能延迟。' : '每60秒检查，新快讯由你选择载入。'}</p>
     </div><aside className="lj-observer"><span className="lj-kicker">THE RESEARCH LENS</span><h3>消息之外，<br />多问一步。</h3><p>真正值得关注的，<br />是新闻如何改变企业的生意。</p><ol><li><span>01</span><div><strong>发生了什么？</strong><small>回到公告和原始信息，确认事实。</small></div></li><li><span>02</span><div><strong>影响哪一环？</strong><small>沿着产业链，寻找需求与成本的变化。</small></div></li><li><span>03</span><div><strong>怎样被验证？</strong><small>让订单、利润和现金流回答问题。</small></div></li></ol><Link href="/research/" className="lj-observer-link">阅读研究档案 <span aria-hidden="true">↗</span></Link></aside></div>
   </section>;
 }

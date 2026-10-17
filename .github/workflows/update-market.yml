@@ -1,0 +1,57 @@
+name: Update public market data
+
+on:
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: public-market-feed
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Restore last successful public snapshot
+        shell: bash
+        run: |
+          if git fetch origin market-data:refs/remotes/origin/market-data; then
+            git show origin/market-data:market.json > "$RUNNER_TEMP/market.json"
+          fi
+      - name: Collect public feeds
+        run: node scripts/update-market-data.mjs "$RUNNER_TEMP/market.json"
+      - name: Publish data branch
+        shell: bash
+        run: |
+          if git show-ref --verify --quiet refs/remotes/origin/market-data; then
+            git switch --force-create market-data origin/market-data
+          else
+            git switch --orphan market-data
+          fi
+          cp "$RUNNER_TEMP/market.json" market.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add market.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Update public financial feed'
+            git push origin HEAD:market-data
+          fi
+      - name: Report upstream availability
+        run: |
+          node --input-type=module - "$RUNNER_TEMP/market.json" <<'JS'
+          import { readFileSync } from 'node:fs';
+          const data = JSON.parse(readFileSync(process.argv[2], 'utf8'));
+          if (data.news.status !== 'ok' || !['ok', 'empty'].includes(data.limitUp.status)) {
+            console.error('::error::Market source unavailable. Any last successful data retains its original timestamp.');
+            process.exitCode = 1;
+          }
+          JS

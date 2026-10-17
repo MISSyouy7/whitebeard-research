@@ -1,11 +1,9 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata } from 'next';
+import './globals.css';
 export const metadata: Metadata = {
- title: "股市照妖镜｜第一季：我不是股神",
- description: "十万虚拟本金，十五次情境选择。走过一段虚构行情，生成你的股市角色卡与本局复盘。",
- icons: { icon: "/favicon.svg" },
- openGraph: { title: "股市照妖镜", description: "十五道情境选择，照出三十种股民精神状态。", locale: "zh_CN", type: "website" },
+ title: '路见资本｜看见产业，理解资本',
+ description: '路见资本独立研究：热点新闻、A股涨停复盘与产业洞察。以事实为起点，持续观察产业周期、资金迁徙和市场情绪。',
+ icons: { icon: '/favicon.svg' },
+ openGraph: { title: '路见资本｜看见产业，理解资本', description: '于喧嚣处，看见资本的方向。热点新闻、涨停复盘、产业研究。', locale: 'zh_CN', type: 'website' },
 };
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
- return <html lang="zh-CN"><body>{children}</body></html>;
-}
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="zh-CN"><body>{children}</body></html>; }

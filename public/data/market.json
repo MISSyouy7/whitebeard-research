@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "mode": "snapshot",
+  "checkedAt": null,
+  "refreshSeconds": 900,
+  "news": {
+    "status": "unavailable",
+    "source": {
+      "name": "东方财富 · 7×24快讯",
+      "url": "https://kuaixun.eastmoney.com/"
+    },
+    "fetchedAt": null,
+    "latestAt": null,
+    "items": [],
+    "message": "快讯暂时未能更新，可前往来源查看。"
+  },
+  "limitUp": {
+    "status": "unavailable",
+    "source": {
+      "name": "东方财富 · 涨停股池",
+      "url": "https://quote.eastmoney.com/ztb/detail#type=ztgc"
+    },
+    "scope": "按来源涨停股池口径统计；不含ST、科创板及未开板新股，不代表全市场。行业为来源行业分类，不等同于涨停原因。",
+    "fetchedAt": null,
+    "tradeDate": null,
+    "stocks": [],
+    "summary": null,
+    "sectors": [],
+    "ladder": [],
+    "message": "涨停数据暂时未能更新，可前往来源查看。"
+  }
+}

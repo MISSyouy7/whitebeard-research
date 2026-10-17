@@ -40,8 +40,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Check simulation rules
+      - name: Check application rules
         run: pnpm test
+
+      - name: Generate research and initial market snapshot
+        run: |
+          pnpm content:generate
+          pnpm market:update
 
       - name: Build static site
         shell: bash

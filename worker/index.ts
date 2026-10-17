@@ -1,4 +1,5 @@
 import { mirrorAPI } from '../server/mirror-api.mjs';
+import { marketAPI } from '../server/market-data.mjs';
 /** Cloudflare Worker entry point for the vinext-starter template. */
 import { handleImageOptimization, DEFAULT_DEVICE_SIZES, DEFAULT_IMAGE_SIZES } from "vinext/server/image-optimization";
 import handler from "vinext/server/app-router-entry";
@@ -28,6 +29,8 @@ interface ExecutionContext {
 
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    const market = await marketAPI(request);
+    if (market) return market;
     const api = await mirrorAPI(request, env);
     if (api) return api;
     const url = new URL(request.url);

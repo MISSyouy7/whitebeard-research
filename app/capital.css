@@ -13,3 +13,343 @@
 @media(prefers-reduced-motion:reduce){.lj-site *{scroll-behavior:auto!important;transition:none!important}}
 
 .lj-ladder button[aria-pressed=true]{outline:1px solid #d6bd84;outline-offset:4px}
+
+/* UX revision: earlier information, persistent orientation and touch-first controls. */
+.lj-site { --lj-muted: #586957; }
+.lj-site .lj-header { height: 84px; position: sticky; top: 0; z-index: 40; background: #f5f4eef7; backdrop-filter: blur(16px); }
+.lj-site .lj-nav-inner .lj-mobile-nav { display: none; }
+.lj-desktop-nav a[aria-current="location"] { font-weight: 600; }
+.lj-desktop-nav a[aria-current="location"]::after { right: 0; }
+.lj-site .lj-nav-cta { min-height: 44px; align-items: center; }
+.lj-site :is(section,footer), .lj-site #limit-results { scroll-margin-top: 105px; }
+.lj-site .lj-kicker { color: #6f724c; }
+.lj-hero { grid-template-columns: 1.25fr 1fr; gap: 64px; padding-block: 32px 36px; }
+.lj-hero-copy { padding-top: 13px; }
+.lj-site .lj-hero h1 { font-size: clamp(38px, 3.7vw, 54px); margin-block: 18px 13px; line-height: 1.5; }
+.lj-hero h1 span { color: #876931; }
+.lj-site .lj-hero-description { font-size: 14px; line-height: 1.9; }
+.lj-hero-visual { min-height: 350px; }
+.lj-hero-actions { margin-top: 24px; gap: 16px; }
+.lj-site .lj-button { min-height: 48px; }
+.lj-site .lj-button-outline { background: transparent; color: inherit; border-color: #adb9a5; }
+.lj-site .lj-button-outline:hover { background: #25452f08; }
+.lj-hero-foot { padding-top: 23px; font-size: 12px; letter-spacing: 1px; }
+.lj-art-bottom>span { font-size: 22px; }
+.lj-news { border-top: 1px solid var(--lj-line); padding-block: 38px 58px; }
+.lj-news-layout { gap: 44px; }
+.lj-site .lj-section-title h2 { font-size: 31px; }
+.lj-section-title { margin-bottom: 24px; }
+.lj-feed-state { font-size: 12px; color: #606b58; }
+.lj-site .lj-refresh { min-height: 44px; padding: 6px 14px; font-size: 12px; }
+.lj-news-search-row { display: flex; gap: 20px; align-items: center; margin-bottom: 9px; }
+.lj-site .lj-search { max-width: none; min-height: 46px; gap: 11px; padding: 0 12px; }
+.lj-search input { font-size: 14px; min-height: 44px; }
+.lj-search input::placeholder { color: #65755e; }
+.lj-news-search-row>.lj-search { flex: 1; }
+.lj-site .lj-clear-input { width: 44px; height: 44px; flex-shrink: 0; border: 0; background: none; color: inherit; font-size: 22px; margin-right: -12px; }
+.lj-important-switch { display: flex; align-items: center; gap: 8px; min-height: 44px; cursor: pointer; font-size: 13px; white-space: nowrap; }
+.lj-important-switch input { width: 17px; height: 17px; accent-color: #164c39; }
+.lj-site .lj-tabs button { font-size: 13px; min-height: 44px; }
+.lj-feed-meta { font-size: 12px; color: #63705b; gap: 12px; }
+.lj-site .lj-news-item h3 { font-size: 16px; line-height: 1.9; }
+.lj-news-time time { font-size: 15px; }
+.lj-news-time small { font-size: 11px; color: #63705b; }
+.lj-site .lj-news-detail { font-size: 14px; color: #52664c; }
+.lj-site .lj-news-detail summary { font-size: 12px; color: #56694e; min-height: 44px; padding-block: 10px; width: fit-content; }
+.lj-news-detail .lj-text-link { min-height: 44px; }
+.lj-news-arrivals button { width: 100%; min-height: 46px; border: 1px solid #9eaf98; background: #e4ecdf; color: #244c32; font: inherit; font-size: 13px; }
+.lj-news-arrivals button span { margin-left: 10px; }
+.lj-site .lj-more { min-height: 46px; font-size: 13px; align-items: center; }
+.lj-site .lj-source-note { font-size: 12px; color: #606c58; }
+.lj-important { font-size: 11px; color: #785d2f; border-color: #a28655; }
+.lj-news-empty { min-height: 245px; padding: 29px 18px 30px; }
+.lj-news-empty p { font-size: 13px; color: #5d6b55; margin: 12px 0 22px; }
+.lj-empty-icon { color: #60765b; font-size: 35px; }
+.lj-empty-actions { display: flex; align-items: center; justify-content: center; gap: 22px; flex-wrap: wrap; }
+.lj-site .lj-text-link { min-height: 44px; font-size: 13px; }
+.lj-observer .lj-kicker, .lj-observer li>span { color: #6d623e; }
+.lj-observer>p, .lj-observer li small { font-size: 12px; color: #52624b; }
+.lj-observer-link { min-height: 44px; align-items: center; font-size: 13px; }
+.lj-observer ol { margin-block: 23px 8px; }
+.lj-loading-rows { padding: 10px 0; }
+.lj-loading-rows>div { position: relative; padding: 20px 0 20px 80px; border-top: 1px solid var(--lj-line); height: 98px; }
+.lj-loading-rows i { position: absolute; left: 0; width: 48px; height: 12px; background: #64725c18; }
+.lj-loading-rows span:not(.sr-only) { display: block; height: 11px; width: 85%; background: #64725c18; margin-bottom: 15px; }
+.lj-loading-rows span:last-child { width: 59%; }
+.lj-limit-section { --lj-muted: #bfcebb; padding-block: 48px 39px; }
+.lj-limit-section .lj-kicker { color: #d6c08c; }
+.lj-review-dateline { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 16px 0; border-block: 1px solid #ffffff25; margin-top: 23px; }
+.lj-review-dateline>div { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; }
+.lj-review-dateline>div>span { font-size: 12px; color: #bed0b9; }
+.lj-review-dateline strong { font: 18px 'Courier New',monospace; color: #f4ebd3; }
+.lj-review-dateline small { font-size: 12px; color: #c4d0b8; }
+.lj-date-picker { margin-left: auto; font-size: 12px; }
+.lj-date-picker input { min-height: 44px; width: 158px; font-size: 13px; }
+.lj-stat-grid { border-top: 0; margin-top: 0; }
+.lj-stat-grid>div>span { font-size: 13px; color: #bdcdb6; }
+.lj-stat-grid strong { font-size: 45px; }
+.lj-stat-grid strong small { font-size: 12px; }
+.lj-market-structure { gap: 55px; }
+.lj-site .lj-market-structure h3 { font-size: 16px; margin-bottom: 12px; }
+.lj-market-structure h3 small { font-size: 12px; color: #bdcdb6; }
+.lj-site .lj-ladder button { min-height: 44px; }
+.lj-ladder b, .lj-ladder strong { font-size: 13px; }
+.lj-ladder small { font-size: 11px; }
+.lj-site .lj-sectors button { min-height: 48px; font-size: 13px; }
+.lj-sectors small { font-size: 11px; color: #bdcdb6; }
+.lj-pool-tools { display: grid; grid-template-columns: auto 1fr auto; padding-top: 24px; gap: 24px; }
+.lj-pool-tools .lj-tabs { min-height: 46px; }
+.lj-site .lj-stock-search { width: 100%; background: #ffffff05; min-width: 0; }
+.lj-stock-search input::placeholder { color: #bccdb5; }
+.lj-pool-filters { gap: 10px; }
+.lj-pool-filters select { min-height: 46px; font-size: 12px; color: #e0e8d7; max-width: 150px; }
+.lj-filter-feedback { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 20px; min-height: 60px; padding-block: 8px; }
+.lj-filter-feedback>span { color: #bed0b9; font-size: 13px; }
+.lj-filter-feedback>span strong { color: #f1e4c0; font-size: 16px; }
+.lj-filter-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.lj-site .lj-filter-chips button { display: flex; gap: 12px; align-items: center; min-height: 44px; border: 1px solid #cbb97e70; background: #dcc99012; color: #f0e3be; padding: 7px 12px; font-size: 12px; max-width: 100%; overflow-wrap: anywhere; }
+.lj-filter-chips button span { font-size: 18px; }
+.lj-site .lj-filter-chips .lj-reset-filters { border: 0; background: none; color: #e3e8d8; text-decoration: underline; text-underline-offset: 4px; }
+.lj-site .lj-pool-table { margin-top: 0; }
+.lj-pool-table th { font-size: 12px; color: #bdcdb6; }
+.lj-pool-table td { font-size: 14px; padding-block: 20px; }
+.lj-pool-table td:first-child strong { font-size: 15px; }
+.lj-pool-table td:first-child small { font-size: 12px; color: #bdcdb6; }
+.lj-board-badge { font-size: 12px; }
+.lj-site .lj-inline-button { min-height: 44px; padding-inline: 4px; font-size: 12px; }
+.lj-pool-bottom { align-items: center; font-size: 12px; padding-top: 12px; }
+.lj-pool-bottom>div { gap: 18px; }
+.lj-site .lj-export-feedback { color: #d5c28a; font-size: 12px; min-height: 0; }
+.lj-export-feedback:not(:empty) { margin-top: 10px; }
+.lj-data-method { border-top: 1px solid #ffffff25; margin-top: 22px; }
+.lj-site .lj-data-method summary { display: flex; justify-content: space-between; align-items: center; min-height: 50px; font-size: 12px; color: #c9d5c2; list-style: none; }
+.lj-data-method summary::-webkit-details-marker { display: none; }
+.lj-data-method[open] summary span { transform: rotate(45deg); }
+.lj-data-method p { color: #c0cdb7; font-size: 12px; line-height: 1.9; padding-block: 4px 14px; }
+.lj-site .lj-data-notice { font-size: 13px; color: #765b2e; }
+.lj-limit-section .lj-data-notice { color: #f0dca8; }
+.lj-pool-unavailable { display: flex; align-items: center; justify-content: space-between; gap: 35px; padding: 36px 0 24px; text-align: left; border: 0; }
+.lj-pool-unavailable h3 { margin-top: 15px!important; }
+.lj-pool-unavailable .lj-empty-actions { display: flex; flex-direction: column; align-items: stretch; gap: 5px; min-width: 165px; }
+.lj-pool-unavailable .lj-empty-actions .lj-text-link { justify-content: center; }
+.lj-pool-empty p { font-size: 13px; line-height: 1.9; color: #c0cdb7; max-width: 550px; margin-bottom: 0; }
+.lj-pool-empty>.lj-button { margin-top: 18px; }
+.lj-limit-section .lj-loading-rows :is(i,span:not(.sr-only)) { background: #ccd9bc18; }
+.lj-mobile-stocks { display: none; }
+.lj-research { padding-block: 53px; }
+.lj-card-top, .lj-card-bottom { font-size: 12px; color: #5e7055; }
+.lj-research-card p { font-size: 14px; line-height: 1.9; color: #53664b; }
+.lj-about>div>p { font-size: 14px; color: #53664b; }
+.lj-about h2 span { color: #657657; }
+.lj-principles { font-size: 12px; }
+.lj-principles b { color: #806332; }
+.lj-footer-top p, .lj-follow small, .lj-footer-bottom { color: #54694c; font-size: 12px; }
+.lj-copy-account { margin-top: 3px; }
+.lj-site .lj-copy-account button { border: 1px solid #9fb095; background: transparent; color: #254f30; min-height: 44px; padding: 9px 16px; font-size: 12px; }
+.lj-copy-account button span { margin-left: 17px; }
+.lj-copy-account>span { display: block!important; font-size: 12px; margin-top: 8px!important; color: #385f36; }
+.lj-copy-account>span:empty { display: none!important; }
+.lj-footer-bottom a { display: inline-flex; align-items: center; min-height: 44px; }
+@media(max-width:1100px) {
+  .lj-hero { gap: 30px; }
+  .lj-hero-visual { min-height: 345px; }
+  .lj-site .lj-hero h1 { font-size: 40px; }
+  .lj-pool-tools { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .lj-pool-filters { grid-column: 1/-1; justify-content: flex-end; }
+  .lj-news-layout { grid-template-columns: minmax(0,1fr) 270px; gap: 30px; }
+}
+@media(max-width:780px) {
+  .lj-site { padding-bottom: calc(69px + env(safe-area-inset-bottom, 0px)); }
+  .lj-site .lj-header { height: 76px; }
+  .lj-site .lj-nav-inner { flex-wrap: nowrap; padding-top: 0; }
+  .lj-site .lj-nav-inner .lj-desktop-nav { display: none; }
+  .lj-site .lj-nav-cta { display: flex!important; min-height: 44px; font-size: 12px; gap: 10px; padding: 8px 12px; }
+  .lj-site .lj-nav-inner .lj-mobile-nav { display: grid; grid-template-columns: repeat(4,1fr); position: fixed; left: 0; right: 0; bottom: 0; top: auto; width: 100%; margin: 0; padding: 7px 10px calc(7px + env(safe-area-inset-bottom, 0px)); gap: 0; background: #f6f6effc; border-top: 1px solid #bfcbb6; box-shadow: 0 -5px 24px #183c2b09; }
+  .lj-mobile-nav a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 3px!important; min-height: 48px; color: #5f7255!important; border-radius: 4px; }
+  .lj-mobile-nav a[aria-current="location"] { color: #133f2d!important; background: #e5ecde; font-weight: 600; }
+  .lj-mobile-nav a:after { display: none; }
+  .lj-mobile-nav a svg { width: 22px; height: 22px; }
+  .lj-site .lj-mobile-nav span { font-size: 11px; color: inherit; line-height: 1.4; }
+  .lj-site :is(section,footer), .lj-site #limit-results { scroll-margin-top: 92px; }
+  .lj-hero { display: block; padding-top: 24px; padding-bottom: 30px; }
+  .lj-hero-copy { padding: 0; }
+  .lj-hero-visual { display: none; }
+  .lj-site .lj-hero h1 { font-size: clamp(32px,8vw,42px); margin: 18px 0 14px; line-height: 1.55; letter-spacing: .5px; }
+  .lj-hero-copy>.lj-kicker { font-size: 9px; letter-spacing: .9px; line-height: 1.7; }
+  .lj-site .lj-hero-description { font-size: 14px!important; letter-spacing: 0; line-height: 1.85!important; }
+  .lj-hero-actions { width: 100%; gap: 10px; margin-top: 22px; }
+  .lj-hero-actions .lj-button { flex: 1; font-size: 13px; gap: 13px; min-height: 48px; padding-inline: 10px; }
+  .lj-hero-foot { padding-top: 20px; font-size: 11px; }
+  .lj-news { padding-block: 28px 36px; }
+  .lj-site .lj-section-title h2 { font-size: 28px; }
+  .lj-site .lj-section-title .lj-kicker { font-size: 9px; }
+  .lj-section-title { margin-bottom: 20px; }
+  .lj-live-controls,.lj-limit-controls { gap: 8px; }
+  .lj-feed-state { font-size: 11px; }
+  .lj-site .lj-refresh { padding: 6px 10px; font-size: 12px; }
+  .lj-news-layout { display: block; }
+  .lj-observer { display: none; }
+  .lj-news-search-row { gap: 10px; margin-bottom: 7px; }
+  .lj-site .lj-search { min-height: 48px; padding-inline: 10px; }
+  .lj-search input { min-height: 46px; font-size: 16px; }
+  .lj-clear-input { margin-right: -10px!important; }
+  .lj-important-switch { font-size: 12px; gap: 6px; }
+  .lj-important-switch input { width: 16px; height: 16px; }
+  .lj-news-search-row .lj-search>span { display: none; }
+  .lj-site .lj-tabs { gap: 18px; }
+  .lj-site .lj-tabs button { font-size: 13px; }
+  .lj-feed-meta { font-size: 11px; padding-block: 13px; flex-wrap: wrap; gap: 6px; }
+  .lj-site .lj-news-item h3 { font-size: 15px; }
+  .lj-news-time time { font-size: 13px; }
+  .lj-news-time small { font-size: 11px; }
+  .lj-site .lj-news-detail summary { min-height: 44px; font-size: 12px; }
+  .lj-site .lj-news-detail p { font-size: 14px; }
+  .lj-site .lj-source-note { font-size: 12px; }
+  .lj-news-empty { min-height: 225px; padding: 23px 8px; }
+  .lj-site .lj-news-empty h3 { font-size: 21px; }
+  .lj-news-empty p { font-size: 13px; }
+  .lj-empty-actions { gap: 16px; }
+  .lj-site .lj-button { min-height: 46px; font-size: 13px; }
+  .lj-site .lj-text-link { font-size: 13px; }
+  .lj-limit-section { padding-block: 34px 24px; }
+  .lj-limit-section .lj-section-title { flex-wrap: nowrap; align-items: flex-end; }
+  .lj-limit-controls { flex-wrap: nowrap; }
+  .lj-review-dateline { flex-wrap: wrap; justify-content: flex-start; gap: 13px; padding-block: 17px; margin-top: 18px; }
+  .lj-review-dateline>div { width: 100%; gap: 8px 12px; }
+  .lj-review-dateline>div>span { font-size: 12px; }
+  .lj-review-dateline strong { font-size: 19px; }
+  .lj-review-dateline small { width: 100%; font-size: 12px; }
+  .lj-date-picker { margin-left: 0; gap: 12px; }
+  .lj-date-picker span { display: inline; }
+  .lj-date-picker input { font-size: 16px; width: 164px; min-height: 44px; padding: 7px; }
+  .lj-review-dateline .lj-inline-button { font-size: 12px; margin-left: auto; }
+  .lj-stat-grid>div { padding: 20px 0 20px 12px; }
+  .lj-stat-grid>div>span { font-size: 12px; }
+  .lj-stat-grid strong { font-size: 34px; }
+  .lj-stat-grid strong small { font-size: 11px; margin-left: 5px; }
+  .lj-market-structure { display: grid; grid-template-columns: 1fr; gap: 24px; padding-block: 24px; }
+  .lj-site .lj-market-structure h3 { font-size: 15px; }
+  .lj-market-structure h3 small { font-size: 11px; margin-left: 10px; }
+  .lj-ladder { gap: 0; }
+  .lj-site .lj-ladder button { min-height: 44px; }
+  .lj-ladder b,.lj-ladder strong { font-size: 13px; }
+  .lj-sectors { grid-template-columns: 1fr 1fr; gap: 9px; }
+  .lj-site .lj-sectors button { font-size: 13px; padding: 10px; min-height: 46px; }
+  .lj-sectors b { font-size: 19px; }
+  .lj-pool-tools { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 22px; }
+  .lj-pool-tools .lj-tabs { width: 100%; order: 0; border-bottom: 1px solid #ffffff20; }
+  .lj-pool-tools>.lj-search { width: 100%; order: 1; flex: auto; }
+  .lj-pool-filters { order: 2; width: 100%; margin: 0; gap: 10px; }
+  .lj-pool-filters>label { width: 50%; }
+  .lj-pool-filters select { width: 100%; max-width: none; font-size: 16px; min-height: 46px; padding: 8px; }
+  .lj-filter-feedback { gap: 5px; padding-top: 14px; }
+  .lj-filter-feedback>span { font-size: 13px; }
+  .lj-filter-chips { width: 100%; }
+  .lj-desktop-stocks { display: none; }
+  .lj-mobile-stocks { display: grid; list-style: none; gap: 12px; margin: 10px 0 0; padding: 0; }
+  .lj-stock-card { background: #ffffff04; border: 1px solid #ffffff24; padding: 18px 16px 0; }
+  .lj-stock-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .lj-stock-card-head>a { min-height: 44px; }
+  .lj-stock-card-head>a>strong { font-size: 17px; font-weight: 500; color: #f1f0e5; }
+  .lj-stock-card-head>a>strong span { font-size: 12px; margin-left: 5px; }
+  .lj-stock-card-head>a>small { display: block; font-size: 12px; color: #bfceb8; margin-top: 4px; }
+  .lj-stock-card-head>div { text-align: right; display: flex; flex-direction: column; gap: 5px; align-items: flex-end; }
+  .lj-stock-card-head .lj-rise { font: 18px 'Courier New',monospace; color: #f0b3a4; }
+  .lj-stock-card-head .lj-board-badge { font-size: 11px; padding: 2px 6px; }
+  .lj-stock-card dl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; border: 0; padding: 0; margin: 19px 0 13px; }
+  .lj-stock-card dl div { display: block; padding: 0; }
+  .lj-stock-card dt { font-size: 12px; color: #bfceb8; }
+  .lj-stock-card dd { font: 16px 'Courier New',monospace; margin-top: 7px; color: #eee7cd; }
+  .lj-stock-card details { border-top: 1px solid #ffffff20; }
+  .lj-stock-card summary { display: flex; justify-content: space-between; align-items: center; min-height: 44px; font-size: 12px; padding: 9px 0; color: #cfdbc5; list-style: none; }
+  .lj-stock-card summary::-webkit-details-marker { display: none; }
+  .lj-stock-card details[open] summary>span { transform: rotate(45deg); }
+  .lj-stock-card details dl { margin-top: 7px; padding-bottom: 10px; }
+  .lj-pool-bottom { display: block; font-size: 12px; line-height: 1.8; }
+  .lj-pool-bottom>div { justify-content: space-between; margin-top: 9px; gap: 15px; }
+  .lj-site .lj-pool-empty h3 { font-size: 21px; }
+  .lj-pool-empty p { max-width: none; margin: 12px 0 16px; font-size: 13px; }
+  .lj-pool-unavailable { display: block; padding: 27px 0 8px; }
+  .lj-pool-unavailable .lj-kicker { font-size: 11px; letter-spacing: 1px; }
+  .lj-pool-unavailable .lj-empty-actions { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 9px 25px; }
+  .lj-data-method { margin-top: 17px; }
+  .lj-site .lj-data-method summary { min-height: 48px; font-size: 12px; }
+  .lj-data-method p { font-size: 12px; }
+  .lj-card-top,.lj-card-bottom { font-size: 12px; }
+  .lj-research-card p { font-size: 14px; }
+  .lj-site .lj-source-note { line-height: 1.8; }
+  .lj-site .lj-follow>span { font-size: 12px; }
+  .lj-follow small,.lj-footer-bottom,.lj-footer-top p { font-size: 12px; }
+  .lj-about>div>p { font-size: 14px; }
+  .lj-principles { font-size: 12px; }
+  .lj-site .lj-data-notice { font-size: 12px; }
+}
+
+/* Research keeps its search context; long articles expose their structure. */
+.lj-library-tools { align-items: center; }
+.lj-library-tools>.lj-search { width: 320px; }
+.lj-library-results { display: flex; justify-content: space-between; align-items: center; min-height: 44px; margin: -6px 0 23px; color: #53664a; font-size: 13px; }
+.lj-site .lj-library-results button { border: 0; background: none; color: inherit; min-height: 44px; font-size: 13px; text-decoration: underline; text-underline-offset: 4px; }
+.lj-research-empty { border-block: 1px solid #c4ceb9; padding: 55px 20px; text-align: center; }
+.lj-research-empty>span { font: 40px Georgia,serif; color: #586f4e; }
+.lj-site .lj-research-empty h2 { font: 500 27px/1.5 'Noto Serif CJK SC','Songti SC',serif; margin-block: 15px; }
+.lj-research-empty p { color: #53664a; font-size: 14px; margin-bottom: 25px; }
+.lj-article { max-width: 1180px; width: calc(100% - 112px); padding-top: 38px; }
+.lj-article-heading { max-width: 820px; margin-left: 250px; }
+.lj-article-heading>.lj-kicker { margin-top: 30px; }
+.lj-article-heading h1 { font-size: 34px!important; }
+.lj-article-summary { color: #53654b; }
+.lj-article-byline { font-size: 12px; color: #5a6e50; }
+.lj-reading-grid { display: grid; grid-template-columns: 210px minmax(0,1fr); gap: 40px; margin-top: 25px; }
+.lj-article-navigation { position: sticky; top: 115px; align-self: start; }
+.lj-desktop-toc h2 { font: 500 22px 'Noto Serif CJK SC','Songti SC',serif; margin-top: 17px; }
+.lj-desktop-toc>p { font-size: 12px; color: #647459; margin-block: 13px 22px; }
+.lj-desktop-toc { max-height: calc(100vh - 140px); overflow-y: auto; }
+.lj-desktop-toc>a,.lj-mobile-toc nav>a { display: flex; align-items: center; padding: 10px 13px; min-height: 44px; font-size: 13px; color: #4e6445; border-left: 2px solid #d1d9c7; }
+.lj-desktop-toc>a[aria-current="location"],.lj-mobile-toc nav>a[aria-current="location"] { border-color: #98763c; background: #e7eddf; color: #26472b; font-weight: 600; }
+.lj-desktop-toc>a.is-subheading { padding-left: 23px; font-size: 12px; }
+.lj-reading-progress { height: 2px; background: #d5ddca; width: 100%; margin-bottom: 24px; overflow: hidden; }
+.lj-reading-progress span { display: block; height: 100%; background: #8c713e; transform-origin: left; }
+.lj-mobile-toc { display: none; }
+.lj-prose { padding-top: 0; font-size: 16px; line-height: 2; color: #344f32; }
+.lj-prose :is(h2,h3,h4) { scroll-margin-top: 110px; }
+.lj-prose a { color: #795e2f; }
+.lj-site .lj-prose h2 { font-size: 25px; margin-top: 27px; }
+.lj-prose h2:first-child { margin-top: 13px; }
+.lj-reading-finish { border-top: 1px solid #c7d0bc; padding-top: 30px; }
+.lj-site .lj-reading-finish h2 { font: 500 24px/1.65 'Noto Serif CJK SC','Songti SC',serif; margin-block: 15px; }
+.lj-reading-finish p { font-size: 14px; color: #586e4e; margin-bottom: 20px; }
+.lj-reading-finish .lj-text-link { margin-right: 27px; }
+@media(max-width:780px) {
+  .lj-library { padding-top: 31px; }
+  .lj-library-tools { display: flex; flex-direction: column; align-items: stretch; gap: 10px; }
+  .lj-library-tools>.lj-search { order: -1; width: 100%; margin-top: 0; }
+  .lj-library-results { font-size: 13px; }
+  .lj-research-empty { padding: 32px 12px; }
+  .lj-site .lj-research-empty h2 { font-size: 24px; }
+  .lj-article { width: calc(100% - 40px); padding-top: 24px; }
+  .lj-article-heading { margin-left: 0; max-width: none; }
+  .lj-article-heading>.lj-kicker { margin-top: 23px; }
+  .lj-article-heading h1 { font-size: 27px!important; }
+  .lj-article-summary { font-size: 15px; }
+  .lj-article-byline { font-size: 12px; padding-block: 18px; }
+  .lj-reading-grid { display: block; margin-top: 18px; }
+  .lj-article-navigation { position: static; }
+  .lj-desktop-toc { display: none; }
+  .lj-mobile-toc { display: block; border: 1px solid #c2cdb7; padding: 0 13px; margin-bottom: 22px; }
+  .lj-site .lj-mobile-toc summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; font-size: 13px; color: #35562f; list-style: none; }
+  .lj-mobile-toc summary::-webkit-details-marker { display: none; }
+  .lj-mobile-toc summary>span { font-size: 12px; color: #596d4e; }
+  .lj-mobile-toc nav { padding-bottom: 12px; }
+  .lj-reading-progress { position: fixed; top: 75px; left: 0; right: 0; z-index: 45; height: 2px; margin: 0; }
+  .lj-prose { font-size: 16px; line-height: 2.05; }
+  .lj-prose :is(h2,h3,h4) { scroll-margin-top: 94px; }
+  .lj-site .lj-prose h2 { font-size: 23px; }
+}
+
+@media(max-width:780px){
+  .lj-site .lj-header{backdrop-filter:none;background:var(--lj-paper)}
+  .lj-site .lj-nav-inner .lj-mobile-nav{background:#f6f6ef}
+}
+.lj-news-item>div>a{display:block;min-height:44px}
+.lj-card-top .lj-note-number{color:#737e65}

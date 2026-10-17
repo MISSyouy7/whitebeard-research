@@ -5,6 +5,8 @@ import { NewsSection } from './news-feed';
 import { LimitSection } from './limit-review';
 import { emptyPool, snapshotMode } from './market-ui';
 import { MarketOverview } from './market-overview';
+import { GlassHero } from './glass-hero';
+import Link from 'next/link';
 
 const basePath = process.env.NEXT_PUBLIC_PAGES_BASE_PATH || '';
 const snapshotURL = process.env.NEXT_PUBLIC_MARKET_SNAPSHOT_URL || 'https://raw.githubusercontent.com/MISSyouy7/whitebeard-research/market-data/market.json';
@@ -70,6 +72,8 @@ export function MarketDashboard() {
   }, [requestedDate, attempt]);
   const refresh = useCallback(() => setAttempt(value => value + 1), []);
   return <>
+    <GlassHero data={data} loading={loading} />
+    <nav className="lj-workspace-tabs lj-wrap" aria-label="工作台快捷入口"><a href="#overview" className="is-current">市场总览</a><a href="#news">7×24 快讯</a><a href="#limit-up">涨停复盘</a><Link href="/research/">研究洞察</Link><span>A股 · 北京时间</span></nav>
     <MarketOverview data={data} loading={loading} refresh={refresh} />
     <NewsSection data={data} loading={loading} error={error} refresh={refresh} />
     <LimitSection data={data} loading={loading} refresh={refresh} requestedDate={requestedDate} setRequestedDate={date => { setData(previous => previous ? { ...previous, limitUp: emptyPool(previous.limitUp) } : null); setRequestedDate(date); }} today={today} />

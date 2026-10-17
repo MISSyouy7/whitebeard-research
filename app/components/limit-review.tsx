@@ -33,7 +33,7 @@ export function LimitSection({ data, loading, refresh, requestedDate, setRequest
   const stale = pool?.fetchedAt && (pool.status === 'stale' || feedIsOld(pool.fetchedAt, data?.mode || 'live'));
 
   return <section className="lj-limit-section" id="limit-up" aria-labelledby="limit-title"><div className="lj-wrap">
-    <SectionTitle index="02" english="A-SHARE / DAILY REVIEW" title="涨停复盘" id="limit-title"><div className="lj-limit-controls"><FeedState status={pool?.status} at={pool?.fetchedAt} mode={data?.mode} loading={loading} /><button className="lj-refresh" onClick={refresh} disabled={loading} aria-label="刷新涨停复盘">↻ 刷新</button></div></SectionTitle>
+    <SectionTitle index="02" eyebrow="每日观察" title="涨停复盘" id="limit-title"><div className="lj-limit-controls"><FeedState status={pool?.status} at={pool?.fetchedAt} mode={data?.mode} loading={loading} /><button className="lj-refresh" onClick={refresh} disabled={loading} aria-label="刷新涨停复盘">↻ 刷新</button></div></SectionTitle>
     <div className="lj-review-dateline"><div><span>数据对应日期</span><strong>{pool?.tradeDate || requestedDate || '待获取'}</strong>{pool?.tradeDate && <small>{pool.tradeDate === today ? '当日股池 · 盘中会变化' : '历史交易日 · 非今日行情'}</small>}</div>
       {!snapshotMode && <label className="lj-date-picker"><span>切换日期</span><input aria-label="涨停复盘日期" aria-describedby={dateError ? 'date-error' : undefined} aria-invalid={!!dateError} type="date" min={minDate} max={today} value={requestedDate || pool?.tradeDate || ''} onChange={event => {
         if (!event.currentTarget.validity.valid) { setDateError('请选择最近30天内的日期'); return; }

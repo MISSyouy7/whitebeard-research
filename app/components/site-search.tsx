@@ -47,7 +47,6 @@ export function SiteSearch() {
           <path d="m16 16 5 5" />
         </svg>
         <span>搜索产业、公司或研究</span>
-        <kbd>⌘ K</kbd>
       </button>
       <dialog
         className="lj-search-dialog"
@@ -107,7 +106,7 @@ export function SiteSearch() {
             ))}
           </ul>
           <div className="lj-search-dialog-foot">
-            <span>Ctrl / ⌘ K 打开 · Esc 关闭</span>
+            <span>输入关键词查找研究 · 按退出键关闭</span>
             <Link
               href={`/research/${query ? `?q=${encodeURIComponent(query)}` : ""}`}
               onClick={() => dialog.current?.close()}

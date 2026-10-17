@@ -30,7 +30,7 @@ try {
   page.on("pageerror", (error) => report.errors.push(error.message));
   const now = new Date();
   const date = new Date(+now - 2 * 86400000).toISOString().slice(0, 10);
-  const counts = [17, 9, 5, 3, 2];
+  const counts = [17, 9, 5, 3, 1, 1];
   const pool = counts.flatMap((count, index) =>
     Array.from({ length: count }, (_, i) => ({
       c: String(990000 + index * 100 + i),
@@ -81,10 +81,21 @@ try {
   await page.goto(base, { waitUntil: "networkidle" });
   assert.deepEqual(
     await page.locator(".lj-market-cards strong").allTextContents(),
-    ["36只", "17只", "19只", "5板"],
+    ["36只", "17只", "19只", "6板"],
+  );
+  assert.equal(
+    await page.locator(".lj-hero-chart-summary strong").textContent(),
+    "36",
+  );
+  assert.deepEqual(
+    await page.locator(".lj-hero-mini-track b").allTextContents(),
+    ["17", "9", "5", "3", "2"],
+  );
+  assert.ok(
+    (await page.locator(".lj-hero-chart-date").textContent()).includes(date),
   );
   const chart = page.getByRole("group", { name: "各连板高度的股票数量" });
-  assert.equal(await chart.getByRole("button").count(), 5);
+  assert.equal(await chart.getByRole("button").count(), 6);
   await chart.getByRole("button", { name: "3连板：5只" }).click();
   assert.ok(
     (await page.locator(".lj-chart-readout").innerText()).includes("5 只"),
@@ -101,7 +112,7 @@ try {
     3,
   );
   report.tasks.push(
-    "Chart metrics and selectable bars match the actual supplied pool",
+    "Chart metrics, hero high-board aggregation and selectable bars match the supplied pool",
   );
 
   await page
@@ -255,6 +266,7 @@ try {
   };
   await page.reload({ waitUntil: "networkidle" });
   assert.equal(await page.locator(".lj-chart-bar").count(), 0);
+  assert.equal(await page.locator(".lj-hero-mini-bar").count(), 0);
   assert.equal(
     await page.locator(".lj-market-cards strong").first().textContent(),
     "—",

@@ -27,7 +27,7 @@ export function ArticleNavigation({ items, minutes }: { items: OutlineItem[]; mi
     if (detail) detail.open = false;
   }}>{item.text}</a>);
   return <aside className="lj-article-navigation"><div className="lj-reading-progress" role="progressbar" aria-label="文章阅读进度" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress * 100)}><span style={{ transform: `scaleX(${progress})` }} /></div>
-    <nav className="lj-desktop-toc" aria-label="文章目录"><span className="lj-kicker">IN THIS ARTICLE</span><h2>这篇研究</h2><p>约 {minutes} 分钟阅读</p>{links}</nav>
+    <nav className="lj-desktop-toc" aria-label="文章目录"><span className="lj-kicker">阅读目录</span><h2>这篇研究</h2><p>约 {minutes} 分钟阅读</p>{links}</nav>
     <details className="lj-mobile-toc"><summary>文章目录 <span>约 {minutes} 分钟 · 展开 ↓</span></summary><nav aria-label="文章目录">{links}</nav></details>
   </aside>;
 }

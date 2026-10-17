@@ -26,6 +26,6 @@ export default async function ResearchArticle({ params }: { params: Promise<{ sl
   });
   return <div className="lj-site" id="top"><SiteHeader /><main className="lj-article">
     <div className="lj-article-heading"><ResearchBackLink /><div className="lj-kicker">{note.category} / <time dateTime={note.date}>{note.date}</time></div><h1>{note.title}</h1><p className="lj-article-summary">{note.summary}</p><div className="lj-article-byline">路见资本 · 广路 <span>{note.readingMinutes} 分钟阅读 · 数据以文中日期为准</span></div></div>
-    <div className="lj-reading-grid"><ArticleNavigation items={outline} minutes={note.readingMinutes} /><div><div className="lj-prose" dangerouslySetInnerHTML={{ __html: html }} /><div className="lj-reading-finish"><span className="lj-kicker">KEEP EXPLORING</span><h2>把判断，留给持续验证。</h2><p>回到研究列表，继续沿着产业与市场寻找证据。</p><ResearchBackLink /><Link className="lj-text-link" href="/#news">查看市场快讯 →</Link></div></div></div>
+    <div className="lj-reading-grid"><ArticleNavigation items={outline} minutes={note.readingMinutes} /><div><div className="lj-prose" dangerouslySetInnerHTML={{ __html: html }} /><div className="lj-reading-finish"><span className="lj-kicker">继续阅读</span><h2>把判断，留给持续验证。</h2><p>回到研究列表，继续沿着产业与市场寻找证据。</p><ResearchBackLink /><Link className="lj-text-link" href="/#news">查看市场快讯 →</Link></div></div></div>
   </main><SiteFooter /></div>;
 }

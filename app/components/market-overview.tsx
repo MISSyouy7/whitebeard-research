@@ -78,7 +78,7 @@ export function MarketOverview({
           <div className="lj-chart-panel">
             <div className="lj-chart-toolbar">
               <div className="lj-chart-symbol" aria-hidden="true">
-                A
+                市
               </div>
               <div>
                 <h3>涨停股池分布</h3>

@@ -5,7 +5,7 @@ import { SiteSearch } from './site-search';
 export function Brand({ small = false }: { small?: boolean }) {
   return <Link href="/" className={`lj-brand${small ? ' lj-brand-small' : ''}`} aria-label="路见资本首页">
     <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M9 7v34h32M20 7v23h21M31 7v12h10" stroke="currentColor" strokeWidth="2.4" /></svg>
-    <span><strong>路见资本</strong><small>LUJIAN CAPITAL</small></span>
+    <span><strong>路见资本</strong><small>产业 · 市场 · 研究</small></span>
   </Link>;
 }
 export function SiteHeader() {
@@ -21,6 +21,6 @@ export function SiteFooter() {
     <div className="lj-footer-bottom"><span>© {new Date().getUTCFullYear()} 路见资本 · 仅作研究交流，不构成投资建议。</span><div><Link href="/research/">研究档案</Link><Link href="/mirror/">股市照妖镜 ↗</Link></div></div>
   </div></footer>;
 }
-export function SectionTitle({ index, english, title, children, id }: { index: string; english: string; title: string; children?: React.ReactNode; id?: string }) {
-  return <div className="lj-section-title"><div><span className="lj-kicker">{index} / {english}</span><h2 id={id}>{title}</h2></div>{children}</div>;
+export function SectionTitle({ index, eyebrow, title, children, id }: { index: string; eyebrow: string; title: string; children?: React.ReactNode; id?: string }) {
+  return <div className="lj-section-title"><div><span className="lj-kicker">{index} / {eyebrow}</span><h2 id={id}>{title}</h2></div>{children}</div>;
 }

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "mode": "snapshot",
-  "checkedAt": "2026-10-20T03:51:03.741Z",
+  "checkedAt": "2026-10-20T04:07:26.069Z",
   "refreshSeconds": 300,
   "news": {
     "status": "ok",
@@ -9,7 +9,7 @@
       "name": "东方财富 · 7×24快讯",
       "url": "https://kuaixun.eastmoney.com/"
     },
-    "fetchedAt": "2026-10-20T03:51:03.741Z",
+    "fetchedAt": "2026-10-20T04:07:26.069Z",
     "latestAt": "2026-10-20T03:41:00.000Z",
     "items": [
       {
@@ -381,7 +381,7 @@
       "url": "https://quote.eastmoney.com/ztb/detail#type=ztgc"
     },
     "scope": "按公开涨停股池收录范围统计，不代表全市场。行业为来源行业分类，不等同于涨停原因。",
-    "fetchedAt": "2026-10-20T03:51:03.741Z",
+    "fetchedAt": "2026-10-20T04:07:26.069Z",
     "tradeDate": "2026-10-20",
     "stocks": [
       {

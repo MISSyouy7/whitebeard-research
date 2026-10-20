@@ -92,7 +92,7 @@ export function SiteSearch() {
           </form>
           <p>研究方向</p>
           <ul>
-            {["AI", "具身智能", "市场复盘"].map((topic) => (
+            {["AI", "具身智能", "科技周刊"].map((topic) => (
               <li key={topic}>
                 <Link
                   href={`/research/?q=${encodeURIComponent(topic)}`}

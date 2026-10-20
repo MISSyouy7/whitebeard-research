@@ -33,7 +33,7 @@ pnpm build:pages
 ## 页面与品牌
 
 - `/`：路见资本首页，新闻、涨停复盘、精选研究、关于路见。
-- `/research/`：按分类、关键词检索已公开研究。
+- `/research/`：按分类、关键词检索科技周刊、AI前沿与产业专题。
 - `/research/[slug]/`：公开研究正文、原始发布日期、依据与来源。
 - `/mirror/`：原股市照妖镜，原接口、存档与兑换权益保持兼容。
 - `/manage/`：原游戏兑换码管理。
@@ -62,7 +62,9 @@ pnpm market:update
 
 ## 内容维护
 
-已公开文章来自 `content/articles/`，产业主线来自 `content/mainline/`。仅 `status: published` 且公开访问的内容进入研究页；其他草稿与会员预览不公开正文。
+产业周刊接入科技爱好者周刊与中文 AI 论文周报，每天北京时间 08:17 自动检查并发布新内容，保留原文入口；详见 [产业周刊更新说明](docs/periodicals.md)。可运行 `pnpm periodicals:update` 手动采集。
+
+站内专题来自 `content/articles/` 与 `content/mainline/`。仅 `status: published` 且公开访问的内容进入研究页；其他草稿与会员预览不公开正文。A股市场复盘已从研究页及文章路由移除，源文件保留为历史档案。
 
 更新 Markdown 后运行：
 

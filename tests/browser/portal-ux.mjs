@@ -115,6 +115,8 @@ check('320 / 390 / 768 / 1024 / 1440 responsive layouts have no page overflow');
 
 await page.setViewportSize({ width: 390, height: 844 });
 await page.getByRole('navigation', { name: '手机快捷导航' }).getByRole('link', { name: '研究', exact: true }).click();
+await page.locator('.lj-library-grid a').first().waitFor();
+const initialResearchCount = await page.locator('.lj-library-grid a').count();
 await page.getByRole('button', { name: '产业主线', exact: true }).click();
 await page.getByRole('searchbox', { name: '搜索研究' }).fill('具身');
 assert.equal(await page.locator('.lj-library-grid a').count(), 1);
@@ -135,7 +137,7 @@ assert.equal(await page.locator('.lj-library-grid a').count(), 1);
 check('Research filters survive article round-trips; mobile contents and reading progress work');
 await page.getByRole('searchbox', { name: '搜索研究' }).fill('不存在的研究');
 await page.getByRole('button', { name: '查看全部研究' }).click();
-assert.equal(await page.locator('.lj-library-grid a').count(), 6);
+assert.equal(await page.locator('.lj-library-grid a').count(), initialResearchCount);
 check('Research empty state restores all published articles');
 
 await page.goto(base + '/', { waitUntil: 'networkidle' });

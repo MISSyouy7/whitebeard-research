@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-20T03:44:34.833Z",
+  "publications": [
+    {
+      "id": "tech-weekly",
+      "name": "科技爱好者周刊",
+      "category": "科技周刊",
+      "repo": "ruanyf/weekly",
+      "branch": "master",
+      "status": "ok",
+      "fetchedAt": "2026-10-20T03:44:34.833Z",
+      "items": [
+        {
+          "id": "tech-weekly:docs/issue-415.md",
+          "title": "科技爱好者周刊 · 第 415 期｜3D 版《看不见的城市》",
+          "date": "2026-10-16",
+          "url": "https://github.com/ruanyf/weekly/blob/master/docs/issue-415.md",
+          "summary": "本期科技动态、文章与资源选读，涵盖智能体、算力、大模型、开源生态。从技术与产品的变化中，寻找值得跟踪的产业线索。",
+          "tags": [
+            "智能体",
+            "算力",
+            "大模型",
+            "开源生态"
+          ]
+        },
+        {
+          "id": "tech-weekly:docs/issue-414.md",
+          "title": "科技爱好者周刊 · 第 414 期｜Jev 决策模型有什么用",
+          "date": "2026-10-10",
+          "url": "https://github.com/ruanyf/weekly/blob/master/docs/issue-414.md",
+          "summary": "本期科技动态、文章与资源选读，涵盖智能体、算力、大模型、开源生态。从技术与产品的变化中，寻找值得跟踪的产业线索。",
+          "tags": [
+            "智能体",
+            "算力",
+            "大模型",
+            "开源生态"
+          ]
+        },
+        {
+          "id": "tech-weekly:docs/issue-413.md",
+          "title": "科技爱好者周刊 · 第 413 期｜再见了，React Native",
+          "date": "2026-09-19",
+          "url": "https://github.com/ruanyf/weekly/blob/master/docs/issue-413.md",
+          "summary": "本期科技动态、文章与资源选读，涵盖大模型、开源生态。从技术与产品的变化中，寻找值得跟踪的产业线索。",
+          "tags": [
+            "大模型",
+            "开源生态"
+          ]
+        },
+        {
+          "id": "tech-weekly:docs/issue-412.md",
+          "title": "科技爱好者周刊 · 第 412 期｜禁止 issue，只用 PR",
+          "date": "2026-09-13",
+          "url": "https://github.com/ruanyf/weekly/blob/master/docs/issue-412.md",
+          "summary": "本期科技动态、文章与资源选读，涵盖具身智能、算力、开源生态。从技术与产品的变化中，寻找值得跟踪的产业线索。",
+          "tags": [
+            "具身智能",
+            "算力",
+            "开源生态"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ai-papers",
+      "name": "AI 论文周报",
+      "category": "AI前沿",
+      "repo": "careywyr/AI-Weekly-Paper",
+      "branch": "main",
+      "status": "ok",
+      "fetchedAt": "2026-10-20T03:44:34.833Z",
+      "items": [
+        {
+          "id": "ai-papers:2026/1012-1016.md",
+          "title": "AI 论文周报｜2026-10-12 — 2026-10-16",
+          "date": "2026-10-18",
+          "url": "https://github.com/careywyr/AI-Weekly-Paper/blob/main/2026/1012-1016.md",
+          "summary": "本期收录 74 篇论文，涉及智能体、具身智能、多模态、视频生成。阅读中文解读，进一步查看论文与研究项目。",
+          "tags": [
+            "智能体",
+            "具身智能",
+            "多模态",
+            "视频生成"
+          ]
+        },
+        {
+          "id": "ai-papers:2026/1005-1009.md",
+          "title": "AI 论文周报｜2026-10-05 — 2026-10-09",
+          "date": "2026-10-11",
+          "url": "https://github.com/careywyr/AI-Weekly-Paper/blob/main/2026/1005-1009.md",
+          "summary": "本期收录 56 篇论文，涉及智能体、具身智能、多模态、视频生成。阅读中文解读，进一步查看论文与研究项目。",
+          "tags": [
+            "智能体",
+            "具身智能",
+            "多模态",
+            "视频生成"
+          ]
+        },
+        {
+          "id": "ai-papers:2026/0928-1002.md",
+          "title": "AI 论文周报｜2026-09-28 — 2026-10-02",
+          "date": "2026-10-04",
+          "url": "https://github.com/careywyr/AI-Weekly-Paper/blob/main/2026/0928-1002.md",
+          "summary": "本期收录 76 篇论文，涉及智能体、具身智能、多模态、视频生成。阅读中文解读，进一步查看论文与研究项目。",
+          "tags": [
+            "智能体",
+            "具身智能",
+            "多模态",
+            "视频生成"
+          ]
+        },
+        {
+          "id": "ai-papers:2026/0921-0925.md",
+          "title": "AI 论文周报｜2026-09-21 — 2026-09-25",
+          "date": "2026-10-04",
+          "url": "https://github.com/careywyr/AI-Weekly-Paper/blob/main/2026/0921-0925.md",
+          "summary": "本期收录 33 篇论文，涉及智能体、具身智能、多模态、视频生成。阅读中文解读，进一步查看论文与研究项目。",
+          "tags": [
+            "智能体",
+            "具身智能",
+            "多模态",
+            "视频生成"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -7,6 +7,7 @@
   },
   "scripts": {
     "market:update": "node scripts/update-market-data.mjs",
+    "periodicals:update": "node scripts/update-periodicals.mjs",
     "content:generate": "node scripts/generate-content-module.mjs",
     "prebuild": "node scripts/generate-content-module.mjs",
     "prebuild:pages": "node scripts/generate-content-module.mjs",

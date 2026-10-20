@@ -4301,3 +4301,14 @@
 .lj-follow-fallback { margin-top: 16px; padding-top: 14px; border-top: 1px solid #dce0e7; }
 .lj-follow-fallback > span { display: block; color: #626873; font-size: 12px; }
 .lj-site .lj-follow-fallback .lj-copy-account button { min-height: 44px; font-size: 13px; }
+
+.lj-periodical-status { margin: 0 0 24px; padding: 14px 18px; border: 1px solid #dce0e7; border-radius: 14px; background: #ffffffb3; color: #525c6c; font-size: 13px; line-height: 1.8; }
+.lj-periodical-status p { margin: 0; }
+.lj-periodical-status p > span:first-child { color: #8c2d33; margin-right: 6px; }
+.lj-periodical-checked { display: inline-block; margin-left: 16px; }
+.lj-periodical-retained { color: #8c2d33; }
+.lj-library-grid .lj-research-card h2 { overflow-wrap: anywhere; }
+@media (max-width: 600px) {
+  .lj-periodical-checked { display: block; margin-left: 0; }
+  .lj-card-top { flex-wrap: wrap; gap: 6px 12px; }
+}

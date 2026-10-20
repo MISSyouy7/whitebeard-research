@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": "2026-10-20T03:44:34.833Z",
+  "checkedAt": "2026-10-20T04:04:40.083Z",
   "publications": [
     {
       "id": "tech-weekly",
@@ -9,56 +9,549 @@
       "repo": "ruanyf/weekly",
       "branch": "master",
       "status": "ok",
-      "fetchedAt": "2026-10-20T03:44:34.833Z",
+      "fetchedAt": "2026-10-20T04:04:40.083Z",
       "items": [
         {
           "id": "tech-weekly:docs/issue-415.md",
           "title": "科技爱好者周刊 · 第 415 期｜3D 版《看不见的城市》",
           "date": "2026-10-16",
           "url": "https://github.com/ruanyf/weekly/blob/master/docs/issue-415.md",
-          "summary": "本期科技动态、文章与资源选读，涵盖智能体、算力、大模型、开源生态。从技术与产品的变化中，寻找值得跟踪的产业线索。",
+          "summary": "本期科技动态、文章与资源目录，涵盖智能体、算力、大模型、开源生态。站内整理阅读线索与产业观察，寻找值得继续跟踪的方向。",
           "tags": [
             "智能体",
             "算力",
             "大模型",
             "开源生态"
-          ]
+          ],
+          "reading": {
+            "sections": [
+              "封面图",
+              "3D 版《看不见的城市》",
+              "AI 的 3D 建模",
+              "灯泡计算机",
+              "Deno 项目结束了",
+              "文章",
+              "工具",
+              "资源",
+              "图片",
+              "文摘",
+              "言论",
+              "往年回顾"
+            ],
+            "entries": [
+              {
+                "title": "我如何用600美元后训练出一个 Jev 式决策模型",
+                "url": "https://deskmind.dev/zh/blog/launch/"
+              },
+              {
+                "title": "给导弹写代码，为什么严禁使用动态内存分配？",
+                "url": "https://mp.weixin.qq.com/s/RL8w75YfXQrRubSLJHnSVA"
+              },
+              {
+                "title": "如何让 AI 网页看起来像设计师作品",
+                "url": "https://railcode.dev/blog/vibe-coded-website"
+              },
+              {
+                "title": "为什么没有 Linux 手机",
+                "url": "https://amosbbatto.wordpress.com/2026/10/05/linux-phones-alternative/"
+              },
+              {
+                "title": "AMD 处理器如何在两年内速度提升 50%？",
+                "url": "https://lemire.me/blog/2026/09/18/how-did-amd-ryzen-get-50-faster-in-two-years/"
+              },
+              {
+                "title": "职场人士如何积累财富",
+                "url": "https://asheradeniyi.com/2026/04/10/how-to-build-wealth-as-a-career-person/"
+              },
+              {
+                "title": "REA",
+                "url": "https://github.com/morluto/rea"
+              },
+              {
+                "title": "SynthID 检测器",
+                "url": "https://synthid.com/"
+              },
+              {
+                "title": "ts-rust",
+                "url": "https://github.com/pingdotgg/ts-rust"
+              },
+              {
+                "title": "Doory",
+                "url": "https://github.com/shaongitbd/doory"
+              },
+              {
+                "title": "HeadOrbit",
+                "url": "https://github.com/Cogria-AI/HeadOrbit"
+              },
+              {
+                "title": "qrypt",
+                "url": "https://github.com/yinzhenyu-su/qrypt"
+              },
+              {
+                "title": "EdgeSSH",
+                "url": "https://github.com/aozorae/EdgeSSH"
+              },
+              {
+                "title": "charts-rs",
+                "url": "https://github.com/vicanso/charts-rs"
+              },
+              {
+                "title": "ItsPaint",
+                "url": "https://github.com/joshlin2201/itspaint"
+              },
+              {
+                "title": "Caplo",
+                "url": "https://github.com/icloudza/caplo"
+              },
+              {
+                "title": "bg2x",
+                "url": "https://github.com/isixe/bg2x"
+              },
+              {
+                "title": "EnvTrace",
+                "url": "https://envtrace.net/"
+              },
+              {
+                "title": "Droidline",
+                "url": "https://github.com/KnifeLemon/Droidline"
+              },
+              {
+                "title": "ESP32 iPhone Agent",
+                "url": "https://github.com/onehumanbeing/esp32-iphone-agent"
+              },
+              {
+                "title": "Bulchimbeon",
+                "url": "https://github.com/s3onghyun/bulchimbeon"
+              },
+              {
+                "title": "CNEquity",
+                "url": "https://github.com/rootSunc/CNEquity"
+              },
+              {
+                "title": "AI 重新实现《仙剑奇侠传》",
+                "url": "https://github.com/IllegalCreed/type-pal"
+              },
+              {
+                "title": "Linux 中文输入法配置",
+                "url": "https://github.com/mars-base/rime-input-method-guide"
+              },
+              {
+                "title": "APPLORE",
+                "url": "https://applore.app/zh"
+              },
+              {
+                "title": "一个字的一生",
+                "url": "https://ivan666jjj.github.io/yigezi/"
+              },
+              {
+                "title": "整流罩之下",
+                "url": "https://x.com/SpaceX/status/1993714666456113363"
+              },
+              {
+                "title": "澳大利亚的情况很好",
+                "url": "https://news.ycombinator.com/item?id=50066470"
+              }
+            ]
+          }
         },
         {
           "id": "tech-weekly:docs/issue-414.md",
           "title": "科技爱好者周刊 · 第 414 期｜Jev 决策模型有什么用",
           "date": "2026-10-10",
           "url": "https://github.com/ruanyf/weekly/blob/master/docs/issue-414.md",
-          "summary": "本期科技动态、文章与资源选读，涵盖智能体、算力、大模型、开源生态。从技术与产品的变化中，寻找值得跟踪的产业线索。",
+          "summary": "本期科技动态、文章与资源目录，涵盖智能体、算力、大模型、开源生态。站内整理阅读线索与产业观察，寻找值得继续跟踪的方向。",
           "tags": [
             "智能体",
             "算力",
             "大模型",
             "开源生态"
-          ]
+          ],
+          "reading": {
+            "sections": [
+              "封面图",
+              "Jev 决策模型有什么用",
+              "Markdown 正在变成源码",
+              "不能摄像的摄像头",
+              "RSA 因数分解的新纪录",
+              "文章",
+              "工具",
+              "资源",
+              "图片",
+              "言论",
+              "往年回顾"
+            ],
+            "entries": [
+              {
+                "title": "JavaScript 技术栈2026最新动态",
+                "url": "https://blog.master.dev/what-to-know-in-javascript-2026-edition/"
+              },
+              {
+                "title": "我从 Deno 转投 Node.js",
+                "url": "https://dbushell.com/2026/10/03/deno-to-node/"
+              },
+              {
+                "title": "example.com 更改页面的解释",
+                "url": "https://www.oliverdunk.com/2026/09/30/iana-reply"
+              },
+              {
+                "title": "AI 竞赛变得尴尬起来",
+                "url": "https://insufferable.dev/posts/the-ai-race-just-got-awkward/"
+              },
+              {
+                "title": "C 语言的灵活整数大小不是设计失误",
+                "url": "https://pikuma.com/blog/c-integer-sizes-not-a-mistake"
+              },
+              {
+                "title": "我如何让一个二维码指向两个应用商店",
+                "url": "https://matthuggins.com/blog/posts/qr-codes-that-route-to-the-appropriate-app-store"
+              },
+              {
+                "title": "Crafting Apps",
+                "url": "https://getartcraft.com/apps"
+              },
+              {
+                "title": "Pass Designer",
+                "url": "https://developer.apple.com/pass-designer/"
+              },
+              {
+                "title": "tui-dashboard",
+                "url": "https://github.com/lyuangg/tui-dashboard"
+              },
+              {
+                "title": "yovoice",
+                "url": "https://github.com/leemysw/yovoice"
+              },
+              {
+                "title": "sh.cd",
+                "url": "https://github.com/CleanIP/sh.cd"
+              },
+              {
+                "title": "AirStats",
+                "url": "https://github.com/byrencheema/airstats"
+              },
+              {
+                "title": "Video Transcript",
+                "url": "https://github.com/anghunk/video-transcript"
+              },
+              {
+                "title": "PecoFence",
+                "url": "https://github.com/DayuanJiang/PecoFence"
+              },
+              {
+                "title": "skillsgist",
+                "url": "https://github.com/Qsnh/skillsgist"
+              },
+              {
+                "title": "Pebrel",
+                "url": "https://github.com/Kuddev/pebrel"
+              },
+              {
+                "title": "WallpaperMachine",
+                "url": "https://github.com/WallpaperMachine/WallpaperMachine"
+              },
+              {
+                "title": "LiteZip",
+                "url": "https://github.com/gentpan/LiteZip"
+              },
+              {
+                "title": "Burrow",
+                "url": "https://github.com/ArkGravity/burrow"
+              },
+              {
+                "title": "atv-core",
+                "url": "https://github.com/corvofeng/atv-core"
+              },
+              {
+                "title": "open-compute",
+                "url": "https://github.com/elliothux/open-compute"
+              },
+              {
+                "title": "Snitch",
+                "url": "https://github.com/aixisstudio/Snitch"
+              },
+              {
+                "title": "EdgeChat",
+                "url": "https://github.com/aozorae/Edgechat"
+              },
+              {
+                "title": "DockTerm",
+                "url": "https://github.com/munvard/dockterm"
+              },
+              {
+                "title": "Naive Icons",
+                "url": "https://github.com/guokaigdg/naive-icons"
+              },
+              {
+                "title": "阅古文",
+                "url": "https://yueguwen.com/"
+              },
+              {
+                "title": "艺术史步行之旅",
+                "url": "https://artmuseum.artfrompixels.com/"
+              },
+              {
+                "title": "stillwet",
+                "url": "https://stillwet.art/"
+              },
+              {
+                "title": "旧金山有轨电车",
+                "url": "https://daniel.lawrence.lu/blog/2026-09-20-muni-heritage-weekend/"
+              },
+              {
+                "title": "大公司的利润率",
+                "url": "https://www.visualcapitalist.com/ranked-how-profitable-are-the-worlds-largest-companies/"
+              }
+            ]
+          }
         },
         {
           "id": "tech-weekly:docs/issue-413.md",
           "title": "科技爱好者周刊 · 第 413 期｜再见了，React Native",
           "date": "2026-09-19",
           "url": "https://github.com/ruanyf/weekly/blob/master/docs/issue-413.md",
-          "summary": "本期科技动态、文章与资源选读，涵盖大模型、开源生态。从技术与产品的变化中，寻找值得跟踪的产业线索。",
+          "summary": "本期科技动态、文章与资源目录，涵盖大模型、开源生态。站内整理阅读线索与产业观察，寻找值得继续跟踪的方向。",
           "tags": [
             "大模型",
             "开源生态"
-          ]
+          ],
+          "reading": {
+            "sections": [
+              "封面图",
+              "再见了，React Native",
+              "世界地图的新投影方法",
+              "科技动态",
+              "文章",
+              "工具",
+              "资源",
+              "图片",
+              "文摘",
+              "言论",
+              "往年回顾"
+            ],
+            "entries": [
+              {
+                "title": "隐藏摄像头检测器",
+                "url": "https://www.chosun.com/english/industry-en/2026/08/30/SBFXUIJQYZEARKP5T4FBAY25HQ/"
+              },
+              {
+                "title": "我的 HTML 模板文件",
+                "url": "https://vale.rocks/posts/html-boilerplate"
+              },
+              {
+                "title": "如何用 JavaScript 取消 CSS",
+                "url": "https://css-tricks.com/that-time-i-tried-browsing-the-web-without-css/"
+              },
+              {
+                "title": "容器管理工具和反向代理工具",
+                "url": "https://web.archive.org/web/20250401115923/https://kiranet.org/posts/self-hosting-like-its-2025/"
+              },
+              {
+                "title": "JavaScript 的怪异之处",
+                "url": "https://stack-auth.com/blog/on-javascripts-weirdness"
+              },
+              {
+                "title": "谷歌搜索的 udm 参数",
+                "url": "https://serpapi.com/blog/every-google-udm-in-the-world/"
+              },
+              {
+                "title": "熵的解释",
+                "url": "https://www.engineersedge.com/thermodynamics/entropy_explained_with_sheep_15961.htm"
+              },
+              {
+                "title": "Great Tables",
+                "url": "https://github.com/posit-dev/great-tables"
+              },
+              {
+                "title": "ghostty-web",
+                "url": "https://github.com/coder/ghostty-web"
+              },
+              {
+                "title": "Infat",
+                "url": "https://github.com/philocalyst/infat"
+              },
+              {
+                "title": "mini-img-editor",
+                "url": "https://github.com/xdadda/mini-photo-editor"
+              },
+              {
+                "title": "CryptPad",
+                "url": "https://cryptpad.fr/"
+              },
+              {
+                "title": "Lyrimuse",
+                "url": "https://github.com/Yudaotor/lyrimuse"
+              },
+              {
+                "title": "capcut-cli",
+                "url": "https://github.com/renezander030/capcut-cli"
+              },
+              {
+                "title": "mailez",
+                "url": "https://github.com/mailez-hq/mailez"
+              },
+              {
+                "title": "Status Trio",
+                "url": "https://github.com/lingyired/status-trio"
+              },
+              {
+                "title": "Polycompiler",
+                "url": "https://github.com/EvanZhouDev/polycompiler"
+              },
+              {
+                "title": "gpcb.net",
+                "url": "https://gpcb.net/net/"
+              },
+              {
+                "title": "视觉风格图鉴",
+                "url": "https://visualstyles.jerrymakes.com/"
+              },
+              {
+                "title": "AI IP 检测",
+                "url": "https://store.xiu.ai/zh/ai-ip/"
+              },
+              {
+                "title": "引力",
+                "url": "https://qunabu.github.io/Gravity/#what-is-gravity"
+              },
+              {
+                "title": "F-35 头盔",
+                "url": "https://www.instagram.com/p/DJPerYryd3P/"
+              },
+              {
+                "title": "苏联 Mi-6 直升机",
+                "url": "https://www.twz.com/news-features/the-story-of-the-monster-mi-6-helicopter-airliner"
+              },
+              {
+                "title": "糊状千层面",
+                "url": "https://underreacted.leaflet.pub/3mdjygm2p5s2c"
+              }
+            ]
+          }
         },
         {
           "id": "tech-weekly:docs/issue-412.md",
           "title": "科技爱好者周刊 · 第 412 期｜禁止 issue，只用 PR",
           "date": "2026-09-13",
           "url": "https://github.com/ruanyf/weekly/blob/master/docs/issue-412.md",
-          "summary": "本期科技动态、文章与资源选读，涵盖具身智能、算力、开源生态。从技术与产品的变化中，寻找值得跟踪的产业线索。",
+          "summary": "本期科技动态、文章与资源目录，涵盖具身智能、算力、开源生态。站内整理阅读线索与产业观察，寻找值得继续跟踪的方向。",
           "tags": [
             "具身智能",
             "算力",
             "开源生态"
-          ]
+          ],
+          "reading": {
+            "sections": [
+              "封面",
+              "禁止 issue，只用 PR",
+              "史上最长的数学程序",
+              "科技动态",
+              "文章",
+              "工具",
+              "资源",
+              "图片",
+              "文摘",
+              "言论",
+              "往年回顾"
+            ],
+            "entries": [
+              {
+                "title": "特斯拉出售 Cyber​​cab",
+                "url": "https://electrek.co/2026/09/07/tesla-cybercab-fleet-profitable-wouldnt-sell/"
+              },
+              {
+                "title": "戴森电动牙刷",
+                "url": "https://www.dyson.com/oral-care/electric-toothbrush/camerajet/ceramic-ultra-blue"
+              },
+              {
+                "title": "AI 手杖",
+                "url": "https://seas.harvard.edu/news/smartphone-navigation-app-people-blindness-and-low-vision"
+              },
+              {
+                "title": "李·霍洛威的悲剧故事",
+                "url": "https://note.com/masakazu_urabe/n/n7815f5b64fab?hl=en"
+              },
+              {
+                "title": "开放模型2026年夏季述评",
+                "url": "https://huggingface.co/blog/state-of-open-models-summer-2026"
+              },
+              {
+                "title": "我分解了90年代 RSA 密钥",
+                "url": "https://mcpherrin.ca/2026/09/07/rsa.html"
+              },
+              {
+                "title": "HTML 中不需要 initial-scale 属性",
+                "url": "https://vale.rocks/micros/20260902-1350"
+              },
+              {
+                "title": "JavaScript 递归的处理方法",
+                "url": "https://blog.gaborkoos.com/posts/2026-05-09-Your-Recursion-Is-Lying-to-You/"
+              },
+              {
+                "title": "我在后院建了一个工作室",
+                "url": "https://www.imkylelambert.com/articles/building-a-backyard-office-the-build-and-cost-breakdown"
+              },
+              {
+                "title": "FlyonUI",
+                "url": "https://flyonui.com/"
+              },
+              {
+                "title": "endlessh-go",
+                "url": "https://github.com/shizunge/endlessh-go"
+              },
+              {
+                "title": "PuTTYgen",
+                "url": "https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html"
+              },
+              {
+                "title": "gh gfm-preview",
+                "url": "https://github.com/thiagokokada/gh-gfm-preview"
+              },
+              {
+                "title": "caddy-waf",
+                "url": "https://github.com/fabriziosalmi/caddy-waf"
+              },
+              {
+                "title": "一息",
+                "url": "https://github.com/Defiabell/yixi"
+              },
+              {
+                "title": "ctty",
+                "url": "https://github.com/zsuroy/ctty"
+              },
+              {
+                "title": "vet",
+                "url": "https://github.com/vet-run/vet"
+              },
+              {
+                "title": "Krep",
+                "url": "https://github.com/davidesantangelo/krep"
+              },
+              {
+                "title": "Inbucket",
+                "url": "https://inbucket.org/"
+              },
+              {
+                "title": "黑客的 Linux 基础知识",
+                "url": "https://github.com/ahegazy0/linux-basics-for-hackers-notes"
+              },
+              {
+                "title": "DNSSEC 的工作原理",
+                "url": "https://howdnssec.works/"
+              },
+              {
+                "title": "Gorgeous GRUB",
+                "url": "https://github.com/Jacksaur/Gorgeous-GRUB"
+              },
+              {
+                "title": "美国公路的奇特建筑",
+                "url": "https://publicdomainreview.org/collection/john-margolies-photographs-of-roadside-america/"
+              },
+              {
+                "title": "在开始构建任何东西之前，问自己三个问题",
+                "url": "https://jordanlord.co.uk/blog/3-constraints/"
+              }
+            ]
+          }
         }
       ]
     },
@@ -69,59 +562,1278 @@
       "repo": "careywyr/AI-Weekly-Paper",
       "branch": "main",
       "status": "ok",
-      "fetchedAt": "2026-10-20T03:44:34.833Z",
+      "fetchedAt": "2026-10-20T04:04:40.083Z",
       "items": [
         {
           "id": "ai-papers:2026/1012-1016.md",
           "title": "AI 论文周报｜2026-10-12 — 2026-10-16",
           "date": "2026-10-18",
           "url": "https://github.com/careywyr/AI-Weekly-Paper/blob/main/2026/1012-1016.md",
-          "summary": "本期收录 74 篇论文，涉及智能体、具身智能、多模态、视频生成。阅读中文解读，进一步查看论文与研究项目。",
+          "summary": "本期目录收录 74 篇论文，涉及智能体、具身智能、多模态、视频生成。站内浏览导读与篇目，再按需查阅论文资料。",
           "tags": [
             "智能体",
             "具身智能",
             "多模态",
             "视频生成"
-          ]
+          ],
+          "reading": {
+            "sections": [
+              "Waypoint-OPD: Transferring RL-Induced Policy Shifts via Gated On-Policy Distillation",
+              "OmniCompass: A Holistic Benchmark for Omni-Modal Video Grounding and Understanding",
+              "Jeva: System One Models from First Principles",
+              "VideoJev: System One Model for Video Understanding and Interaction",
+              "MJev-Spatial: System One Spatial Intelligence via Native Attention Matching",
+              "Any Time, Any Space: A World-State-Centric Framework for Agentic Video Generation",
+              "Player-1: Learning to Play from Synthetic Experience",
+              "GroundingPI: A Grounding Foundation Model towards Physical Intelligence with Visual Primitives",
+              "DiffusionART: Efficient, Stable and Scalable Reinforcement of Diffusion Models",
+              "OpenGCUA: Toward a Fully Open Stack for Generalist Computer Use",
+              "S-Space: Exploring Spatial Workspace in Multimodal Language Models",
+              "FDE-Gym: The Last Mile of AI Delivery",
+              "Thinking Inertia: LLMs Keep Thinking When Told Not To",
+              "Beyond Domain-Routed Supervision: Cross-Teacher Guarding for Multi-Teacher On-Policy Distillation",
+              "AgentSWE: Can Coding Agents Build the Agent You Actually Want?",
+              "Agent-Reflex: Teaching Language Agents to Act Reflectively",
+              "RoTA-Bench: Evaluating 3D Spatial Reasoning through Interactive Projection Alignment",
+              "Self-Evolving Agent Harness",
+              "Scaling Agentic Data for Long-Horizon Terminal Intelligence",
+              "MAI-Gym: An Open All-in-One Platform for GUI Agent Evaluation and RL Training across Mobile and Computer Environments",
+              "Reflex: Visually Grounded Reactive Humanoid Control",
+              "Learning Where to Split: Dynamic Band Splitting for Audio Source Separation",
+              "AesCode: Aesthetic Code Generation with Decoupled Cross-Modal Rewards",
+              "Urbex: Agentic Spatial Grounding for City-Scale 3D Scenes",
+              "InfiniSplat v2: Analyzing and Improving Feed-Forward 3DGS from Any Views",
+              "SoftwareGym: Scaling Computer-Use Agent Training with Diverse Synthesized Software Environments",
+              "Tev: Scaling Long-Horizon Agentic Environments with Dense Progress Rewards",
+              "Harness^2: Recursive Agent Harnessing for an Open World",
+              "Behavioral Compositionality of Sparse Autoencoder Representations",
+              "3DCodeVerse: Exploring 3D Worlds as Code",
+              "Doc2Harness: Benchmarking LLMs on Long-Horizon Harness Engineering of Coding Agents",
+              "GreenWAM: A World Foundation Model for Robotics",
+              "VIS-Ground: Video Interactive Storytelling with Contextual Grounding",
+              "GroundAnything: Reconciling Parallel Decoding with Precise Visual Grounding at Flash Speed",
+              "TPPO: Tracking-Value PPO For Language Model Reasoning",
+              "ExeWorldBench: Benchmarking Code-Based Executable 3D World Modeling",
+              "WorkRover: Scaling Long-Horizon Cowork Agent Training Via Recursive Environment Evolution",
+              "Vela: User Behavior as Supervision Sparks LLM Intelligence",
+              "More Methods, Better Agents? A Reality Check on Self-Distillation in Agentic Reinforcement Learning",
+              "SCOPE: Semantic Bounded Credit Optimization for Prompt Engineering in Text-to-image Generation",
+              "Recovering Reliable Supervision via Critique-Guided On-Policy Distillation",
+              "X-Ragent: Tool-Augmented Reinforcement Learning for Evidence-Grounded Chest X-Ray Reasoning",
+              "DoSA: Dots Sparse Attention",
+              "Speculative Forcing for Efficient Autoregressive Video Generation",
+              "LeWAM: End-to-End World and Action Modeling with JEPAs",
+              "EmbodiedCLBench: Evaluating Continual Learning for Self-Evolving Embodied Agents",
+              "Last Secure Code Benchmark: Is the Code You Vibe Secure?",
+              "Many Right Answers, One Training Example: Removing Responder Noise from GRPO for LLM Recommenders",
+              "Multics: Generative Multi-Player World Model with Hierarchical Communication",
+              "UltraBERT: Beyond the Limit of BERT Pre-Training",
+              "VisionWeave: Weaving Elastic Visual Representations as a Native Capability of MLLMs",
+              "SwarmRSI: Recursive Self-Improvement through Evolving Scientific Agent Swarm",
+              "Scoring Higher, Answering Worse: Mitigating Reward Hacking in Rubric-Based RL via Protocol-Level Rubrics",
+              "LatentLoop: Scaling Looped MoE Models with Asymmetric Compute Allocation",
+              "Hear the World in Stereo: Learning Dynamic Spatial Correspondence for Immersive Joint Video-Audio Generation",
+              "Cortex: Consolidating Context into Parametric Memory",
+              "SALD: Self-Referenced Advantage Learning for Diffusion Models",
+              "EviScene: Beyond \"Is It AI?\" for Agentic Image Factuality Assessment",
+              "ActionOPD: Distilling Decisions, Not Tokens",
+              "Each Reward to Its Relevant Tokens: Reward-Specific Token-Level Credit Assignment for Multi-Reward RL",
+              "AReA: Adaptive Receptive-Field Attention for Efficient High-Resolution Diffusion Transformers",
+              "VLA-Δ: Learning Physical State Transition for Vision-Language-Action Models",
+              "Mosaic: Multi-Session Agentic Reinforcement Learning",
+              "ProgramGym: Scaling Training Environments for Long-Horizon Program Reproduction Agents",
+              "CommerceGen-Studio: An End-to-End Framework for Commercial-Grade Main-Image Generation",
+              "Work2Skill: Capturing Human GUI Experience for Reusable Agent Skill Induction",
+              "APEX: Asynchronous Prefix Denoising for Extreme Compression",
+              "Seeing, Maintaining, and Learning: The Evolution of Multimodal Agent Memory",
+              "Multi-Stream Attention Residuals",
+              "RSI-Anything: Unlocking Recursive Self-Improvement with World Models",
+              "Learning How to Remember: Memory Modality Selection for GUI Agents",
+              "Relevance Does Not Imply Applicability: Experience Activation for Personal GUI Agents",
+              "Continually Post-training Small Models via Synthetic Self-distillation",
+              "SepGen: Multi-Stem Audio-Video Separation and Generation in a Single Model"
+            ],
+            "entries": [
+              {
+                "title": "Waypoint-OPD：通过门控同策略蒸馏迁移 RL 引发的策略偏移",
+                "url": "https://arxiv.org/abs/2610.21601"
+              },
+              {
+                "title": "OmniCompass：面向全模态视频定位与理解的综合基准",
+                "url": "https://arxiv.org/abs/2610.18829"
+              },
+              {
+                "title": "Jeva：从第一性原理构建 System One 模型",
+                "url": "https://arxiv.org/abs/2610.18773"
+              },
+              {
+                "title": "VideoJev：面向视频理解与交互的 System One 模型",
+                "url": "https://arxiv.org/abs/2610.18615"
+              },
+              {
+                "title": "MJev-Spatial：通过原生注意力匹配实现系统 1 空间智能",
+                "url": "https://arxiv.org/abs/2610.22276"
+              },
+              {
+                "title": "任意时间、任意空间：一种以世界状态为中心的智能体视频生成框架",
+                "url": "https://arxiv.org/abs/2610.20571"
+              },
+              {
+                "title": "Player-1：从合成经验中学习游戏操作",
+                "url": "https://arxiv.org/abs/2610.20584"
+              },
+              {
+                "title": "GroundingPI：面向物理智能、以视觉基元实现接地的基座模型",
+                "url": "https://arxiv.org/abs/2609.39601"
+              },
+              {
+                "title": "DiffusionART：高效、稳定且可扩展的扩散模型强化学习",
+                "url": "https://arxiv.org/abs/2610.12572"
+              },
+              {
+                "title": "OpenGCUA：迈向通用计算机使用全开放技术栈",
+                "url": "https://arxiv.org/abs/2610.22200"
+              },
+              {
+                "title": "S-Space：探索多模态语言模型中的空间工作区",
+                "url": "https://arxiv.org/abs/2610.13527"
+              },
+              {
+                "title": "FDE-Gym：AI 交付的最后一公里",
+                "url": "https://arxiv.org/abs/2610.22350"
+              },
+              {
+                "title": "思维惯性：LLM 在被要求停止思考时仍会继续思考",
+                "url": "https://arxiv.org/abs/2610.11765"
+              },
+              {
+                "title": "超越域路由监督：多教师策略内蒸馏中的跨教师守卫",
+                "url": "https://arxiv.org/abs/2610.13521"
+              },
+              {
+                "title": "AgentSWE：编码 Agent 能构建你真正想要的 Agent 吗？",
+                "url": "https://arxiv.org/abs/2610.13361"
+              },
+              {
+                "title": "Agent-Reflex：教语言智能体进行反思性行动",
+                "url": "https://arxiv.org/abs/2610.17953"
+              },
+              {
+                "title": "RoTA-Bench：通过交互式投影对齐评估 3D 空间推理",
+                "url": "https://arxiv.org/abs/2610.17665"
+              },
+              {
+                "title": "自演化 Agent Harness",
+                "url": "https://arxiv.org/abs/2610.18813"
+              },
+              {
+                "title": "面向长时程终端智能的 Agentic 数据扩展",
+                "url": "https://arxiv.org/abs/2610.13166"
+              },
+              {
+                "title": "MAI-Gym：面向移动端与计算机环境的 GUI Agent 评估与 RL 训练开放一体化平台",
+                "url": "https://arxiv.org/abs/2610.20939"
+              },
+              {
+                "title": "Reflex：视觉 grounded 的反应式人形机器人控制",
+                "url": "https://arxiv.org/abs/2610.12772"
+              },
+              {
+                "title": "学习在哪里切分：用于音频源分离的动态频带切分",
+                "url": "https://arxiv.org/abs/2610.14993"
+              },
+              {
+                "title": "AesCode：具有解耦跨模态奖励的美学代码生成",
+                "url": "https://arxiv.org/abs/2610.18860"
+              },
+              {
+                "title": "Urbex：面向城市级 3D 场景的 Agent 空间定位",
+                "url": "https://arxiv.org/abs/2610.18356"
+              },
+              {
+                "title": "InfiniSplat v2：分析与改进任意视角下的前馈 3DGS",
+                "url": "https://arxiv.org/abs/2610.20341"
+              },
+              {
+                "title": "SoftwareGym：用多样化合成软件环境扩展计算机使用 Agent 训练",
+                "url": "https://arxiv.org/abs/2610.12611"
+              },
+              {
+                "title": "Tev：用密集进度奖励扩展长程 Agent 环境",
+                "url": "https://arxiv.org/abs/2610.18868"
+              },
+              {
+                "title": "Harness^2：面向开放世界的递归式 Agent 执行框架构建",
+                "url": "https://arxiv.org/abs/2610.14224"
+              },
+              {
+                "title": "稀疏自编码器表征的行为组合性",
+                "url": "https://arxiv.org/abs/2610.21261"
+              },
+              {
+                "title": "3DCodeVerse：将 3D 世界作为代码进行探索",
+                "url": "https://arxiv.org/abs/2610.22341"
+              },
+              {
+                "title": "Doc2Harness：在编码 Agent 的长程 Harness 工程中对 LLM 进行基准测试",
+                "url": "https://arxiv.org/abs/2610.20344"
+              },
+              {
+                "title": "GreenWAM：面向机器人领域的世界基础模型",
+                "url": "https://arxiv.org/abs/2610.18774"
+              },
+              {
+                "title": "VIS-Ground：基于上下文依据的视频互动叙事",
+                "url": "https://arxiv.org/abs/2610.09326"
+              },
+              {
+                "title": "GroundAnything：以极速协调并行解码与精确视觉定位",
+                "url": "https://arxiv.org/abs/2609.39600"
+              },
+              {
+                "title": "TPPO：用于语言模型推理的跟踪价值 PPO",
+                "url": "https://arxiv.org/abs/2610.16794"
+              },
+              {
+                "title": "ExeWorldBench：面向基于代码的可执行 3D 世界建模的基准测试",
+                "url": "https://arxiv.org/abs/2610.15166"
+              },
+              {
+                "title": "WorkRover：通过递归环境演化扩展长时程协作 Agent 训练",
+                "url": "https://arxiv.org/abs/2610.18067"
+              },
+              {
+                "title": "Vela：以用户行为作为监督信号激发 LLM 智能",
+                "url": "https://arxiv.org/abs/2610.14709"
+              },
+              {
+                "title": "更多方法，更好的 Agent？Agentic 强化学习中自蒸馏的现实检验",
+                "url": "https://arxiv.org/abs/2610.19789"
+              },
+              {
+                "title": "SCOPE：面向文本到图像生成提示词工程的语义边界信用优化",
+                "url": "https://arxiv.org/abs/2610.22264"
+              },
+              {
+                "title": "通过批评引导的在线策略蒸馏恢复可靠监督",
+                "url": "https://arxiv.org/abs/2610.20572"
+              },
+              {
+                "title": "X-Ragent：面向基于证据的胸部X射线推理的工具增强强化学习",
+                "url": "https://arxiv.org/abs/2610.16811"
+              },
+              {
+                "title": "DoSA：点稀疏注意力",
+                "url": "https://arxiv.org/abs/2610.13990"
+              },
+              {
+                "title": "用于高效自回归视频生成的 Speculative Forcing",
+                "url": "https://arxiv.org/abs/2610.22347"
+              },
+              {
+                "title": "LeWAM：基于 JEPA 的端到端世界与动作建模",
+                "url": "https://arxiv.org/abs/2610.12818"
+              },
+              {
+                "title": "EmbodiedCLBench：评估自进化具身智能体的持续学习能力",
+                "url": "https://arxiv.org/abs/2610.13021"
+              },
+              {
+                "title": "Last Secure Code Benchmark：你“氛围编程”出的代码安全吗？",
+                "url": "https://arxiv.org/abs/2610.14766"
+              },
+              {
+                "title": "多个正确答案，一个训练样本：为 LLM 推荐器移除 GRPO 中的回答者噪声",
+                "url": "https://arxiv.org/abs/2610.17771"
+              },
+              {
+                "title": "Multics：具有分层通信的生成式多玩家世界模型",
+                "url": "https://arxiv.org/abs/2610.17201"
+              },
+              {
+                "title": "UltraBERT：超越 BERT 预训练的极限",
+                "url": "https://arxiv.org/abs/2610.15028"
+              },
+              {
+                "title": "VisionWeave：将弹性视觉表示编织为多模态大模型的原生能力",
+                "url": "https://arxiv.org/abs/2610.07987"
+              },
+              {
+                "title": "SwarmRSI：通过进化科学 Agent 群体实现递归自我改进",
+                "url": "https://arxiv.org/abs/2610.20431"
+              },
+              {
+                "title": "得分更高，回答更差：通过协议级评分标准缓解基于评分标准的强化学习中的奖励黑客行为",
+                "url": "https://arxiv.org/abs/2609.38847"
+              },
+              {
+                "title": "LatentLoop：以非对称计算分配扩展循环 MoE 模型",
+                "url": "https://arxiv.org/abs/2610.19975"
+              },
+              {
+                "title": "在立体声中聆听世界：面向沉浸式视频-音频联合生成的动态空间对应学习",
+                "url": "https://arxiv.org/abs/2609.38748"
+              },
+              {
+                "title": "Cortex：将上下文整合为参数化记忆",
+                "url": "https://arxiv.org/abs/2610.20399"
+              },
+              {
+                "title": "SALD：面向扩散模型的自参考优势学习",
+                "url": "https://arxiv.org/abs/2610.01496"
+              },
+              {
+                "title": "EviScene：超越“它是不是 AI 生成的？”——面向 Agent 的图像事实性评估",
+                "url": "https://arxiv.org/abs/2610.14609"
+              },
+              {
+                "title": "ActionOPD：蒸馏决策，而非 Token",
+                "url": "https://arxiv.org/abs/2610.19820"
+              },
+              {
+                "title": "将每个奖励分配给其相关 Token：多奖励 RL 的奖励特定 Token 级信用分配",
+                "url": "https://arxiv.org/abs/2610.21439"
+              },
+              {
+                "title": "AReA：用于高效高分辨率扩散 Transformer 的自适应感受野注意力",
+                "url": "https://arxiv.org/abs/2610.17227"
+              },
+              {
+                "title": "VLA-Δ：为视觉-语言-动作模型学习物理状态转移",
+                "url": "https://arxiv.org/abs/2610.21306"
+              },
+              {
+                "title": "Mosaic：多会话智能体强化学习",
+                "url": "https://arxiv.org/abs/2610.22174"
+              },
+              {
+                "title": "ProgramGym：面向长周期程序复现 Agent 的可扩展训练环境",
+                "url": "https://arxiv.org/abs/2610.13395"
+              },
+              {
+                "title": "CommerceGen-Studio：面向商业级主图生成的端到端框架",
+                "url": "https://arxiv.org/abs/2610.20603"
+              },
+              {
+                "title": "Work2Skill：捕获人类 GUI 经验以用于可复用 Agent 技能归纳",
+                "url": "https://arxiv.org/abs/2610.12984"
+              },
+              {
+                "title": "APEX：面向极端压缩的异步前缀去噪",
+                "url": "https://arxiv.org/abs/2610.12843"
+              },
+              {
+                "title": "看见、维护与学习：多模态 Agent 记忆的演进",
+                "url": "https://arxiv.org/abs/2610.19366"
+              },
+              {
+                "title": "多流注意力残差",
+                "url": "https://arxiv.org/abs/2610.13630"
+              },
+              {
+                "title": "RSI-Anything：借助世界模型实现递归自我改进",
+                "url": "https://arxiv.org/abs/2610.13912"
+              },
+              {
+                "title": "学习如何记忆：GUI Agent 的记忆模态选择",
+                "url": "https://arxiv.org/abs/2610.17928"
+              },
+              {
+                "title": "相关性不等于适用性：面向个人 GUI Agent 的经验激活",
+                "url": "https://arxiv.org/abs/2609.33304"
+              },
+              {
+                "title": "通过合成自蒸馏持续后训练小模型",
+                "url": "https://arxiv.org/abs/2610.13113"
+              },
+              {
+                "title": "SepGen：在单一模型中实现多分轨音视频分离与生成",
+                "url": "https://arxiv.org/abs/2610.11361"
+              }
+            ]
+          }
         },
         {
           "id": "ai-papers:2026/1005-1009.md",
           "title": "AI 论文周报｜2026-10-05 — 2026-10-09",
           "date": "2026-10-11",
           "url": "https://github.com/careywyr/AI-Weekly-Paper/blob/main/2026/1005-1009.md",
-          "summary": "本期收录 56 篇论文，涉及智能体、具身智能、多模态、视频生成。阅读中文解读，进一步查看论文与研究项目。",
+          "summary": "本期目录收录 56 篇论文，涉及智能体、具身智能、多模态、视频生成。站内浏览导读与篇目，再按需查阅论文资料。",
           "tags": [
             "智能体",
             "具身智能",
             "多模态",
             "视频生成"
-          ]
+          ],
+          "reading": {
+            "sections": [
+              "RealCompanion: Benchmarking Human Understanding from Reasoning over Longitudinal Real-World Conversations",
+              "Rethinking Cross-Tokenizer On-Policy Distillation: From Alignment Coverage to Supervision Reliability",
+              "AgentGarten: Code Worlds for Evolving Agents",
+              "Kandinsky 6.0 Video: Foundation Models for Synchronized Video and Audio Generation",
+              "Self-Retrospection Distillation: Turning Post-hoc Experiences into Prior Foresight",
+              "UltraText Bench: A Comprehensive Bilingual Benchmark for Evaluating Visual Text Rendering in Image Generation",
+              "LoGRA: Scaling LLM Reinforcement Learning with Low-Rank Gradient Sketches",
+              "Learn2Play Bench: How Well Do LLM Agents Learn from Experience in Unfamiliar Environments?",
+              "TokenRouter: Efficient Serving System for Token-Level LLM Routing",
+              "FrameMorrow: Future-guided Frame Selection with Prospective Tokens for Long-Horizon Video Generation",
+              "STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization",
+              "MotorMind: Scaffolding General Vision Language Models for Zero-Shot Robot Manipulation",
+              "From Traces to Agentic Worlds: Agentic Language World Models for Interactive Environment Simulation",
+              "Long-WAM: Scaling the Context of World-Action Models",
+              "Scaling Trajectories for Complex Tasks through Recursive Self-Rewrite",
+              "nanoMuse: An Open-Source Personal Agent for Every Device You Own",
+              "DuoMatching: Joint-Marginal Distribution Matching for Few-Step Video Generation",
+              "World Action Modeling with Progressive Visual Planning",
+              "TRACE: Rollout-Guided Quantization-Aware Training for FP4 Reinforcement Learning of MoE Language Models",
+              "Native Action-Prior Learning from Videos for World Action Models",
+              "On-Policy Parameter Update Direction Underlies Generalization in LLM Post-Training",
+              "Recursive Game Creator: An Agentic Product-Level Experience-Oriented Game Harness",
+              "ALoDLM: Adaptively Looped Diffusion Language Models",
+              "GRACE: Generation-aware latent compression for efficient video generation",
+              "DecepEval: A Benchmark for Evaluating Deception in LLM Agents",
+              "MiMo-V2.6: Scaling Reinforcement Learning Towards Self-Improvement",
+              "SuperNav: An Agentic Navigation System for Any Task in Any Scene",
+              "Questioning the Questions: Sustaining Self-Evolution in Reasoning Models",
+              "Latent-MOPD: Latent Multi-Teacher On-Policy Distillation",
+              "LexReward: A Taxonomy-Driven Reward Framework for Legal Language Models",
+              "CheckerBench: Can Long-Horizon Agents Synthesize Static-Analysis Checkers?",
+              "PointWAM: 3D World Action Modeling for Dexterous Robotic Manipulation",
+              "Pivot-SD: Efficient Self-Distillation for Masked Diffusion Language Models",
+              "Science or Slop?: Benchmarking and Mitigating Scientific Slop in AI-Generated Papers",
+              "PDE-JEPA: Predictive Representation Learning of Latent Dynamics Modeling for Parametric PDEs",
+              "VeriHarness: Scaling Agentic Verification for Long-Horizon Tasks",
+              "Memadapter: Counterfactual Adaptation Against Memory-induced Sycophancy",
+              "HyperBrowseComp: A Multilingual and Multimodal Stress Test for Web-Browsing Agents",
+              "Spatial Memory Intelligence: Endowing World Models with Understanding-Driven Long-Term Memory",
+              "EditHero: A Benchmark for Long-Horizon Part-Level 3D Editing and Vibe Modeling",
+              "SimuVerity: Benchmarking Agents for Engineering-Grade Simulink Model Generation",
+              "UniWAM: Unified World-Action Model",
+              "VepAgent: Bridging Causal-Transition via Tool-Augmented Reinforcement Learning for Video Event Prediction",
+              "SGF+: Decoupling Gradient Flows for Autoregressive Video Generation",
+              "World Embedding Benchmark",
+              "Multi-Agent Egocentric World Model with Fine-Grained Embodied Interaction",
+              "EVISKILL: Grounding Skill Evolution in Replayable Evidence",
+              "Multilingual GSM-Symbolic: What determines capability transfer across languages?",
+              "In-Distribution Forcing for Long Video Generation at Test Time",
+              "Does Learning Protein Folding Generalize to Broader Reasoning?",
+              "In-context Robot Learning Made Simple: A Democratized Recipe for Manipulation Tasks",
+              "Kinematic MeanFlow: One-Step Action Generation Policy for Robotic Foundation Models",
+              "Source Preference in the Wild: How LLM Agents Favor Items by Source, and How to Reduce It",
+              "Tetris3D: 3D Scene Generation With Objects That Fit Together",
+              "From Evidence to Action: How Tool-Using Agents Fail",
+              "Science Utopia? Closed-Loop LLM Simulation of Academic Research Ecosystems"
+            ],
+            "entries": [
+              {
+                "title": "RealCompanion：基于纵向真实世界对话推理的人类理解基准测试",
+                "url": "https://arxiv.org/abs/2610.01780"
+              },
+              {
+                "title": "重新思考跨 Tokenizer 的在线策略蒸馏：从对齐覆盖到监督可靠性",
+                "url": "https://arxiv.org/abs/2610.08448"
+              },
+              {
+                "title": "AgentGarten：面向进化型 Agent 的代码世界",
+                "url": "https://arxiv.org/abs/2610.12374"
+              },
+              {
+                "title": "Kandinsky 6.0 Video：同步视频与音频生成的基础模型",
+                "url": "https://arxiv.org/abs/2610.05608"
+              },
+              {
+                "title": "自回溯蒸馏：将事后经验转化为事前预见力",
+                "url": "https://arxiv.org/abs/2610.08077"
+              },
+              {
+                "title": "UltraText Bench：用于评估图像生成中视觉文本渲染的综合双语基准",
+                "url": "https://arxiv.org/abs/2610.09823"
+              },
+              {
+                "title": "LoGRA：以低秩梯度草图扩展 LLM 强化学习",
+                "url": "https://arxiv.org/abs/2610.06647"
+              },
+              {
+                "title": "Learn2Play Bench：LLM Agent 在陌生环境中的经验学习能力如何？",
+                "url": "https://arxiv.org/abs/2610.08215"
+              },
+              {
+                "title": "TokenRouter：面向 Token 级 LLM 路由的高效服务系统",
+                "url": "https://arxiv.org/abs/2610.12242"
+              },
+              {
+                "title": "FrameMorrow：面向长时程视频生成、由未来引导的帧选择与前瞻性 Token",
+                "url": "https://arxiv.org/abs/2609.38839"
+              },
+              {
+                "title": "STEPQuant：Delta 规则循环状态量化中误差何时与何处更重要",
+                "url": "https://arxiv.org/abs/2609.38169"
+              },
+              {
+                "title": "MotorMind：为通用视觉语言模型搭建脚手架以实现零样本机器人操作",
+                "url": "https://arxiv.org/abs/2609.38078"
+              },
+              {
+                "title": "从交互轨迹到 Agentic 世界：面向交互式环境模拟的 Agentic 语言世界模型",
+                "url": "https://arxiv.org/abs/2610.06100"
+              },
+              {
+                "title": "Long-WAM：扩展世界-动作模型的上下文",
+                "url": "https://arxiv.org/abs/2610.10528"
+              },
+              {
+                "title": "通过递归自我重写扩展复杂任务的轨迹",
+                "url": "https://arxiv.org/abs/2610.02826"
+              },
+              {
+                "title": "nanoMuse：面向你拥有的每一台设备的开源个人 Agent",
+                "url": "https://arxiv.org/abs/2610.08699"
+              },
+              {
+                "title": "DuoMatching：面向少步视频生成的联合-边缘分布匹配",
+                "url": "https://arxiv.org/abs/2610.03543"
+              },
+              {
+                "title": "基于渐进式视觉规划的世界动作建模",
+                "url": "https://arxiv.org/abs/2610.02508"
+              },
+              {
+                "title": "TRACE：面向 MoE 语言模型 FP4 强化学习的 Rollout 引导量化感知训练",
+                "url": "https://arxiv.org/abs/2610.07767"
+              },
+              {
+                "title": "从视频中学习世界动作模型的原生动作先验",
+                "url": "https://arxiv.org/abs/2610.03391"
+              },
+              {
+                "title": "LLM 后训练中泛化能力背后的 On-Policy 参数更新方向",
+                "url": "https://arxiv.org/abs/2609.36659"
+              },
+              {
+                "title": "递归游戏创造者：面向产品级体验的 Agentic 游戏框架",
+                "url": "https://arxiv.org/abs/2610.08621"
+              },
+              {
+                "title": "ALoDLM：自适应循环 Diffusion Language Model",
+                "url": "https://arxiv.org/abs/2610.04198"
+              },
+              {
+                "title": "GRACE：面向高效视频生成的生成感知潜在压缩",
+                "url": "https://arxiv.org/abs/2610.10524"
+              },
+              {
+                "title": "DecepEval：评估 LLM Agent 欺骗行为的基准",
+                "url": "https://arxiv.org/abs/2610.07967"
+              },
+              {
+                "title": "MiMo-V2.6：将强化学习扩展至自我改进",
+                "url": "https://arxiv.org/abs/2610.11959"
+              },
+              {
+                "title": "SuperNav：面向任意场景中任意任务的 Agent 导航系统",
+                "url": "https://arxiv.org/abs/2610.12126"
+              },
+              {
+                "title": "质疑问题本身：在推理模型中维持自我进化",
+                "url": "https://arxiv.org/abs/2610.04299"
+              },
+              {
+                "title": "潜在多教师在线策略蒸馏",
+                "url": "https://arxiv.org/abs/2610.02381"
+              },
+              {
+                "title": "LexReward：面向法律语言模型的分类驱动奖励框架",
+                "url": "https://arxiv.org/abs/2609.39071"
+              },
+              {
+                "title": "CheckerBench：长时程 Agent 能否合成静态分析检查器？",
+                "url": "https://arxiv.org/abs/2610.07557"
+              },
+              {
+                "title": "PointWAM：面向灵巧机器人操作的 3D 世界动作建模",
+                "url": "https://arxiv.org/abs/2610.02840"
+              },
+              {
+                "title": "Pivot-SD：面向掩码扩散语言模型的高效自蒸馏",
+                "url": "https://arxiv.org/abs/2610.03665"
+              },
+              {
+                "title": "科学还是垃圾？：对 AI 生成论文中的科学垃圾进行基准测试与缓解",
+                "url": "https://arxiv.org/abs/2610.00531"
+              },
+              {
+                "title": "PDE-JEPA：面向参数化 PDE 的隐动力学建模预测性表征学习",
+                "url": "https://arxiv.org/abs/2609.34715"
+              },
+              {
+                "title": "VeriHarness：为长时程任务扩展智能体验证能力",
+                "url": "https://arxiv.org/abs/2610.00972"
+              },
+              {
+                "title": "MemAdapter：对抗记忆诱发谄媚的反事实适配",
+                "url": "https://arxiv.org/abs/2610.05162"
+              },
+              {
+                "title": "HyperBrowseComp：面向网页浏览 Agent 的多语言、多模态压力测试",
+                "url": "https://arxiv.org/abs/2610.03574"
+              },
+              {
+                "title": "空间记忆智能：赋予世界模型理解驱动的长期记忆",
+                "url": "https://arxiv.org/abs/2610.02521"
+              },
+              {
+                "title": "EditHero：面向长程部件级 3D 编辑与 Vibe Modeling 的基准",
+                "url": "https://arxiv.org/abs/2610.02298"
+              },
+              {
+                "title": "SimuVerity：面向工程级 Simulink 模型生成的 Agent 基准测试",
+                "url": "https://arxiv.org/abs/2610.02304"
+              },
+              {
+                "title": "UniWAM：统一世界-动作模型",
+                "url": "https://arxiv.org/abs/2610.02054"
+              },
+              {
+                "title": "VepAgent：通过工具增强强化学习架起因果过渡桥梁，用于视频事件预测",
+                "url": "https://arxiv.org/abs/2610.06293"
+              },
+              {
+                "title": "SGF+：解耦自回归视频生成的梯度流",
+                "url": "https://arxiv.org/abs/2610.10429"
+              },
+              {
+                "title": "世界嵌入基准",
+                "url": "https://arxiv.org/abs/2610.03632"
+              },
+              {
+                "title": "具有细粒度具身交互的多智能体自我中心世界模型",
+                "url": "https://arxiv.org/abs/2610.12299"
+              },
+              {
+                "title": "EVISKILL：将技能演化建立在可回放证据之上",
+                "url": "https://arxiv.org/abs/2610.05030"
+              },
+              {
+                "title": "多语言 GSM-Symbolic：是什么决定了跨语言的能力迁移？",
+                "url": "https://arxiv.org/abs/2610.03367"
+              },
+              {
+                "title": "测试时长视频生成的分布内强制",
+                "url": "https://arxiv.org/abs/2610.03120"
+              },
+              {
+                "title": "学习蛋白质折叠能否泛化到更广泛的推理？",
+                "url": "https://arxiv.org/abs/2609.38879"
+              },
+              {
+                "title": "上下文机器人学习简明指南：面向操作任务的民主化方案",
+                "url": "https://arxiv.org/abs/2609.38173"
+              },
+              {
+                "title": "运动学 MeanFlow：面向机器人基础模型的一步动作生成策略",
+                "url": "https://arxiv.org/abs/2610.00864"
+              },
+              {
+                "title": "真实环境中的来源偏好：LLM Agent 如何按来源偏向条目，以及如何减少这种偏好",
+                "url": "https://arxiv.org/abs/2610.03195"
+              },
+              {
+                "title": "Tetris3D：可相互契合物体的 3D 场景生成",
+                "url": "https://arxiv.org/abs/2610.10539"
+              },
+              {
+                "title": "从证据到行动：工具使用型 Agent 为何失败",
+                "url": "https://arxiv.org/abs/2610.07753"
+              },
+              {
+                "title": "科学乌托邦？学术研究生态系统的闭环 LLM 模拟",
+                "url": "https://arxiv.org/abs/2610.01257"
+              }
+            ]
+          }
         },
         {
           "id": "ai-papers:2026/0928-1002.md",
           "title": "AI 论文周报｜2026-09-28 — 2026-10-02",
           "date": "2026-10-04",
           "url": "https://github.com/careywyr/AI-Weekly-Paper/blob/main/2026/0928-1002.md",
-          "summary": "本期收录 76 篇论文，涉及智能体、具身智能、多模态、视频生成。阅读中文解读，进一步查看论文与研究项目。",
+          "summary": "本期目录收录 76 篇论文，涉及智能体、具身智能、多模态、视频生成。站内浏览导读与篇目，再按需查阅论文资料。",
           "tags": [
             "智能体",
             "具身智能",
             "多模态",
             "视频生成"
-          ]
+          ],
+          "reading": {
+            "sections": [
+              "Raven: The Harness of Harnesses for Composable Agentic Intelligence",
+              "The Teacher Is a Direction, Not a Destination: Extrapolating RL-Induced Representation Residuals in On-Policy Distillation",
+              "MaLiang-Harness: A Programmable Path to Image and Video Generation",
+              "LoopVL: Recurrent Visual Intelligence",
+              "False Frontiers: Diagnosing and Mitigating Co-Cheating in Self-Evolving Search Agents",
+              "In-Context Learning for Robots: Methods and Applications",
+              "Scaling Properties of Same-Family On-Policy Distillation",
+              "Omni-IO Skills: Harnessing Your Agent Omni-Native",
+              "UniEvo-VL: An On-policy Self-Distillation Training Recipe for Multimodal Model Self-improvement",
+              "Post-Training Leaves Behavioral Shadows on Unrelated Decisions",
+              "YuE2: Unifying Symbolic and Audio Music Generation at Frontier Quality",
+              "VisionHOPE: Visual Backbones as Self-Modifying Learning Systems",
+              "Rethinking Latent Visual Reasoning: Grounding Latent Reasoning in Visual Evidence",
+              "Beyond Teacher Assignment: Domain-Normalized Multi-Teacher On-Policy Distillation",
+              "PanoVLN: Towards Effective Panoramic Vision-and-Language Navigation",
+              "On-Policy or Off-Policy Learning? A Systematic Study of Distillation Dynamics",
+              "OneStreamer: Unifying Perception, Memory, and Proactive Response in Streaming Video Interaction",
+              "FuseReg: Regularizing Layer Fusion Mitigates the Reconstruction-Generation Gap in Representation Autoencoders",
+              "VoxMem: Benchmarking Multimodal Memory in Large Audio Language Models",
+              "GraphForge: Training Working Agents with Graph-Anchored Workspace Synthesis",
+              "LEGO-Anything: Coding Agents for 3D Scene Reconstruction",
+              "What Makes World Action Models Generalize? An Empirical Study of Test-Time Future Modeling",
+              "Groupwise Agentic Grading and Advantage Redistribution for Code Agent RL",
+              "AREX-2: Advancing Self-Improving Agents through Long-Horizon Reflective Tasks",
+              "Adaptive Reward Routing: Dynamic Multi-Reward Optimization for Joint Audio-Video Diffusion via Forward-Process RL",
+              "Mid-Harness: Scaling Actions Between Model and Harness for Terminal Agents",
+              "Beyond the Timeline: Augmenting Long-Video Memory with Grounded Entity Biographies",
+              "Self-Evolving Coding Agents: From Digital Programs to Physical-World Intelligence",
+              "EvoDuet: Bilevel Co-Evolution of Web Searching and Task Solving for Scientific Discovery",
+              "Think Before You Score: Thinking Reward Model for Visual Generation",
+              "Periodic Weak Spots: Phase Sensitivity from Chunked KV-Cache Compression",
+              "WorldAuditBench: Interactive 3D World Auditing with Multimodal Agents",
+              "Follow the Entities: A Corpus Map for Agentic Search",
+              "SAKI: Maximal-Coupling-Routed Teacher Supervision for On-Policy Distillation",
+              "Disaggregated Quantization: Specializing LLM Prefill and Decode",
+              "Duplex-MPE: Benchmarking Multi-Party Interaction in Full-Duplex Dialogue",
+              "Learning Meta-Skills for Agent Harness Design in Test-Time AI4AI",
+              "Beyond Memory: Harnessing Long-Horizon Agents with Explicit Belief States",
+              "Hierarchical Continuous Diffusion Language Models",
+              "RSIGame: Autonomous Agentic Game Development with Recursive Self-improvement",
+              "LLMs are General Asynchronous Agents",
+              "Sharpening Tax in Post-Training",
+              "MassAlloc Attention: Let Attention Allocate Its Own Compute",
+              "Agent Priors-guided Policy Learning",
+              "TraceDance: An Automated System for Building Agent Behavior Benchmarks from Real-World Agent Deployment Traces",
+              "World Observer: Joint Actor-Observer Generation for Persistent World Modeling",
+              "A Missing Piece for Trustworthy AI Reviewers: From Benchmarking Rhetorical Robustness to SciCore Review",
+              "EVOKE: Eliciting World Knowledge in Agents for Transferable Decision-Making",
+              "EngiWorld: What Can Frontier Agents Deliver in Professional Engineering Environments?",
+              "CoWindow Attention: Full Causal Coverage Is a Collective Property",
+              "Beyond Dyadic Memory: Interaction-Aware Multimodal Memory with Adaptive Agentic Retrieval for Multi-Party Spoken Conversations",
+              "How Far Are We from Removing the Visual Encoder? Scaling Laws for Encoder-Free Multimodal Pretraining",
+              "LongCat-DeepResearch Technical Report",
+              "Transformers Stop Thinking Too Early, and a Tiny LoRA Fixes It",
+              "Thinking Outside the Box: Can Language Models Rely on External Guidance Selectively?",
+              "Learning Beyond What You Sample: Off-Policy-Aware Cross-Model Trajectory Exchange for RLVR",
+              "Imagine3D-LLM: Teaching MLLMs to Imagine 3D Scenes Before Answering",
+              "ROWBench: Do Video Models Render What the Program Specifies?",
+              "Improving Test-Time Scaling with Adaptive Looped Transformers",
+              "E-MoE: Enhanced Mixture-of-Experts for Non-Factorized Diffusion Language Models",
+              "ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization",
+              "RayOrch: Programming and Executing Lineage-Controlled Multi-Grain Dataflows for Foundation-Model Data Preparation",
+              "More Choices, Fewer Decisions: Ordinal-Scale Bias in JEV-like Direct-Decision Models",
+              "OSWorld-Science: A Benchmark of Computer Use Agents for Learning and Using Scientific Software",
+              "OmniTaskonomy: When Does Visual Generation Improve Visual Understanding?",
+              "Make Sparse Rewards Count: Density-Aware Reward Aggregation for Multi-Reward RL",
+              "AutoGUIWorld: Image Generators as Visual World Models for GUI Agent",
+              "AIM: Agentic Idea Management for Automated Research",
+              "Learning Native Reflection in Unified Models with Interleaved Reinforcement Learning",
+              "Agent Error Dataset: Scaling 50,000 Error--Diagnosis Pairs for Failure Analysis and Error-Aware Post-Training",
+              "ROSS: Relearning from Self-Generated Rollouts through Selective Supervision",
+              "EgoTools: Towards Tool-Centric Reasoning in Real-World Egocentric Videos",
+              "Retrieval-Augmented Skill Optimization via Cross-Harness Adaptation",
+              "LANTERN: Illuminating Hidden Mathematical Knowledge in Language Models",
+              "APM-Bench: Benchmarking Cross-session Persistent Memory for Egocentric Streaming Video Assistants",
+              "HybridCUA: Learning to Orchestrate GUI and CLI for Computer-Use Agents"
+            ],
+            "entries": [
+              {
+                "title": "Raven：面向可组合智能体系统的“框架之框架”",
+                "url": "https://arxiv.org/abs/2609.33439"
+              },
+              {
+                "title": "教师是一个方向，而非终点：在在线策略蒸馏中外推 RL 诱导的表征残差",
+                "url": "https://arxiv.org/abs/2609.36484"
+              },
+              {
+                "title": "MaLiang-Harness：通往图像与视频生成的可编程路径",
+                "url": "https://arxiv.org/abs/2609.34309"
+              },
+              {
+                "title": "LoopVL：循环视觉智能",
+                "url": "https://arxiv.org/abs/2609.38426"
+              },
+              {
+                "title": "虚假前沿：诊断与缓解自进化搜索智能体中的协同作弊",
+                "url": "https://arxiv.org/abs/2609.39102"
+              },
+              {
+                "title": "机器人的上下文学习：方法与应用",
+                "url": "https://arxiv.org/abs/2609.36012"
+              },
+              {
+                "title": "同系列在线策略蒸馏的缩放特性",
+                "url": "https://arxiv.org/abs/2609.32722"
+              },
+              {
+                "title": "Omni-IO Skills：让 Agent 实现全模态原生能力",
+                "url": "https://arxiv.org/abs/2609.31847"
+              },
+              {
+                "title": "UniEvo-VL：面向多模态模型自我改进的在线策略自蒸馏训练方案",
+                "url": "https://arxiv.org/abs/2609.38721"
+              },
+              {
+                "title": "后训练在不相关决策上留下行为影子",
+                "url": "https://arxiv.org/abs/2609.29233"
+              },
+              {
+                "title": "YuE2：以前沿质量统一符号音乐与音频音乐生成",
+                "url": "https://arxiv.org/abs/2609.33757"
+              },
+              {
+                "title": "VisionHOPE：将视觉骨干网络作为自修改学习系统",
+                "url": "https://arxiv.org/abs/2609.33325"
+              },
+              {
+                "title": "重新思考潜在视觉推理：将潜在推理锚定于视觉证据",
+                "url": "https://arxiv.org/abs/2609.34563"
+              },
+              {
+                "title": "超越教师分配：领域归一化的多教师同策略蒸馏",
+                "url": "https://arxiv.org/abs/2609.35347"
+              },
+              {
+                "title": "PanoVLN：面向高效全景视觉–语言导航",
+                "url": "https://arxiv.org/abs/2609.34759"
+              },
+              {
+                "title": "在策略学习还是离策略学习？蒸馏动态的系统性研究",
+                "url": "https://arxiv.org/abs/2609.35259"
+              },
+              {
+                "title": "OneStreamer：统一流式视频交互中的感知、记忆与主动响应",
+                "url": "https://arxiv.org/abs/2610.01762"
+              },
+              {
+                "title": "FuseReg：通过正则化层融合缓解表征自编码器中的重建-生成鸿沟",
+                "url": "https://arxiv.org/abs/2609.31620"
+              },
+              {
+                "title": "VoxMem：大型音频语言模型中的多模态记忆基准测试",
+                "url": "https://arxiv.org/abs/2609.32607"
+              },
+              {
+                "title": "GraphForge：以图锚定工作区合成训练可干活的 Agent",
+                "url": "https://arxiv.org/abs/2609.38923"
+              },
+              {
+                "title": "LEGO-Anything：用编码智能体实现三维场景重建",
+                "url": "https://arxiv.org/abs/2609.36380"
+              },
+              {
+                "title": "世界动作模型为何具备泛化能力？测试时未来建模的实证研究",
+                "url": "https://arxiv.org/abs/2609.34981"
+              },
+              {
+                "title": "面向代码 Agent 强化学习的分组式智能体评分与优势重分配",
+                "url": "https://arxiv.org/abs/2609.32577"
+              },
+              {
+                "title": "AREX-2：通过长时程反思任务推进自我改进 Agent",
+                "url": "https://arxiv.org/abs/2609.38288"
+              },
+              {
+                "title": "自适应奖励路由：通过前向过程 RL 实现联合音视频扩散的动态多奖励优化",
+                "url": "https://arxiv.org/abs/2609.37200"
+              },
+              {
+                "title": "Mid-Harness：在模型与执行框架之间扩展终端智能体的动作空间",
+                "url": "https://arxiv.org/abs/2609.39982"
+              },
+              {
+                "title": "超越时间线：用接地实体传记增强长视频记忆",
+                "url": "https://arxiv.org/abs/2609.38155"
+              },
+              {
+                "title": "自进化编码智能体：从数字程序到物理世界智能",
+                "url": "https://arxiv.org/abs/2609.35432"
+              },
+              {
+                "title": "EvoDuet：面向科学发现的网络搜索与任务求解双层协同演化",
+                "url": "https://arxiv.org/abs/2609.40340"
+              },
+              {
+                "title": "评分前先思考：面向视觉生成的思维奖励模型",
+                "url": "https://arxiv.org/abs/2609.37372"
+              },
+              {
+                "title": "周期性弱点：分块 KV 缓存压缩带来的相位敏感性",
+                "url": "https://arxiv.org/abs/2609.36322"
+              },
+              {
+                "title": "WorldAuditBench：面向多模态 Agent 的交互式 3D 世界审计",
+                "url": "https://arxiv.org/abs/2609.40325"
+              },
+              {
+                "title": "跟随实体：面向 Agentic Search 的语料地图",
+                "url": "https://arxiv.org/abs/2609.37226"
+              },
+              {
+                "title": "SAKI：面向同策略蒸馏的最大耦合路由教师监督",
+                "url": "https://arxiv.org/abs/2609.36601"
+              },
+              {
+                "title": "解耦量化：面向 LLM 预填充与解码的专门化",
+                "url": "https://arxiv.org/abs/2609.26333"
+              },
+              {
+                "title": "Duplex-MPE：全双工对话中的多方交互基准测试",
+                "url": "https://arxiv.org/abs/2609.31948"
+              },
+              {
+                "title": "学习用于测试时 AI4AI 中 Agent Harness 设计的元技能",
+                "url": "https://arxiv.org/abs/2609.38143"
+              },
+              {
+                "title": "超越记忆：以显式信念状态驱动长时程 Agent",
+                "url": "https://arxiv.org/abs/2610.01415"
+              },
+              {
+                "title": "分层连续扩散语言模型",
+                "url": "https://arxiv.org/abs/2610.02193"
+              },
+              {
+                "title": "RSIGame：面向自主智能体游戏开发的递归自我改进框架",
+                "url": "https://arxiv.org/abs/2609.39045"
+              },
+              {
+                "title": "LLM 是通用异步智能体",
+                "url": "https://arxiv.org/abs/2609.35427"
+              },
+              {
+                "title": "后训练中的锐化税",
+                "url": "https://arxiv.org/abs/2610.01509"
+              },
+              {
+                "title": "MassAlloc Attention：让注意力自行分配其计算量",
+                "url": "https://arxiv.org/abs/2609.32712"
+              },
+              {
+                "title": "Agent 先验引导的策略学习",
+                "url": "https://arxiv.org/abs/2609.35690"
+              },
+              {
+                "title": "TraceDance：从真实世界 Agent 部署轨迹自动构建 Agent 行为基准的系统",
+                "url": "https://arxiv.org/abs/2609.33295"
+              },
+              {
+                "title": "World Observer：面向持久世界建模的联合 Actor-Observer 生成",
+                "url": "https://arxiv.org/abs/2610.02162"
+              },
+              {
+                "title": "可信 AI 审稿人缺失的一环：从修辞鲁棒性基准测试到 SciCore Review",
+                "url": "https://arxiv.org/abs/2609.39027"
+              },
+              {
+                "title": "EVOKE：在 Agent 中激发世界知识以实现可迁移决策",
+                "url": "https://arxiv.org/abs/2609.38334"
+              },
+              {
+                "title": "EngiWorld：前沿智能体在专业工程环境中能交付什么？",
+                "url": "https://arxiv.org/abs/2609.37686"
+              },
+              {
+                "title": "CoWindow 注意力：完整因果覆盖是一种集体属性",
+                "url": "https://arxiv.org/abs/2609.32704"
+              },
+              {
+                "title": "超越二元对话记忆：面向多方语音对话的交互感知多模态记忆与自适应 Agentic 检索",
+                "url": "https://arxiv.org/abs/2609.32522"
+              },
+              {
+                "title": "我们距离移除视觉编码器还有多远？无编码器多模态预训练的缩放定律",
+                "url": "https://arxiv.org/abs/2609.35457"
+              },
+              {
+                "title": "LongCat-DeepResearch 技术报告",
+                "url": "https://arxiv.org/abs/2609.36071"
+              },
+              {
+                "title": "Transformer 过早停止思考，一个小 LoRA 就能修复",
+                "url": "https://arxiv.org/abs/2609.36585"
+              },
+              {
+                "title": "跳出框框思考：语言模型能否选择性地依赖外部指导？",
+                "url": "https://arxiv.org/abs/2609.39578"
+              },
+              {
+                "title": "超越采样范围的学习：面向 RLVR 的离策略感知跨模型轨迹交换",
+                "url": "https://arxiv.org/abs/2609.37868"
+              },
+              {
+                "title": "Imagine3D-LLM：让 MLLM 在回答前先想象 3D 场景",
+                "url": "https://arxiv.org/abs/2609.38177"
+              },
+              {
+                "title": "ROWBench：视频模型能否渲染出程序所指定的内容？",
+                "url": "https://arxiv.org/abs/2610.02205"
+              },
+              {
+                "title": "用自适应循环 Transformer 改进测试时扩展",
+                "url": "https://arxiv.org/abs/2609.35748"
+              },
+              {
+                "title": "E-MoE：面向非因子化扩散语言模型的增强型混合专家",
+                "url": "https://arxiv.org/abs/2609.37533"
+              },
+              {
+                "title": "ActiveSaddler：面向 Agent Harness 优化的自动化课程学习",
+                "url": "https://arxiv.org/abs/2610.00906"
+              },
+              {
+                "title": "RayOrch：为面向基础模型的数据准备而编程并执行谱系受控的多粒度数据流",
+                "url": "https://arxiv.org/abs/2609.18703"
+              },
+              {
+                "title": "更多选择，更少决策：类 JEV 直接决策模型中的序数尺度偏差",
+                "url": "https://arxiv.org/abs/2609.38827"
+              },
+              {
+                "title": "OSWorld-Science：面向学习和使用科学软件的计算机使用Agent基准",
+                "url": "https://arxiv.org/abs/2609.39903"
+              },
+              {
+                "title": "OmniTaskonomy：视觉生成何时能提升视觉理解？",
+                "url": "https://arxiv.org/abs/2609.38079"
+              },
+              {
+                "title": "让稀疏奖励发挥作用：面向多奖励 RL 的密度感知奖励聚合",
+                "url": "https://arxiv.org/abs/2610.00574"
+              },
+              {
+                "title": "AutoGUIWorld：将图像生成器作为 GUI Agent 的视觉世界模型",
+                "url": "https://arxiv.org/abs/2610.01215"
+              },
+              {
+                "title": "AIM：面向自动化研究的智能体化想法管理",
+                "url": "https://arxiv.org/abs/2609.38445"
+              },
+              {
+                "title": "在统一模型中以交错强化学习实现原生反思",
+                "url": "https://arxiv.org/abs/2609.35767"
+              },
+              {
+                "title": "Agent Error Dataset：扩展 50,000 条错误—诊断对，用于失败分析与错误感知后训练",
+                "url": "https://arxiv.org/abs/2609.40111"
+              },
+              {
+                "title": "ROSS：通过选择性监督从自生成轨迹中重新学习",
+                "url": "https://arxiv.org/abs/2609.35954"
+              },
+              {
+                "title": "EgoTools：面向真实世界第一视角视频中以工具为中心的推理",
+                "url": "https://arxiv.org/abs/2609.39378"
+              },
+              {
+                "title": "通过跨 Harness 适配的检索增强技能优化",
+                "url": "https://arxiv.org/abs/2609.38024"
+              },
+              {
+                "title": "LANTERN：照亮语言模型中隐藏的数学知识",
+                "url": "https://arxiv.org/abs/2609.32264"
+              },
+              {
+                "title": "APM-Bench：面向第一视角流式视频助手的跨会话持久记忆基准测试",
+                "url": "https://arxiv.org/abs/2609.37559"
+              },
+              {
+                "title": "HybridCUA：学习为计算机使用智能体编排 GUI 与 CLI",
+                "url": "https://arxiv.org/abs/2609.38008"
+              }
+            ]
+          }
         },
         {
           "id": "ai-papers:2026/0921-0925.md",
           "title": "AI 论文周报｜2026-09-21 — 2026-09-25",
           "date": "2026-10-04",
           "url": "https://github.com/careywyr/AI-Weekly-Paper/blob/main/2026/0921-0925.md",
-          "summary": "本期收录 33 篇论文，涉及智能体、具身智能、多模态、视频生成。阅读中文解读，进一步查看论文与研究项目。",
+          "summary": "本期目录收录 33 篇论文，涉及智能体、具身智能、多模态、视频生成。站内浏览导读与篇目，再按需查阅论文资料。",
           "tags": [
             "智能体",
             "具身智能",
             "多模态",
             "视频生成"
-          ]
+          ],
+          "reading": {
+            "sections": [
+              "Training Object Permanence in World Models",
+              "OmniEdu: Open Foundation Models for Learning and Teaching",
+              "Realtime-Venus: A full-duplex interaction system with asynchronous delegation",
+              "RRSI: Regularized Recursive Self-Improvement of Agent Harnesses",
+              "The Tasteful Agent: Measuring and Improving Taste in Long-Horizon Tasks",
+              "EvoOntology: A Self-Evolving Ontology Layer for Data Agents",
+              "WorldCrafter: Consistent Video World Model with Implicit 3D-aware Memory",
+              "OmniVChat: Synthesizing, Benchmarking, and Training for Native Audio-Visual Dialogue",
+              "CodeMidas: Scaling Agentic Coding RL Environments from Code Itself",
+              "GameHorizon Suite: Multi-Horizon Data and Evaluation in Gameplay",
+              "Transferring the Intelligence of VLMs to Robotic Control",
+              "Grounded Skill Synthesis from Code at Scale for Agentic Intelligence",
+              "RULER: Instance-aware Rubric Rewards for SVG Generation",
+              "Your Transformer Can Hold Two Thoughts at Once: Evidence of Linear Superposition in LLMs",
+              "SpeakerMem-R1: Speaker-Centered Dual-Track Memory for Multi-Party Dialogue",
+              "Grounded Action Model: 3D Grounding as a Foundation for Robotics",
+              "RecreationWorld: Scalable and Verifiable Environments for Hybrid Computer-Use Agents",
+              "Ovis-Embedding: Pushing the Frontiers of Universal Omni-Modal Embeddings",
+              "VideoGen-Agent: Reinforcing Video Generation Agents",
+              "GAE: Learning a Geometry-Native Latent Space for 3D-Consistent World Generation",
+              "Document Retrieval-Aware Chunking (D-RAC): Universal Retrieval-Aware Ingestion of Enterprise Documents via PDF Normalization and Multimodal Markdown Conversion",
+              "The Past Frames the Future: Memory for Autoregressive Video Generation",
+              "Spatial-Interactor: Learning Spatial Reasoning through Interaction with the Observable Physical World",
+              "Paint-Anything: Unified Any-Color Control for Image Generation and Editing",
+              "HappyWorld-Bench",
+              "StableVQ: Practical Guidelines for Stable Vector-Quantized Tokenizer Training",
+              "All-in-One Multilingual Scene Text Recognition with Script-aware Mixture-of-Experts",
+              "onPanda: Efficient Annotation of On-Policy Alignment Data for LLMs and Agents via Token-Level Correction",
+              "Just-in-Time Memory: Learning to Curate Task-Adaptive Memory for LLM Agents",
+              "One to More, More to One: Category-Aware Iterative Expert Training for Software Engineering Agents",
+              "Bellman Policy Optimization",
+              "WanPE: Towards Cinematic Prompt Enhancement for Modern Text-to-Video Generation",
+              "IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation Mixture-of-Experts"
+            ],
+            "entries": [
+              {
+                "title": "在世界模型中训练客体永久性",
+                "url": "https://arxiv.org/abs/2609.28654"
+              },
+              {
+                "title": "OmniEdu：面向学习与教学的开源基础模型",
+                "url": "https://arxiv.org/abs/2609.23088"
+              },
+              {
+                "title": "Realtime-Venus：一种具备异步委派能力的全双工交互系统",
+                "url": "https://arxiv.org/abs/2609.13814"
+              },
+              {
+                "title": "RRSI：Agent Harness 的正则化递归自我改进",
+                "url": "https://arxiv.org/abs/2609.24972"
+              },
+              {
+                "title": "有品味的 Agent：长时程任务中品味的度量与提升",
+                "url": "https://arxiv.org/abs/2609.25804"
+              },
+              {
+                "title": "EvoOntology：面向数据智能体的自演化本体层",
+                "url": "https://arxiv.org/abs/2609.15779"
+              },
+              {
+                "title": "WorldCrafter：具备隐式 3D 感知记忆的一致视频世界模型",
+                "url": "https://arxiv.org/abs/2609.24984"
+              },
+              {
+                "title": "OmniVChat：原生音视频对话的合成、基准构建与训练",
+                "url": "https://arxiv.org/abs/2609.21465"
+              },
+              {
+                "title": "CodeMidas：从代码本身扩展 Agentic 编程 RL 环境",
+                "url": "https://arxiv.org/abs/2609.22068"
+              },
+              {
+                "title": "GameHorizon Suite：游戏玩法中的多时间跨度数据与评估",
+                "url": "https://arxiv.org/abs/2609.25001"
+              },
+              {
+                "title": "将 VLM 的智能迁移至机器人控制",
+                "url": "https://arxiv.org/abs/2609.22966"
+              },
+              {
+                "title": "从代码中大规模合成有依据的技能，赋能 Agent 智能",
+                "url": "https://arxiv.org/abs/2609.05571"
+              },
+              {
+                "title": "RULER：面向 SVG 生成的实例感知评分规则奖励",
+                "url": "https://arxiv.org/abs/2609.25270"
+              },
+              {
+                "title": "你的 Transformer 能同时容纳两个想法：LLM 中线性叠加的证据",
+                "url": "https://arxiv.org/abs/2609.29845"
+              },
+              {
+                "title": "SpeakerMem-R1：面向多方对话的以说话者为中心的双轨记忆",
+                "url": "https://arxiv.org/abs/2609.26780"
+              },
+              {
+                "title": "具身动作模型：以 3D 定位作为机器人学的基础",
+                "url": "https://arxiv.org/abs/2609.23863"
+              },
+              {
+                "title": "RecreationWorld：面向混合计算机使用智能体的可扩展可验证环境",
+                "url": "https://arxiv.org/abs/2609.22000"
+              },
+              {
+                "title": "Ovis-Embedding：推动通用全模态嵌入的前沿",
+                "url": "https://arxiv.org/abs/2609.25165"
+              },
+              {
+                "title": "VideoGen-Agent：强化视频生成 Agent",
+                "url": "https://arxiv.org/abs/2609.24997"
+              },
+              {
+                "title": "GAE：学习面向 3D 一致世界生成的几何原生潜在空间",
+                "url": "https://arxiv.org/abs/2609.24981"
+              },
+              {
+                "title": "文档检索感知分块（D-RAC）：通过 PDF 归一化与多模态 Markdown 转换实现企业文档的通用检索感知摄取",
+                "url": "https://arxiv.org/abs/2609.24220"
+              },
+              {
+                "title": "过去帧定未来：自回归视频生成的记忆机制",
+                "url": "https://arxiv.org/abs/2609.28466"
+              },
+              {
+                "title": "Spatial-Interactor：通过与可观测物理世界交互学习空间推理",
+                "url": "https://arxiv.org/abs/2609.23038"
+              },
+              {
+                "title": "Paint-Anything：面向图像生成与编辑的统一任意颜色控制",
+                "url": "https://arxiv.org/abs/2609.20816"
+              },
+              {
+                "title": "HappyWorld-Bench 基准测试",
+                "url": "https://arxiv.org/abs/2609.24308"
+              },
+              {
+                "title": "StableVQ：稳定向量量化分词器训练的实用指南",
+                "url": "https://arxiv.org/abs/2609.26774"
+              },
+              {
+                "title": "基于文字系统感知混合专家的一体化多语言场景文本识别",
+                "url": "https://arxiv.org/abs/2609.24058"
+              },
+              {
+                "title": "onPanda：通过 Token 级修正高效标注 LLM 与 Agent 的在线策略对齐数据",
+                "url": "https://arxiv.org/abs/2609.24983"
+              },
+              {
+                "title": "即时记忆：为 LLM Agent 学习策展任务自适应记忆",
+                "url": "https://arxiv.org/abs/2609.27334"
+              },
+              {
+                "title": "从一到多，从多到一：面向软件工程 Agent 的类别感知迭代专家训练",
+                "url": "https://arxiv.org/abs/2609.23377"
+              },
+              {
+                "title": "贝尔曼策略优化",
+                "url": "https://arxiv.org/abs/2609.15987"
+              },
+              {
+                "title": "WanPE：面向现代文生视频的电影级提示词增强",
+                "url": "https://arxiv.org/abs/2609.30221"
+              },
+              {
+                "title": "IntBMoE：将块级条件引入专家组合，实现全参与式混合专家模型",
+                "url": "https://arxiv.org/abs/2609.21346"
+              }
+            ]
+          }
         }
       ]
     }

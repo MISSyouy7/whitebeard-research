@@ -62,7 +62,7 @@ pnpm market:update
 
 ## 内容维护
 
-产业周刊接入科技爱好者周刊与中文 AI 论文周报，每天北京时间 08:17 自动检查并发布新内容，保留原文入口；详见 [产业周刊更新说明](docs/periodicals.md)。可运行 `pnpm periodicals:update` 手动采集。
+产业周刊接入科技爱好者周刊与中文 AI 论文周报，每天北京时间 08:17 自动检查并发布新内容。卡片进入站内导读、产业观察与篇目目录，原刊链接保留在页尾；详见 [产业周刊更新说明](docs/periodicals.md)。可运行 `pnpm periodicals:update` 手动采集。
 
 站内专题来自 `content/articles/` 与 `content/mainline/`。仅 `status: published` 且公开访问的内容进入研究页；其他草稿与会员预览不公开正文。A股市场复盘已从研究页及文章路由移除，源文件保留为历史档案。
 

@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { collectPeriodicals, collectPublication, createGithubReader, paperIssues, publications, techIssues, validSnapshot } from '../server/periodicals.mjs';
 import { updatePeriodicals } from '../scripts/update-periodicals.mjs';
+import { extractReadingIndex, periodicalGuide, periodicalSlug } from '../lib/periodical-reading.mjs';
 
 const now = new Date('2026-10-20T01:00:00Z');
 const silent = { log() {}, warn() {} };
@@ -111,4 +112,30 @@ test('daily builds restore newer published data before a failed upstream refresh
     await assert.rejects(updatePeriodicals({ destination, collector: async () => ({}), logger: silent }));
     assert.deepEqual(JSON.parse(await readFile(destination, 'utf8')), result);
   } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
+test('site reading indexes keep Chinese titles and safe references without copying article bodies', () => {
+  const reading = extractReadingIndex('## A paper\n\n[中文标题](https://arxiv.org/abs/2610.12345)\n\n这是不应整段转载的原文。\n\n[坏链接](javascript:alert(1))\n\n[重复](https://arxiv.org/abs/2610.12345)', true);
+  assert.equal(reading.entries.length, 1);
+  assert.equal(reading.entries[0].url, 'https://arxiv.org/abs/2610.12345');
+  assert.ok(!JSON.stringify(reading).includes('这是不应整段转载'));
+  assert.equal(extractReadingIndex('1、[测试工具](https://example.com/tool)', false).entries.length, 1);
+  const item = { ...fixture().publications[0].items[0], reading, tags: ['大模型'] };
+  const content = periodicalGuide(item, '测试周刊');
+  assert.match(content, /本期导读/);
+  assert.match(content, /产业观察/);
+  assert.match(content, /本期篇目/);
+  assert.ok(!content.includes('这是不应整段转载'));
+  assert.match(periodicalGuide({ ...item, reading: undefined }, '旧快照'), /本期导读/);
+});
+
+test('each edition gets a stable site path and unsafe reading metadata is rejected', () => {
+  assert.equal(periodicalSlug('tech-weekly:docs/issue-415.md'), 'weekly-tech-415');
+  assert.equal(periodicalSlug('ai-papers:2026/1012-1016.md'), 'weekly-ai-2026-1012-1016');
+  assert.throws(() => periodicalSlug('tech-weekly:../../secret'));
+  for (const url of [undefined, 'javascript:alert(1)', 'https://user:pass@example.com/']) {
+    const data = fixture();
+    data.publications[0].items[0].reading = { sections: [], entries: [{ title: '测试', url }] };
+    assert.equal(validSnapshot(data), false);
+  }
 });

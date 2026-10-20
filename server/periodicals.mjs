@@ -1,3 +1,5 @@
+import { extractReadingIndex, readingLink } from '../lib/periodical-reading.mjs';
+
 export const publications = [
   { id: 'tech-weekly', name: '科技爱好者周刊', category: '科技周刊', repo: 'ruanyf/weekly', branch: 'master' },
   { id: 'ai-papers', name: 'AI 论文周报', category: 'AI前沿', repo: 'careywyr/AI-Weekly-Paper', branch: 'main' },
@@ -60,7 +62,13 @@ export function validSnapshot(data) {
         && entry.date <= item.fetchedAt.slice(0, 10)
         && typeof entry.title === 'string' && entry.title.length > 0 && entry.title.length <= 220
         && typeof entry.summary === 'string' && entry.summary.length <= 300
-        && Array.isArray(entry.tags) && entry.tags.length <= 4 && entry.tags.every(tag => typeof tag === 'string' && tag.length <= 30);
+        && Array.isArray(entry.tags) && entry.tags.length <= 4 && entry.tags.every(tag => typeof tag === 'string' && tag.length <= 30)
+        && (entry.reading === undefined || (
+          Array.isArray(entry.reading?.sections) && entry.reading.sections.length <= 120
+          && entry.reading.sections.every(title => typeof title === 'string' && title.length <= 200)
+          && Array.isArray(entry.reading?.entries) && entry.reading.entries.length <= 120
+          && entry.reading.entries.every(reference => typeof reference.title === 'string' && reference.title.length > 0 && reference.title.length <= 200 && typeof reference.url === 'string' && reference.url.length <= 2048 && readingLink(reference.url) === reference.url)
+        ));
     });
   });
 }
@@ -109,9 +117,10 @@ export async function collectPublication(source, { reader = createGithubReader()
       id: `${source.id}:${issue.path}`, title: issue.title, date: updated.slice(0, 10),
       url: `https://github.com/${source.repo}/blob/${source.branch}/${issue.path}`,
       summary: source.id === 'ai-papers'
-        ? `本期收录 ${papers} 篇论文${tags.length ? `，涉及${tags.join('、')}` : ''}。阅读中文解读，进一步查看论文与研究项目。`
-        : `本期科技动态、文章与资源选读${tags.length ? `，涵盖${tags.join('、')}` : ''}。从技术与产品的变化中，寻找值得跟踪的产业线索。`,
+        ? `本期目录收录 ${papers} 篇论文${tags.length ? `，涉及${tags.join('、')}` : ''}。站内浏览导读与篇目，再按需查阅论文资料。`
+        : `本期科技动态、文章与资源目录${tags.length ? `，涵盖${tags.join('、')}` : ''}。站内整理阅读线索与产业观察，寻找值得继续跟踪的方向。`,
       tags: tags.length ? tags : ['科技观察'],
+      reading: extractReadingIndex(markdown, source.id === 'ai-papers'),
     };
   }));
   return { ...source, status: 'ok', fetchedAt: now.toISOString(), items };

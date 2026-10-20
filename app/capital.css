@@ -4307,6 +4307,9 @@
 .lj-periodical-status p > span:first-child { color: #8c2d33; margin-right: 6px; }
 .lj-periodical-checked { display: inline-block; margin-left: 16px; }
 .lj-periodical-retained { color: #8c2d33; }
+.lj-periodical-original { margin-top: 32px; padding: 18px 0; border-top: 1px solid #dce0e7; color: #626873; font-size: 13px; line-height: 1.8; }
+.lj-periodical-original p { margin: 0 0 8px; }
+.lj-article-heading h1, .lj-prose li, .lj-prose a { overflow-wrap: anywhere; }
 .lj-library-grid .lj-research-card h2 { overflow-wrap: anywhere; }
 @media (max-width: 600px) {
   .lj-periodical-checked { display: block; margin-left: 0; }

@@ -2367,7 +2367,7 @@
   }
   .lj-site .lj-mobile-nav {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     position: fixed;
     left: 0;
     right: 0;
@@ -4314,4 +4314,37 @@
 @media (max-width: 600px) {
   .lj-periodical-checked { display: block; margin-left: 0; }
   .lj-card-top { flex-wrap: wrap; gap: 6px 12px; }
+}
+
+/* Keep the mirror one tap away, from the first screen and persistent navigation. */
+.lj-site .lj-hero-destination.lj-mirror-entry {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, #9e3438, #78252e);
+  border-color: #8c2d33;
+  box-shadow: inset 0 1px #ffffff33, 0 8px 20px #8b313322;
+}
+.lj-site .lj-mirror-entry strong,
+.lj-site .lj-mirror-entry > span {
+  color: #fff;
+}
+.lj-site .lj-mirror-entry small {
+  color: #fff0f0;
+}
+.lj-site .lj-hero-destination.lj-mirror-entry:hover {
+  background: linear-gradient(135deg, #8c2d33, #66202a);
+  border-color: #66202a;
+}
+.lj-site .lj-mirror-nav {
+  color: #8c2d33;
+  font-weight: 700;
+}
+@media (min-width: 781px) and (max-width: 950px) {
+  .lj-nav-inner { gap: 12px; }
+  .lj-desktop-nav { gap: 8px; }
+}
+@media (max-width: 780px) {
+  .lj-mobile-nav .lj-mirror-nav {
+    background: #f3e6e8;
+    border-radius: 11px;
+  }
 }

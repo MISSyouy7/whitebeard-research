@@ -5,6 +5,12 @@ import { feedIsOld } from "./market-ui";
 
 const destinations = [
   {
+    number: "↗",
+    href: "/mirror/",
+    title: "股市照妖镜",
+    description: "走进虚构行情，照见自己的交易选择",
+  },
+  {
     number: "01",
     href: "#news",
     title: "热点快讯",
@@ -77,7 +83,7 @@ export function GlassHero({
         <nav className="lj-hero-destinations" aria-label="首页主要入口">
           {destinations.map((item) => (
             <Link
-              className="lj-hero-destination"
+              className={`lj-hero-destination${item.href === "/mirror/" ? " lj-mirror-entry" : ""}`}
               href={item.href}
               key={item.href}
             >

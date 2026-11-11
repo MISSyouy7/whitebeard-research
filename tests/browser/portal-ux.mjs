@@ -30,7 +30,7 @@ await page.route('**/api/market*', route => mode === 'offline' ? route.abort() :
 await page.goto(base + '/', { waitUntil: 'networkidle' });
 assert.equal(await page.title(), '路见资本｜看见产业，理解资本');
 assert.equal(await page.locator('.lj-footer a[href$="/mirror/"]').count(), 1);
-assert.equal(await page.locator('nav a[href$="/mirror/"]').count(), 0);
+assert.equal(await page.locator('nav a[href$="/mirror/"]').count(), 3);
 await page.getByRole('navigation', { name: '手机快捷导航' }).getByRole('link', { name: '快讯', exact: true }).click();
 await waitFor(() => document.querySelector('.lj-mobile-nav a[href="/#news"]')?.getAttribute('aria-current') === 'location');
 assert.ok((await page.locator('#news').boundingBox()).y >= 76, 'anchored content must clear the sticky header');
